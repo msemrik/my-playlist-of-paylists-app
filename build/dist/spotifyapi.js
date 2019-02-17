@@ -8,7 +8,7 @@ var userID;
 spotifyApi = new SpotifyWebApi({
     clientId: '2d38f2f3447c478eb13d74c62b5eb58a',
     clientSecret: '36b86b6a2c29409cb42e63c5c9e45ba5',
-    redirectUri: 'http://localhost:3000/'
+    redirectUri: 'http://localhost:5000/'
 });
 
 spotifyApi.getMe()
