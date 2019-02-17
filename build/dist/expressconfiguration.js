@@ -128,7 +128,7 @@ app.get('/spotify/login', function (req, res) {
         '?response_type=code' +
         '&client_id=' + '2d38f2f3447c478eb13d74c62b5eb58a' +
         (scopes ? '&scope=' + encodeURIComponent(scopes) : '') +
-        '&redirect_uri=' + encodeURIComponent('http://localhost:5000/'));
+        '&redirect_uri=' + encodeURIComponent('https://my-playlist-of-playlists-app.herokuapp.com/'));
 });
 
 app.post('/spotify/logout', function (req, res) {
