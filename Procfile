@@ -1,1 +1,1 @@
-web: node --inspect-brk build/dist/app.js
+web: node --debug build/dist/app.js

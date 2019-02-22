@@ -26,9 +26,13 @@
     "mongoose": "^5.4.14",
     "multer": "^1.4.1",
     "node-sass": "^4.10.0",
+    "nodemon": "^1.18.10",
     "react": "^16.6.3",
     "react-bootstrap": "^0.32.4",
     "react-dom": "^16.6.3",
     "spotify-web-api-node": "^4.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.10"
   }
 }

@@ -10,21 +10,32 @@ gulp.task('clean', function () {
 });
 
 gulp.task("babel", function () {
-    return gulp.src("applications/client/src/jsx/*.jsx").pipe(babel({
+    return gulp.src("applications/client/src/jsx/*.jsx")
+        .pipe(sourcemaps.init())
+
+        .pipe(babel({
         plugins: ['transform-react-jsx']
-    })).pipe(gulp.dest("build/tmp/js/"));
+    }))
+        .on('error', swallowError)
+        .pipe(sourcemaps.write())
+        .pipe(gulp.dest("build/tmp/js/"));
 });
 
 gulp.task("browserify",  function () {
     return gulp.src('build/tmp/js/*.js')
+        .pipe(sourcemaps.init())
         .pipe(browserify({
              insertGlobals: true
         }))
+        .pipe(sourcemaps.write())
         .pipe(gulp.dest('build/dist/public/js/'));
 });
 
 gulp.task('copy-static-content', function () {
-    return gulp.src(['applications/client/public/**/*']).pipe(gulp.dest('build/dist/public'));
+    return gulp.src(['applications/client/public/**/*'])
+        .pipe(sourcemaps.init())
+        .pipe(sourcemaps.write())
+        .pipe(gulp.dest('build/dist/public'));
 });
 
 gulp.task('copy-static-html', function () {
@@ -32,7 +43,7 @@ gulp.task('copy-static-html', function () {
 });
 
 gulp.task('copy-server-classes', function () {
-    return gulp.src(['applications/server/*'])
+    return gulp.src(['applications/server/**'])
         .pipe(sourcemaps.init())
         .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest('build/dist'));
@@ -41,3 +52,13 @@ gulp.task('copy-server-classes', function () {
 gulp.task('default', gulp.series('clean', 'babel', 'browserify','copy-static-content','copy-static-html', 'copy-server-classes'), function () {});
 
 gulp.task('watch', function(){ return gulp.watch('applications/**',gulp.series('default'))});
+
+
+function swallowError (error) {
+
+    // If you want details of the error in the console
+    console.log(error.toString())
+
+    this.emit('end')
+}
+

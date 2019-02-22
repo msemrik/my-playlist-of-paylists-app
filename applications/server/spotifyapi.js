@@ -1,4 +1,3 @@
-var booleanTest = true;
 var SpotifyWebApi = require('spotify-web-api-node');
 var DataBaseAccess = require('./database')
 
@@ -48,9 +47,12 @@ function getUserPlaylists(res){
     if(isLoggedToSpotify && userID){
 
         spotifyApi.getUserPlaylists(userID).then(function(data){
+            DataBaseAccess.getPlaylists().then(function(data2){
+                console.log(data2);
 
-            res.status(200);
-            res.json(data.body.items)});
+                res.status(200);
+                res.json(data.body.items)});
+            });
     }
 }
 
@@ -93,13 +95,32 @@ function login(code,res) {
         });
     });
 
+}
 
-
-
-
-
+function createPlaylist(req, res){
+    if(isLoggedToSpotify && userID){
+        spotifyApi.createPlaylist(userID, req.body.name, { 'public' : false })
+            .then(function(data) {
+                console.log('Created playlist!');
+                DataBaseAccess.addPlaylist(data);
+                res.status(200);
+                res.json(data);
+            }, function(err) {
+                console.log('Something went wrong!', err);
+                res.status(400);
+                res.json(err);
+            });
+        // spotifyApi.getUserPlaylists(userID).then(function(data){
+        //     DataBaseAccess.getPlaylists().then(function(data2){
+        //         console.log(data2);
+        //
+        //         res.status(200);
+        //         res.json(data.body.items)});
+        // });
+    }
 }
 
 
+
 // module.exports = {islogged: function(res) {return islogged(res)}}
-module.exports = {islogged: islogged, login: login, logout: logout, getUserPlaylists: getUserPlaylists}
+module.exports = {islogged: islogged, login: login, logout: logout, getUserPlaylists: getUserPlaylists, createPlaylist: createPlaylist}

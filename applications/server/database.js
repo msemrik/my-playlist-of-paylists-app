@@ -1,56 +1,85 @@
-//Import the mongoose module
 var mongoose = require('mongoose');
+var playlistpojo = require('./playlistpojo');
 var Schema = mongoose.Schema;
+var isDataBaseConnected = false;
 
-//Set up default mongoose connection
-var mongoDB = 'mongodb+srv://msemrik:0147258369Mb@cluster0-fmguv.mongodb.net/my-playlist-of-playlists-app?retryWrites=true';
-var promise = mongoose.connect(mongoDB, {useNewUrlParser: true})
+// var mongoDB = 'mongodb+srv://msemrik:0147258369Mb@cluster0-fmguv.mongodb.net/my-playlist-of-playlists-app?retryWrites=true';
+var mongoDB = 'mongodb://localhost:27017/my-playlist-of-playlists-app';
+
+var dataBasePromise = mongoose.connect(mongoDB, {useNewUrlParser: true})
     .then(() => {
+        isDataBaseConnected = true;
         console.log('Database connection successful')
     })
+
+
     .catch(err => {
+        isDataBaseConnected = false;
         console.error('Database connection error')
     });
 
-let playlistSchema = new mongoose.Schema({
-    playlists: Array
-});
+var getPlaylists = function () {
+    return dataBasePromise.then(function () {
+        console.log('despues de succesful si o si');
 
-var PlaylistModel = mongoose.model('Playlist', playlistSchema)
-
-let msg = new PlaylistModel({playlists:[]});
-msg.save()
-    .then(doc => {
-        console.log(doc)
-    })
-    .catch(err => {
-        console.error(err)
+        return PlaylistModel.find().lean().exec(function (err, playlists) {
+            return playlists[0];
+        });
     });
+}
+
+// function PlayListPojo(playlists) {
+//     var playlist={};
+//     playlists.map()
+// }
 
 
-promise.then(function(){console.log('despues de succesful si o si');
 
-    PlaylistModel.find({
-        // email: 'ada.lovelace@gmail.com'   // search query
-    })
+var savePlaylists = function (playlists) {
+    let msg = new PlaylistModel(playlists);
+
+    msg.save()
         .then(doc => {
             console.log(doc)
         })
-
         .catch(err => {
             console.error(err)
-        })});
+        });
+}
 
-// Get Mongoose to use the global promise library
-mongoose.Promise = global.Promise;
-//Get the default connection
-var db = mongoose.connection;
+var addPlaylist = function (playlist) {
+    getPlaylists().then(function(playlists){
+        if(playlists != undefined){
+            playlists.push(playlist);
+        }
+        else{
+            var object = {playlists : []};
 
-//Bind connection to error event (to get notification of connection errors)
-db.on('error', console.error.bind(console, 'MongoDB connection error:'));
-var User = mongoose.model('User', new Schema({url: String, text: String, id: Number}, {collection: 'playlists'}));
+            object.playlists.push({playlistId : playlist.body.id, name: playlist.body.name});
+            PlaylistModel.update({},playlists);
+            savePlaylists(object);
+        }
 
-console.log(User);
-module.exports = db;
+    })
+}
+
+let playlistSchema = new Schema({
+    playlists: [{
+        playlistId: String,
+        name: String,
+        playlistsConfigured: [{
+            playlistId: String
+        }]
+    }]
+});
 
 
+var PlaylistModel = mongoose.model('Playlist', playlistSchema)
+
+
+// getPlaylists();
+// savePlaylists({
+//     playlists: [{playlistId: 'aaaa1', name: 'aaaa', playlistsConfigured: [{playlistId: 'cccc'}, {playlistId: 'dddd'}, {playlistId: 'eeee'}]},{playlistId: 'bbbb1', name: 'bbbb', playlistsConfigured: [{playlistId: 'cccc'}, {playlistId: 'zzzz'}, {playlistId: 'eeee'}]}]
+// });
+
+module.exports = {getPlaylists: getPlaylists, savePlaylists: savePlaylists, addPlaylist: addPlaylist};
