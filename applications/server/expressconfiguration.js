@@ -9,6 +9,10 @@ var spotifyapi = require('./spotifyapi');
 
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
+app.set('views', __dirname + '/views');
+
+console.log(__dirname);
+app.use(express.static(__dirname +'/public'));
 app.use(express.static('public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
@@ -119,7 +123,7 @@ app.get('/spotify/login', function (req, res) {
         '?response_type=code' +
         '&client_id=' + '2d38f2f3447c478eb13d74c62b5eb58a' +
         (scopes ? '&scope=' + encodeURIComponent(scopes) : '') +
-        '&redirect_uri=' + encodeURIComponent('http://localhost:3000/'));
+        '&redirect_uri=' + encodeURIComponent('http://localhost:5000/'));
 });
 
 app.post('/spotify/logout', function (req, res) {

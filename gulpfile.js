@@ -2,6 +2,7 @@ var gulp = require('gulp');
 var babel = require('gulp-babel');
 var clean = require('gulp-clean');
 var browserify = require('gulp-browserify');
+var sourcemaps = require('gulp-sourcemaps');
 
 gulp.task('clean', function () {
     return gulp.src(['build/dist/*','build/tmp/*'], {allowEmpty: true,read: false})
@@ -31,7 +32,12 @@ gulp.task('copy-static-html', function () {
 });
 
 gulp.task('copy-server-classes', function () {
-    return gulp.src(['applications/server/*']).pipe(gulp.dest('build/dist'));
+    return gulp.src(['applications/server/*'])
+        .pipe(sourcemaps.init())
+        .pipe(sourcemaps.write('.'))
+        .pipe(gulp.dest('build/dist'));
 });
 
 gulp.task('default', gulp.series('clean', 'babel', 'browserify','copy-static-content','copy-static-html', 'copy-server-classes'), function () {});
+
+gulp.task('watch', function(){ return gulp.watch('applications/**',gulp.series('default'))});
