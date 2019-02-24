@@ -1,13 +1,17 @@
-var Users = [];
+//TODO remove this vars
+var Users = [{user:"msemrik",pass:"yo"}];
+
 
 function checkSignIn(req, res, next) {
-    if (isLoggedIn(req)) {
-        next();     //If session exists, proceed to page
-    } else {
-        var err = new Error("Not logged in!");
-        console.log(isLoggedIn(req));
-        next(err);  //Error, trying to access unauthorized page!
-    }
+    next()
+    //TODO get this back
+    // if (isLoggedIn(req)) {
+    //     next();     //If session exists, proceed to page
+    // } else {
+    //     // var err = new Error("Not logged in!");
+    //     console.log(isLoggedIn(req));
+    //     next("not logged");  //Error, trying to access unauthorized page!
+    // }
 }
 
 function isLoggedIn(req) {

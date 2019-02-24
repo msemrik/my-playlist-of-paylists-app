@@ -1,1 +1,1 @@
-web: node --debug build/dist/app.js
+web: node --inspect applications/server/app.js

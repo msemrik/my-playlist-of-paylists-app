@@ -1,69 +1,87 @@
 var mongoose = require('mongoose');
-var playlistpojo = require('./playlistpojo');
 var Schema = mongoose.Schema;
 var isDataBaseConnected = false;
-
-// var mongoDB = 'mongodb+srv://msemrik:0147258369Mb@cluster0-fmguv.mongodb.net/my-playlist-of-playlists-app?retryWrites=true';
-var mongoDB = 'mongodb://localhost:27017/my-playlist-of-playlists-app';
-
+mongoDB = process.env.DATABASE_URL;
 var dataBasePromise = mongoose.connect(mongoDB, {useNewUrlParser: true})
     .then(() => {
         isDataBaseConnected = true;
         console.log('Database connection successful')
     })
-
-
     .catch(err => {
         isDataBaseConnected = false;
         console.error('Database connection error')
     });
-
 var getPlaylists = function () {
-    return dataBasePromise.then(function () {
-        console.log('despues de succesful si o si');
+    return new Promise(function (resolver, reject) {
+        dataBasePromise.then(function () {
+            console.log('despues de succesful si o si');
 
-        return PlaylistModel.find().lean().exec(function (err, playlists) {
-            return playlists[0];
+            PlaylistModel.find().lean().exec(function (err, playlists) {
+                resolver(playlists[0]);
+            });
+        });
+    })
+
+}
+
+var updatePlaylists = function (playlists) {
+
+    return new Promise(function (resolve, reject) {
+            PlaylistModel.findOneAndReplace({_id: playlists._id}, playlists
+                , function (err, res) {
+                    console.log('error: ' + err);
+                    console.log('response: ' + res);
+                    resolve(res);
+                }
+            )
+        }
+    );
+
+}
+
+var savePlaylists = function (playlists) {
+    let msg = new PlaylistModel(playlists);
+    msg._doc._id = "my-playlist-id";
+    return new Promise(function (resolve, reject) {
+
+        msg.save()
+            .then(doc => {
+                resolve("my-playlist-id");
+            })
+            .catch(err => {
+                reject(err);
+            });
+    });
+
+}
+
+
+var addPlaylist = function (playlist) {
+    return new Promise(function (resolve, reject) {
+        getPlaylists().then(function (playlists) {
+            if (playlists == undefined) {
+                savePlaylists().then(function (playlistId) {
+                    playlists = {};
+                    playlists._id = playlistId;
+                    playlists.playlists = [];
+                    playlists.playlists.push({playlistId: playlist.body.id, name: playlist.body.name});
+                    updatePlaylists(playlists).then(function (data) {
+                        resolve(playlists);
+                    })
+                });
+            } else {
+                playlists.playlists.push({playlistId: playlist.body.id, name: playlist.body.name});
+                updatePlaylists(playlists).then(function (data) {
+                    resolve(playlists);
+                })
+            }
         });
     });
 }
 
-// function PlayListPojo(playlists) {
-//     var playlist={};
-//     playlists.map()
-// }
-
-
-
-var savePlaylists = function (playlists) {
-    let msg = new PlaylistModel(playlists);
-
-    msg.save()
-        .then(doc => {
-            console.log(doc)
-        })
-        .catch(err => {
-            console.error(err)
-        });
-}
-
-var addPlaylist = function (playlist) {
-    getPlaylists().then(function(playlists){
-        if(playlists != undefined){
-            playlists.push(playlist);
-        }
-        else{
-            var object = {playlists : []};
-
-            object.playlists.push({playlistId : playlist.body.id, name: playlist.body.name});
-            PlaylistModel.update({},playlists);
-            savePlaylists(object);
-        }
-
-    })
-}
 
 let playlistSchema = new Schema({
+    _id: String,
     playlists: [{
         playlistId: String,
         name: String,

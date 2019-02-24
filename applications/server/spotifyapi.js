@@ -49,9 +49,10 @@ function getUserPlaylists(res){
         spotifyApi.getUserPlaylists(userID).then(function(data){
             DataBaseAccess.getPlaylists().then(function(data2){
                 console.log(data2);
-
+                var dbDataIDs = data2.playlists.map(itemY => { return itemY.playlistId; });
+                var playlistsToReturn = data.body.items.filter(itemX => dbDataIDs.includes(itemX.id));
                 res.status(200);
-                res.json(data.body.items)});
+                res.json(playlistsToReturn)});
             });
     }
 }
@@ -102,10 +103,12 @@ function createPlaylist(req, res){
         spotifyApi.createPlaylist(userID, req.body.name, { 'public' : false })
             .then(function(data) {
                 console.log('Created playlist!');
-                DataBaseAccess.addPlaylist(data);
-                res.status(200);
-                res.json(data);
-            }, function(err) {
+                DataBaseAccess.addPlaylist(data).then(function(playlists){
+
+                    res.status(200);
+                    res.json(playlists);
+                });
+                }, function(err) {
                 console.log('Something went wrong!', err);
                 res.status(400);
                 res.json(err);

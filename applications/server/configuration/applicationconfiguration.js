@@ -13,6 +13,9 @@ app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
 app.set('views', __dirname + '/../views');
 app.use(express.static(__dirname +'/../public'));
+//TODO make env var
+// app.set('views', __dirname + '/../../../build/dist/views');
+// app.use(express.static(__dirname +'/../../../build/dist/public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(upload.array());
