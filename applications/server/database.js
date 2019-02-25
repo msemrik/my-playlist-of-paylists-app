@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var isDataBaseConnected = false;
 mongoDB = process.env.DATABASE_URL;
-var dataBasePromise = mongoose.connect(mongoDB, {useNewUrlParser: true})
+var dataBasePromise = mongoose.connect("mongodb://localhost:27017/test", {useNewUrlParser: true})
     .then(() => {
         isDataBaseConnected = true;
         console.log('Database connection successful')

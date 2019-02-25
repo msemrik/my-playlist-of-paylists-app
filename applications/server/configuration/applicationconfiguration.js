@@ -11,16 +11,23 @@ var app = express();
 var upload = multer();
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
-app.set('views', __dirname + '/../views');
-app.use(express.static(__dirname +'/../public'));
+// app.set('views', __dirname + '/../views');
+// app.use(express.static(__dirname +'/../public'));
 //TODO make env var
-// app.set('views', __dirname + '/../../../build/dist/views');
-// app.use(express.static(__dirname +'/../../../build/dist/public'));
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(upload.array());
 app.use(cookieParser());
 app.use(session({secret: "Your secret key"}));
+
+//Init EndPoints
+restendpoints(app);
+getendpoints(app);
+
+app.set('views', __dirname + '/../../../client/build');
+app.use(express.static(__dirname +'/../../../client/build'));
+
 let port = process.env.PORT;
 if (port == null || port == "") {
     port = 5000;
@@ -28,6 +35,3 @@ if (port == null || port == "") {
 app.listen(port);
 
 
-//Init EndPoints
-restendpoints(app);
-getendpoints(app);

@@ -4,3 +4,27 @@ npm-debug.log
 /*.env
 /.idea
 /build
+
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/build/node_modules
+/build/.pnp
+/build.pnp.js
+
+# testing
+/build/coverage
+
+# production
+/build/build
+
+# misc
+/build/.DS_Store
+/build/.env.local
+/build/.env.development.local
+/build/.env.test.local
+/build/.env.production.local
+
+/build/npm-debug.log*
+/build/yarn-debug.log*
+/build/yarn-error.log*

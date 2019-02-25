@@ -5,6 +5,7 @@ function initGetEndPoints(app) {
 
     app.get('/', securityConfiguration.checkSignIn, function (req, res) {
         var code = req.query.code;
+        console.log('inside get. code : ' + code);
         if (code) {
             spotifyapi.login(code, res);
         } else {
