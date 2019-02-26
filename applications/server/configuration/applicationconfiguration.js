@@ -11,9 +11,6 @@ var app = express();
 var upload = multer();
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
-// app.set('views', __dirname + '/../views');
-// app.use(express.static(__dirname +'/../public'));
-//TODO make env var
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
@@ -25,8 +22,8 @@ app.use(session({secret: "Your secret key"}));
 restendpoints(app);
 getendpoints(app);
 
-app.set('views', __dirname + '/../../../client/build');
-app.use(express.static(__dirname +'/../../../client/build'));
+app.set('views', __dirname + '/../../../build');
+app.use(express.static(__dirname +'/../../../build'));
 
 let port = process.env.PORT;
 if (port == null || port == "") {
