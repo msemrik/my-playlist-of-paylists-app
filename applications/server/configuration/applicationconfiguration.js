@@ -12,6 +12,7 @@ var upload = multer();
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
 
+//Set up Express server
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(upload.array());
@@ -22,9 +23,11 @@ app.use(session({secret: "Your secret key"}));
 restendpoints(app);
 getendpoints(app);
 
+//Set directories
 app.set('views', __dirname + '/../../../build');
 app.use(express.static(__dirname +'/../../../build'));
 
+//Configure port
 let port = process.env.PORT;
 if (port == null || port == "") {
     port = 5000;

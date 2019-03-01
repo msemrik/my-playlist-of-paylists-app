@@ -1,8 +1,7 @@
 var React = require('react');
 var Button = require('react-bootstrap').Button;
 
-
-class Login extends React.Component {
+class Signup extends React.Component {
 
     constructor(props) {
         super(props);
@@ -28,7 +27,7 @@ class Login extends React.Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        fetch('/login', {
+        fetch('/signup', {
             method: 'POST',
             redirect: 'follow',
             headers: {"Content-Type": "application/json"},
@@ -47,28 +46,30 @@ class Login extends React.Component {
             )
     }
 
-    createNewAccount() {
-        window.location.replace("/signup");
+
+    goToLogIn() {
+        window.location.replace("/login");
     }
+
 
     render() {
         return <div>
             {this.state.error ? this.state.errorDescription : null}
-            <form  onSubmit={this.handleSubmit}>
+            <form onSubmit={this.handleSubmit}>
                 <label>
                     Username:
-                    <input id="username" type="text"  value={this.state.name} onChange={this.handleNameChange} />
+                    <input id="username" type="text" value={this.state.name} onChange={this.handleNameChange}/>
                 </label>
                 <label>
                     Password:
-                    <input id="password" type="password" value={this.state.password} onChange={this.handlePassChange} />
+                    <input id="password" type="password" value={this.state.password} onChange={this.handlePassChange}/>
                 </label>
-                <input type="submit" value="Submit" />
+                <input type="submit" value="Submit"/>
             </form>
-            <Button onClick={this.createNewAccount}>Create New Account</Button>
+            <Button onClick={this.goToLogIn}>Log In</Button>
+
         </div>;
     }
 }
 
-export default Login;
-// ReactDOM.render(React.createElement(Login), document.getElementById('content'));
+export default Signup;

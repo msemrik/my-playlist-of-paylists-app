@@ -1,85 +1,12 @@
 var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+
+var dataBasePromiseConnection = null;
 var isDataBaseConnected = false;
-mongoDB = process.env.DATABASE_URL;
-var dataBasePromise = mongoose.connect("mongodb://localhost:27017/test", {useNewUrlParser: true})
-    .then(() => {
-        isDataBaseConnected = true;
-        console.log('Database connection successful')
-    })
-    .catch(err => {
-        isDataBaseConnected = false;
-        console.error('Database connection error')
-    });
-var getPlaylists = function () {
-    return new Promise(function (resolver, reject) {
-        dataBasePromise.then(function () {
-            console.log('despues de succesful si o si');
-
-            PlaylistModel.find().lean().exec(function (err, playlists) {
-                resolver(playlists[0]);
-            });
-        });
-    })
-
-}
-
-var updatePlaylists = function (playlists) {
-
-    return new Promise(function (resolve, reject) {
-            PlaylistModel.findOneAndReplace({_id: playlists._id}, playlists
-                , function (err, res) {
-                    console.log('error: ' + err);
-                    console.log('response: ' + res);
-                    resolve(res);
-                }
-            )
-        }
-    );
-
-}
-
-var savePlaylists = function (playlists) {
-    let msg = new PlaylistModel(playlists);
-    msg._doc._id = "my-playlist-id";
-    return new Promise(function (resolve, reject) {
-
-        msg.save()
-            .then(doc => {
-                resolve("my-playlist-id");
-            })
-            .catch(err => {
-                reject(err);
-            });
-    });
-
-}
+var DBPlaylistsObjectId = "my-playlist-id";
+var mongoDB = process.env.DATABASE_URL;
 
 
-var addPlaylist = function (playlist) {
-    return new Promise(function (resolve, reject) {
-        getPlaylists().then(function (playlists) {
-            if (playlists == undefined) {
-                savePlaylists().then(function (playlistId) {
-                    playlists = {};
-                    playlists._id = playlistId;
-                    playlists.playlists = [];
-                    playlists.playlists.push({playlistId: playlist.body.id, name: playlist.body.name});
-                    updatePlaylists(playlists).then(function (data) {
-                        resolve(playlists);
-                    })
-                });
-            } else {
-                playlists.playlists.push({playlistId: playlist.body.id, name: playlist.body.name});
-                updatePlaylists(playlists).then(function (data) {
-                    resolve(playlists);
-                })
-            }
-        });
-    });
-}
-
-
+var Schema = mongoose.Schema;
 let playlistSchema = new Schema({
     _id: String,
     playlists: [{
@@ -90,14 +17,113 @@ let playlistSchema = new Schema({
         }]
     }]
 });
-
-
 var PlaylistModel = mongoose.model('Playlist', playlistSchema)
 
 
-// getPlaylists();
-// savePlaylists({
-//     playlists: [{playlistId: 'aaaa1', name: 'aaaa', playlistsConfigured: [{playlistId: 'cccc'}, {playlistId: 'dddd'}, {playlistId: 'eeee'}]},{playlistId: 'bbbb1', name: 'bbbb', playlistsConfigured: [{playlistId: 'cccc'}, {playlistId: 'zzzz'}, {playlistId: 'eeee'}]}]
-// });
+var getDataBasePromiseConection = function () {
+    if (!dataBasePromiseConnection) {
+        dataBasePromiseConnection = mongoose.connect(mongoDB, {useNewUrlParser: true})
+            .then(() => {
+                isDataBaseConnected = true;
+            })
+            .catch(err => {
+                isDataBaseConnected = false;
+                console.error('Database connection error')
+            });
+    }
 
-module.exports = {getPlaylists: getPlaylists, savePlaylists: savePlaylists, addPlaylist: addPlaylist};
+    return dataBasePromiseConnection;
+}
+
+//TODO this should be done by user
+var getDBPlaylistsObject = function () {
+    return new Promise(function (resolver, reject) {
+        getDataBasePromiseConection().then(function () {
+            PlaylistModel.find().lean().exec(function (err, DBPlaylistsObject) {
+                resolver(DBPlaylistsObject[0]);
+            });
+        });
+    })
+}
+
+//TODO this should be done by user
+var updateDBPlaylistsObject = function (DBPlaylistsObject) {
+    return new Promise(function (resolve) {
+            getDataBasePromiseConection().then(function () {
+                PlaylistModel.findOneAndReplace({_id: DBPlaylistsObject._id}, DBPlaylistsObject
+                    , function (err, res) {
+                        if (err) console.log('error: ' + err);
+                        resolve(res);
+                    }
+                )
+            })
+        }
+    );
+}
+
+//TODO this should be done by user
+var createEmptyDBPlaylistsObject = function (newDBPlaylistsObject) {
+    let newDBPlaylistDBModelToBeSave = new PlaylistModel(newDBPlaylistsObject);
+    newDBPlaylistDBModelToBeSave._doc._id = DBPlaylistsObjectId;
+    return new Promise(function (resolve, reject) {
+        getDataBasePromiseConection().then(function () {
+            newDBPlaylistDBModelToBeSave.save()
+                .then(doc => {
+                    console.log("playlists object created with ID: " + DBPlaylistsObjectId);
+                    resolve(DBPlaylistsObjectId);
+                })
+                .catch(err => {
+                    console.log("error while creating playlists object");
+                    reject(err);
+                });
+        })
+    });
+}
+
+//TODO this should be done by user
+var addNewPlaylistToDBPlaylistsObject = function (newPlaylistToBeSaved) {
+    return new Promise(function (resolve, reject) {
+        getDBPlaylistsObject().then(function (DBPlaylistsObject) {
+            if (!DBPlaylistsObject) {
+                createEmptyDBPlaylistsObject().then(function (playlistId) {
+                    DBPlaylistsObject = {};
+                    DBPlaylistsObject._id = playlistId;
+                    DBPlaylistsObject.playlists = [];
+                    DBPlaylistsObject.playlists.push({
+                        playlistId: newPlaylistToBeSaved.body.id,
+                        name: newPlaylistToBeSaved.body.name
+                    });
+                    updateDBPlaylistsObject(DBPlaylistsObject).then(function (data) {
+                        resolve(DBPlaylistsObject);
+                    })
+                });
+            } else {
+                DBPlaylistsObject.playlists.push({
+                    playlistId: newPlaylistToBeSaved.body.id,
+                    name: newPlaylistToBeSaved.body.name
+                });
+                updateDBPlaylistsObject(DBPlaylistsObject).then(function () {
+                    resolve(DBPlaylistsObject);
+                })
+            }
+        });
+    });
+}
+
+var updatePlaylist = function (req, res) {
+    const request = req;
+    console.log("update playlist: " + req.body);
+    getDataBasePromiseConection().then(function () {
+        PlaylistModel.find().lean().exec(function (err, DBPlaylistsObject) {
+            DBPlaylistsObject[0].req.body.playlistToUpdate.id
+            console.log(DBPlaylistsObject[0]);
+        });
+    });
+}
+
+module.exports =
+    {
+        getPlaylists: getDBPlaylistsObject,
+        addPlaylist: addNewPlaylistToDBPlaylistsObject,
+        updatePlaylist: updatePlaylist
+    };

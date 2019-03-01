@@ -1,13 +1,13 @@
-import AlertDismissable from "./AlertDismissable";
-import React, { Component } from 'react';
+import React from 'react';
+import Pages from '../enum/pages';
 
-class DefaultLayout extends Component {
-    constructor(props){
+class DefaultLayout extends React.Component {
+    constructor(props) {
         super(props);
-        this.logOut = this.logOut.bind(this);
+        this.logOutApplication = this.logOutApplication.bind(this);
     }
 
-    logOut() {
+    logOutApplication() {
         window.location.replace("/logout");
     }
 
@@ -21,9 +21,9 @@ class DefaultLayout extends Component {
                 </div>
 
                 <div className="topnav">
-                    <a href="#" >Go To My Playlists</a>
-                    <a href="#" onClick={this.logOut}>Logout</a>
-                    <a href="#">Configure Spotify Account</a>
+                    <a href="#" className={this.setClassName(Pages.PLAYLISTS)} onClick={() => this.props.onChange(Pages.PLAYLISTS)}>Go To My Playlists</a>
+                    <a href="#" onClick={this.logOutApplication}>Logout</a>
+                    <a href="#" className={this.setClassName(Pages.SPOTIFYCONFIGURATION)} onClick={() => this.props.onChange(Pages.SPOTIFYCONFIGURATION)}>Configure Spotify Account</a>
                 </div>
 
                 <div className="Content"> {this.props.children} </div>
@@ -34,6 +34,12 @@ class DefaultLayout extends Component {
             </div>
         );
     }
+
+    setClassName(page){
+        if(page === this.props.page){
+            return "selected";
+        }
+    }
 }
 
-export default  DefaultLayout;
+export default DefaultLayout;

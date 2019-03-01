@@ -5,16 +5,10 @@ function initGetEndPoints(app) {
 
     app.get('/', securityConfiguration.checkSignIn, function (req, res) {
         var code = req.query.code;
-        console.log('inside get. code : ' + code);
         if (code) {
             spotifyapi.login(code, res);
         } else {
-
-            if (!req.query.testFlag) {
-                res.render('index');
-            } else {
-                res.render('index', {"testFlag": true});
-            }
+            res.render('index');
         }
     });
 
@@ -22,7 +16,7 @@ function initGetEndPoints(app) {
         if (!req.session.user) {
             res.render('signup');
         } else {
-            res.redirect('/?testFlag=true');
+            res.redirect('/');
         }
     });
 
@@ -30,7 +24,7 @@ function initGetEndPoints(app) {
         if (!req.session.user) {
             res.render('login');
         } else {
-            res.redirect('/?testFlag=true');
+            res.redirect('/');
         }
     });
 
@@ -38,6 +32,7 @@ function initGetEndPoints(app) {
         req.session.destroy(function () {
             console.log("user logged out.")
         });
+        spotifyapi.logoutWhenClosingAppSession();
         res.redirect('/login');
     });
 
@@ -47,13 +42,13 @@ function initGetEndPoints(app) {
             '?response_type=code' +
             '&client_id=' + '2d38f2f3447c478eb13d74c62b5eb58a' +
             (scopes ? '&scope=' + encodeURIComponent(scopes) : '') +
-            '&redirect_uri=' + encodeURIComponent('http://localhost:5000/'));
+            '&redirect_uri=' + encodeURIComponent(process.env.SPOTIFY_REDIRECT_URI));
     });
 
     app.use('/', function (err, req, res, next) {
         console.log(err);
         //User should be authenticated! Redirect him to log in.
-        res.redirect('/login?triedToGetIn=true');
+        res.redirect('/');
     });
 
 }

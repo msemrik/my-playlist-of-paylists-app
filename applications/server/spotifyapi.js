@@ -1,129 +1,140 @@
 var SpotifyWebApi = require('spotify-web-api-node');
 var DataBaseAccess = require('./database')
 
-
-var isLoggedToSpotify;
+var isClientConected = false;
+var userConnectedPromise;
 var userID;
+var userInfo;
 
+//TODO we'll need one spotifyApiObject per logged user
 spotifyApi = new SpotifyWebApi({
-    clientId: '2d38f2f3447c478eb13d74c62b5eb58a',
-    clientSecret: '36b86b6a2c29409cb42e63c5c9e45ba5',
-    redirectUri: 'http://localhost:5000/'
+    clientId: process.env.SPOTIFY_CLIENT_ID,
+    clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
+    redirectUri: process.env.SPOTIFY_REDIRECT_URI
 });
 
-spotifyApi.getMe()
+var clientConnectedPromise = spotifyApi.clientCredentialsGrant()
     .then(function (data) {
-        isLoggedToSpotify = true;
-        console.log('Some information about the authenticated user', data.body);
-        return data;
+        isClientConected = true;
+        spotifyApi.setAccessToken(data.body['access_token']);
+        console.log('Client connected');
     }, function (err) {
-        isLoggedToSpotify = false;
-        console.log('Something went wrong!', err);
-    })
-
+        console.log('Something went wrong on connecting client to Spotify!', err);
+    });
 
 function islogged(res) {
-
-    console.log('is logged method is in');
-
-    if (!isLoggedToSpotify) {
+    if (!userID) {
         res.status(500);
     } else {
+        res.json(userInfo);
         res.status(200);
     }
     res.end();
 }
 
 function logout(res) {
-    console.log('logout method is in');
     spotifyApi.setAccessToken(undefined);
-    isLoggedToSpotify = false;
+    userID = undefined;
     res.status(200);
     res.end();
 }
 
-
-function getUserPlaylists(res){
-    if(isLoggedToSpotify && userID){
-
-        spotifyApi.getUserPlaylists(userID).then(function(data){
-            DataBaseAccess.getPlaylists().then(function(data2){
-                console.log(data2);
-                var dbDataIDs = data2.playlists.map(itemY => { return itemY.playlistId; });
-                var playlistsToReturn = data.body.items.filter(itemX => dbDataIDs.includes(itemX.id));
-                res.status(200);
-                res.json(playlistsToReturn)});
-            });
+function logoutWhenClosingAppSession() {
+    if (userID) {
+        userID = undefined;
+        spotifyApi.setAccessToken(undefined);
     }
 }
 
-function login(code,res) {
+//TODO this should return the userId for future calls from browser
+function login(code, res) {
 
-
-    newPromise = spotifyApi.clientCredentialsGrant()
-        .then(function(data) {
-            console.log('The access token is ' + data.body['access_token']);
-            spotifyApi.setAccessToken(data.body['access_token']);
-        }, function(err) {
-            console.log('Something went wrong!', err);
-        });
-
-    newPromise.then(function(){
-        return spotifyApi.authorizationCodeGrant(code).then(
-            function(data) {
-                console.log('The token expires in ' + data.body['expires_in']);
-                console.log('The access token is ' + data.body['access_token']);
-                console.log('The refresh token is ' + data.body['refresh_token']);
-
-                // Set the access token on the API object to use it in later calls
+    clientConnectedPromise.then(function () {
+        userConnectedPromise = spotifyApi.authorizationCodeGrant(code).then(
+            function (data) {
                 spotifyApi.setAccessToken(data.body['access_token']);
                 spotifyApi.setRefreshToken(data.body['refresh_token']);
                 userID = data.body.id
-                isLoggedToSpotify = true;
-                res.redirect('/');
-        },
-            function(err) {
-                isLoggedToSpotify = false;
-                console.log('Something went wrong!', err);
-            }).then(function(){
-                spotifyApi.getMe()
+                return res;
+            },
+            function (err) {
+                userID = undefined;
+                console.log('Something went wrong on connecting user to spotify!', err);
+            }).then(function (res) {
+            spotifyApi.getMe()
                 .then(function (data) {
                     console.log('Some information about the authenticated user', data.body);
                     userID = data.body.id;
+                    userInfo = data.body;
+                    res.redirect('/');
                 }, function (err) {
                     console.log('Something went wrong!', err);
                 })
         });
     });
-
 }
 
-function createPlaylist(req, res){
-    if(isLoggedToSpotify && userID){
-        spotifyApi.createPlaylist(userID, req.body.name, { 'public' : false })
-            .then(function(data) {
-                console.log('Created playlist!');
-                DataBaseAccess.addPlaylist(data).then(function(playlists){
+function getUnionOfDBAndSpotifyUserPlaylists(res) {
+    if (userID) {
+        spotifyApi.getUserPlaylists(userID).then(function (SPOTIFYPlaylistsObject) {
+            DataBaseAccess.getPlaylists().then(function (DBPlaylistsObject) {
+                console.log(DBPlaylistsObject);
 
+                var playlistsToReturn = {
+                    configuredPlaylists: getConfiguredSpotifyPlaylists(DBPlaylistsObject, SPOTIFYPlaylistsObject),
+                    spotifyPlaylists: SPOTIFYPlaylistsObject.body.items
+                };
+
+                res.status(200);
+                res.json(playlistsToReturn)
+            });
+        }, function (err) {
+            console.log('error: ' + err);
+        });
+    }
+}
+
+// function getSpotifyUserPlaylists(res) {
+//     if (userID) {
+//         spotifyApi.getUserPlaylists(userID).then(function (SPOTIFYPlaylistsObject) {
+//             console.log(SPOTIFYPlaylistsObject);
+//             res.status(200);
+//             res.json(SPOTIFYPlaylistsObject.body.items);
+//         });
+//     }
+// }
+
+function createPlaylist(req, res) {
+    if (userID) {
+        spotifyApi.createPlaylist(userID, req.body.name, {'public': false})
+            .then(function (data) {
+                console.log('Spotify Created playlist!');
+                DataBaseAccess.addPlaylist(data).then(function (playlists) {
+                    console.log('Database Created playlist!');
                     res.status(200);
                     res.json(playlists);
                 });
-                }, function(err) {
+            }, function (err) {
                 console.log('Something went wrong!', err);
                 res.status(400);
                 res.json(err);
             });
-        // spotifyApi.getUserPlaylists(userID).then(function(data){
-        //     DataBaseAccess.getPlaylists().then(function(data2){
-        //         console.log(data2);
-        //
-        //         res.status(200);
-        //         res.json(data.body.items)});
-        // });
     }
 }
 
 
+function getConfiguredSpotifyPlaylists(DBPlaylistsObject, SPOTIFYPlaylistsObject) {
+    var DBPlaylistsObjectIDs = DBPlaylistsObject.playlists.map(itemY => {
+        return itemY.playlistId;
+    });
+    return SPOTIFYPlaylistsObject.body.items.filter(itemX => DBPlaylistsObjectIDs.includes(itemX.id));
+}
 
-// module.exports = {islogged: function(res) {return islogged(res)}}
-module.exports = {islogged: islogged, login: login, logout: logout, getUserPlaylists: getUserPlaylists, createPlaylist: createPlaylist}
+module.exports = {
+    islogged: islogged,
+    login: login,
+    logout: logout,
+    logoutWhenClosingAppSession: logoutWhenClosingAppSession,
+    getSpotifyUserPlaylists: getUnionOfDBAndSpotifyUserPlaylists,
+    createPlaylist: createPlaylist
+}

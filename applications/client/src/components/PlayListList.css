@@ -1,0 +1,365 @@
+.PlaylistSection {
+    box-sizing: border-box;
+    color: rgb(34, 35, 38);
+    height: 690px;
+    min-height: 20px;
+    text-decoration: none solid rgb(34, 35, 38);
+    text-size-adjust: 100%;
+    width: 757.5px;
+    column-rule-color: rgb(34, 35, 38);
+    perspective-origin: 378.75px 345px;
+    transform-origin: 378.75px 345px;
+    caret-color: rgb(34, 35, 38);
+    background: rgb(255, 255, 255) none repeat scroll 0% 0% / auto padding-box border-box;
+    border: 1px solid rgba(0, 0, 0, 0);
+    font: normal normal 400 normal 16px / 24px Circular, Helvetica, Arial, sans-serif;
+    margin: 0px 0px 10px;
+    outline: rgb(34, 35, 38) none 0px;
+    padding: 40px;
+}/*#SECTION_1*/
+
+
+.PlaylistsDiv {
+    box-sizing: border-box;
+    color: rgb(34, 35, 38);
+    max-height: 92%;
+    min-height: 0.01%;
+    text-decoration: none solid rgb(34, 35, 38);
+    text-size-adjust: 100%;
+    width: 675.5px;
+    column-rule-color: rgb(34, 35, 38);
+    perspective-origin: 337.75px 304px;
+    transform-origin: 337.75px 304px;
+    caret-color: rgb(34, 35, 38);
+    border: 0px none rgb(34, 35, 38);
+    font: normal normal 400 normal 16px / 24px Circular, Helvetica, Arial, sans-serif;
+    outline: rgb(34, 35, 38) none 0px;
+    overflow: auto;
+}/*#DIV_2*/
+
+.PlaylistTable {
+    width:100%;
+    border-collapse: collapse;
+    box-sizing: border-box;
+    color: rgb(34, 35, 38);
+    max-width: 100%;
+    text-decoration: none solid rgb(34, 35, 38);
+    text-size-adjust: 100%;
+    column-rule-color: rgb(34, 35, 38);
+    perspective-origin: 337.5px 304px;
+    transform-origin: 337.5px 304px;
+    caret-color: rgb(34, 35, 38);
+    border-spacing: 5px 5px;
+    font: normal normal 400 normal 16px / 24px Circular, Helvetica, Arial, sans-serif;
+    outline: rgb(34, 35, 38) none 0px;
+}/*#TABLE_3*/
+
+
+.PlaylistTbody {
+    border-collapse: collapse;
+    box-sizing: border-box;
+    color: rgb(34, 35, 38);
+    text-decoration: none solid rgb(34, 35, 38);
+    text-size-adjust: 100%;
+    width: 675px;
+    column-rule-color: rgb(34, 35, 38);
+    perspective-origin: 337.5px 304px;
+    transform-origin: 337.5px 304px;
+    caret-color: rgb(34, 35, 38);
+    border: 0px none rgb(128, 128, 128);
+    font: normal normal 400 normal 16px / 24px Circular, Helvetica, Arial, sans-serif;
+    outline: rgb(34, 35, 38) none 0px;
+}/*#TBODY_4*/
+
+.PlaylistRow {
+    border-collapse: collapse;
+    box-sizing: border-box;
+    color: rgb(34, 35, 38);
+    text-decoration: none solid rgb(34, 35, 38);
+    text-size-adjust: 100%;
+    vertical-align: middle;
+    width: 675px;
+    column-rule-color: rgb(34, 35, 38);
+    perspective-origin: 337.5px 52px;
+    transform-origin: 337.5px 52px;
+    caret-color: rgb(34, 35, 38);
+    background: rgba(0, 0, 0, 0.02) none repeat scroll 0% 0% / auto padding-box border-box;
+    border: 0px none rgb(128, 128, 128);
+    font: normal normal 400 normal 16px / 24px Circular, Helvetica, Arial, sans-serif;
+    outline: rgb(34, 35, 38) none 0px;
+}/*#TR_5, #TR_25*/
+
+.PlaylistRow:hover {cursor: pointer;}
+
+
+.PlaylistImageColumn {
+    border-collapse: collapse;
+    box-sizing: border-box;
+    color: rgb(34, 35, 38);
+    overflow-wrap: break-word;
+    text-decoration: none solid rgb(34, 35, 38);
+    text-size-adjust: 100%;
+    text-overflow: ellipsis;
+    vertical-align: middle;
+    width: 20%;
+    column-rule-color: rgb(34, 35, 38);
+    perspective-origin: 48px 52px;
+    transform-origin: 48px 52px;
+    caret-color: rgb(34, 35, 38);
+    border: 0px none rgb(34, 35, 38);
+    font: normal normal 400 normal 16px / 24px Circular, Helvetica, Arial, sans-serif;
+    outline: rgb(34, 35, 38) none 0px;
+    padding: 16px 16px 16px 16px;
+}/*#TD_6, #TD_26, #TD_36, #TD_56*/
+
+
+
+
+.PlaylistName {
+    border-collapse: collapse;
+    box-sizing: border-box;
+    color: rgb(34, 35, 38);
+    overflow-wrap: break-word;
+    text-decoration: none solid rgb(34, 35, 38);
+    text-size-adjust: 100%;
+    text-overflow: ellipsis;
+    vertical-align: middle;
+    width: 80%;
+    column-rule-color: rgb(34, 35, 38);
+    perspective-origin: 227px 52px;
+    transform-origin: 227px 52px;
+    caret-color: rgb(34, 35, 38);
+    border: 0px none rgb(34, 35, 38);
+    font: normal normal 400 normal 16px / 24px Circular, Helvetica, Arial, sans-serif;
+    outline: rgb(34, 35, 38) none 0px;
+    padding: 16px 16px 16px 16px;
+}
+
+.spotifyplaylistlists .PlaylistName {
+    width: 60%;
+}
+
+.PlaylistImage{
+    height: 70px;
+    width: 70px;
+}
+
+.PlaylistCheckboxColumn{
+    width: 20%;
+}
+
+.PlaylistCheckBoxDiv{}
+.PlaylistCheckBox{}
+/*#STRONG_9, #STRONG_19, #STRONG_29, #STRONG_39, #STRONG_49, #STRONG_59 {*/
+    /*border-collapse: collapse;*/
+    /*box-sizing: border-box;*/
+    /*color: rgb(34, 35, 38);*/
+    /*overflow-wrap: break-word;*/
+    /*text-decoration: none solid rgb(34, 35, 38);*/
+    /*text-size-adjust: 100%;*/
+    /*column-rule-color: rgb(34, 35, 38);*/
+    /*perspective-origin: 0px 0px;*/
+    /*transform-origin: 0px 0px;*/
+    /*caret-color: rgb(34, 35, 38);*/
+    /*border: 0px none rgb(34, 35, 38);*/
+    /*font: normal normal 700 normal 16px / 24px Circular, Helvetica, Arial, sans-serif;*/
+    /*outline: rgb(34, 35, 38) none 0px;*/
+/*}!*#STRONG_9, #STRONG_19, #STRONG_29, #STRONG_39, #STRONG_49, #STRONG_59*!*/
+
+
+/*#BR_10, #BR_20, #BR_30, #BR_40, #BR_50, #BR_60 {*/
+    /*border-collapse: collapse;*/
+    /*box-sizing: border-box;*/
+    /*color: rgb(34, 35, 38);*/
+    /*overflow-wrap: break-word;*/
+    /*text-decoration: none solid rgb(34, 35, 38);*/
+    /*text-size-adjust: 100%;*/
+    /*column-rule-color: rgb(34, 35, 38);*/
+    /*perspective-origin: 0px 0px;*/
+    /*transform-origin: 0px 0px;*/
+    /*caret-color: rgb(34, 35, 38);*/
+    /*border: 0px none rgb(34, 35, 38);*/
+    /*font: normal normal 400 normal 16px / 24px Circular, Helvetica, Arial, sans-serif;*/
+    /*outline: rgb(34, 35, 38) none 0px;*/
+/*}!*#BR_10, #BR_20, #BR_30, #BR_40, #BR_50, #BR_60*!*/
+
+.playlistlists{
+    width:100%;
+    float:left;
+}
+
+.configuredplaylistlists{
+    width:50%;
+    float:left;
+}
+
+.spotifyplaylistlists{
+    width:50%;
+    float:left;
+}
+
+
+#DIV_1 {
+    border-collapse: collapse;
+    bottom: 0px;
+    box-sizing: border-box;
+    color: rgb(145, 148, 150);
+    display: inline-block;
+    /*height: 30px;*/
+    left: 0px;
+    position: relative;
+    right: 0px;
+    text-align: center;
+    text-decoration: none solid rgb(145, 148, 150);
+    text-size-adjust: 100%;
+    top: 0px;
+    width: 28px;
+    column-rule-color: rgb(145, 148, 150);
+    perspective-origin: 14px 15px;
+    transform-origin: 14px 15px;
+    caret-color: rgb(145, 148, 150);
+    border: 0px none rgb(145, 148, 150);
+    font: normal normal 400 normal 16px / 24px Circular, Helvetica, Arial, sans-serif;
+    margin: 0px -4px 0px 0px;
+    outline: rgb(145, 148, 150) none 0px;
+}/*#DIV_1*/
+
+#LABEL_2 {
+    border-collapse: collapse;
+    box-sizing: border-box;
+    color: rgb(145, 148, 150);
+    cursor: pointer;
+    display: inline-block;
+    /*height: 24px;*/
+    max-width: 100%;
+    min-height: 24px;
+    text-align: center;
+    text-decoration: none solid rgb(145, 148, 150);
+    text-size-adjust: 100%;
+    width: 28px;
+    column-rule-color: rgb(145, 148, 150);
+    perspective-origin: 14px 12px;
+    transform-origin: 14px 12px;
+    caret-color: rgb(145, 148, 150);
+    border: 0px none rgb(145, 148, 150);
+    font: normal normal 400 normal 16px / 24px Circular, Helvetica, Arial, sans-serif;
+    outline: rgb(145, 148, 150) none 0px;
+    padding: 0px 0px 0px 28px;
+}/*#LABEL_2*/
+
+
+.INPUT_3 {
+    border-collapse: collapse;
+    bottom: 13px;
+    color: rgb(145, 148, 150);
+    cursor: default;
+    display: block;
+    /*height: 13px;*/
+    left: 28px;
+    /*min-height: 13px;*/
+    min-width: 13px;
+    opacity: 0;
+    position: absolute;
+    right: 7px;
+    text-decoration: none solid rgb(145, 148, 150);
+    text-size-adjust: 100%;
+    top: 0px;
+    width: 13px;
+    z-index: -1;
+    column-rule-color: rgb(145, 148, 150);
+    perspective-origin: 6.5px 6.5px;
+    transform-origin: 6.5px 6.5px;
+    caret-color: rgb(145, 148, 150);
+    background: rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box;
+    border: 0px none rgb(145, 148, 150);
+    font: normal normal 400 normal 16px / normal Circular, Helvetica, Arial, sans-serif;
+    margin: 4px 0px 0px -20px;
+    outline: rgb(145, 148, 150) none 0px;
+    padding: 0px;
+}/*#INPUT_3*/
+
+.CheckBox {
+    background-position: 50% 50%;
+    border-collapse: collapse;
+    bottom: 9px;
+    box-sizing: border-box;
+    color: rgb(145, 148, 150);
+    cursor: pointer;
+    display: block;
+    height: 20px;
+    left: 0px;
+    pointer-events: none;
+    position: absolute;
+    right: 8px;
+    text-align: center;
+    text-decoration: none solid rgb(145, 148, 150);
+    text-size-adjust: 100%;
+    top: 1px;
+    vertical-align: middle;
+    width: 20px;
+    column-rule-color: rgb(145, 148, 150);
+    perspective-origin: 10px 10px;
+    transform-origin: 10px 10px;
+    user-select: none;
+    caret-color: rgb(145, 148, 150);
+    border: 1px solid #C1C3C6;
+    border-radius: 4px 4px 4px 4px;
+    font: normal normal 400 normal 16px / 24px Circular, Helvetica, Arial, sans-serif;
+    outline: rgb(145, 148, 150) none 0px;
+}/*#SPAN_4*/
+
+.CheckBox.checked{
+    background: rgb(29, 185, 84) url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2232%22%20height%3D%2232%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cpath%20d%3D%22M13.613%2027.068l-7.94-7.28q-.285-.267-.442-.613t-.172-.7.11-.71.394-.638q.52-.583%201.3-.614T8.225%2017l6.13%205.626%208.79-17q.363-.693%201.104-.93t1.433.118.93%201.103-.126%201.442L16.56%2026.55q-.204.394-.558.654t-.78.34q-.063.015-.118.023t-.11.008-.102%200q-.74%200-1.276-.504z%22%20fill%3D%22%23FFF%22/%3E%3C/svg%3E") no-repeat scroll 50% 50% / 16px padding-box border-box;
+    border: 1px solid rgb(29, 185, 84);
+}
+#SPAN_5 {
+    border-collapse: collapse;
+    box-sizing: border-box;
+    color: rgb(145, 148, 150);
+    cursor: pointer;
+    display: none;
+    pointer-events: none;
+    text-align: center;
+    text-decoration: none solid rgb(145, 148, 150);
+    text-size-adjust: 100%;
+    column-rule-color: rgb(145, 148, 150);
+    caret-color: rgb(145, 148, 150);
+    border: 0px none rgb(145, 148, 150);
+    font: normal normal 400 normal 16px / 24px Circular, Helvetica, Arial, sans-serif;
+    outline: rgb(145, 148, 150) none 0px;
+}/*#SPAN_5*/
+
+#svg_6 {
+    border-collapse: collapse;
+    box-sizing: border-box;
+    color: rgb(145, 148, 150);
+    cursor: pointer;
+    pointer-events: none;
+    text-align: center;
+    text-decoration: none solid rgb(145, 148, 150);
+    text-size-adjust: 100%;
+    column-rule-color: rgb(145, 148, 150);
+    caret-color: rgb(145, 148, 150);
+    border: 0px none rgb(145, 148, 150);
+    font: normal normal 400 normal 16px / 24px Circular, Helvetica, Arial, sans-serif;
+    outline: rgb(145, 148, 150) none 0px;
+    overflow: hidden;
+}/*#svg_6*/
+
+#use_7 {
+    border-collapse: collapse;
+    box-sizing: border-box;
+    color: rgb(145, 148, 150);
+    cursor: pointer;
+    pointer-events: none;
+    text-align: center;
+    text-decoration: none solid rgb(145, 148, 150);
+    text-size-adjust: 100%;
+    column-rule-color: rgb(145, 148, 150);
+    transform-origin: 0px 0px;
+    caret-color: rgb(145, 148, 150);
+    border: 0px none rgb(145, 148, 150);
+    font: normal normal 400 normal 16px / 24px Circular, Helvetica, Arial, sans-serif;
+    outline: rgb(145, 148, 150) none 0px;
+}/*#use_7*/
+

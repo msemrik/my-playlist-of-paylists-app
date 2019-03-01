@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import * as serviceWorker from './serviceWorker';
-import Signup from "./components/Signup";
+import Signup from "./Signup";
 
 ReactDOM.render(<Signup/>, document.getElementById('root'));
 

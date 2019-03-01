@@ -1,0 +1,119 @@
+.UserLoggedInformationDiv {
+    box-sizing: border-box;
+    color: rgb(34, 35, 38);
+    /*height: 435px;*/
+    min-height: 20px;
+    text-decoration: none solid rgb(34, 35, 38);
+    text-size-adjust: 100%;
+    column-rule-color: rgb(34, 35, 38);
+    perspective-origin: 186.875px 217.5px;
+    transform-origin: 186.875px 217.5px;
+    caret-color: rgb(34, 35, 38);
+    background: rgb(255, 255, 255) none repeat scroll 0% 0% / auto padding-box border-box;
+    border: 1px solid rgba(0, 0, 0, 0);
+    font: normal normal 400 normal 16px / 24px Circular, Helvetica, Arial, sans-serif;
+    margin: 0px -10px 10px 0px;
+    outline: rgb(34, 35, 38) none 0px;
+    padding: 40px;
+}
+
+.UserLoggedInformationDivTitle {
+    background-color: inherit;
+    box-sizing: border-box;
+    color: rgb(29, 185, 84);
+    height: 25px;
+    letter-spacing: -0.18px;
+    text-decoration: none solid rgb(29, 185, 84);
+    text-size-adjust: 100%;
+    column-rule-color: rgb(29, 185, 84);
+    perspective-origin: 145.875px 12.5px;
+    transform-origin: 145.875px 12.5px;
+    caret-color: rgb(29, 185, 84);
+    border: 0px none rgb(29, 185, 84);
+    font: normal normal 400 normal 18px / 25.2px Circular, Helvetica, Arial, sans-serif;
+    margin: 0px 0px 12px;
+    outline: rgb(29, 185, 84) none 0px;
+}
+
+.UserLoggedInformationForm {
+    background-color: inherit;
+    box-sizing: border-box;
+    color: rgb(34, 35, 38);
+    /*height: 284px;*/
+    text-decoration: none solid rgb(34, 35, 38);
+    text-size-adjust: 100%;
+    column-rule-color: rgb(34, 35, 38);
+    perspective-origin: 145.875px 142px;
+    transform-origin: 145.875px 142px;
+    caret-color: rgb(34, 35, 38);
+    border: 0px none rgb(34, 35, 38);
+    font: normal normal 400 normal 16px / 24px Circular, Helvetica, Arial, sans-serif;
+    margin: 0px;
+    outline: rgb(34, 35, 38) none 0px;
+}
+
+.UserLoggedInformationDivItemGroup {
+    background-color: inherit;
+    box-sizing: border-box;
+    color: rgb(34, 35, 38);
+    height: 71px;
+    text-decoration: none solid rgb(34, 35, 38);
+    text-size-adjust: 100%;
+    column-rule-color: rgb(34, 35, 38);
+    perspective-origin: 145.875px 35.5px;
+    transform-origin: 145.875px 35.5px;
+    caret-color: rgb(34, 35, 38);
+    border: 0px none rgb(34, 35, 38);
+    font: normal normal 400 normal 16px / 24px Circular, Helvetica, Arial, sans-serif;
+    outline: rgb(34, 35, 38) none 0px;
+}
+
+.UserLoggedInformationItemTitle {
+    background-color: inherit;
+    box-sizing: border-box;
+    color: rgb(145, 148, 150);
+    display: inline-block;
+    height: 24px;
+    max-width: 100%;
+    text-decoration: none solid rgb(145, 148, 150);
+    text-size-adjust: 100%;
+    column-rule-color: rgb(145, 148, 150);
+    perspective-origin: 68.9219px 12px;
+    transform-origin: 68.9219px 12px;
+    caret-color: rgb(145, 148, 150);
+    border: 0px none rgb(145, 148, 150);
+    font: normal normal 400 normal 16px / 24px Circular, Helvetica, Arial, sans-serif;
+    outline: rgb(145, 148, 150) none 0px;
+}
+
+.UserLoggedInformationItemValue {
+    background-color: inherit;
+    box-sizing: border-box;
+    color: rgb(34, 35, 38);
+    height: 40px;
+    min-height: 40px;
+    text-decoration: none solid rgb(34, 35, 38);
+    text-size-adjust: 100%;
+    column-rule-color: rgb(34, 35, 38);
+    perspective-origin: 145.875px 20px;
+    transform-origin: 145.875px 20px;
+    caret-color: rgb(34, 35, 38);
+    border: 0px none rgb(34, 35, 38);
+    font: normal normal 400 normal 14px / 21px Circular, Helvetica, Arial, sans-serif;
+    margin: 7px 0px 0px;
+    outline: rgb(34, 35, 38) none 0px;
+    padding: 2px 0px 17px;
+}
+
+.mainconfigurediv{
+    margin-right: auto;
+    margin-left: auto;
+    display: table;
+    min-width: 30%;
+}
+
+.button-div {
+    margin-left: auto;
+    margin-right: auto;
+    display: table;
+}

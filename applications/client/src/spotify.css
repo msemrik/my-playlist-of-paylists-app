@@ -1,0 +1,211 @@
+.SpotifyLogInOutButton {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10%;
+    display: block;
+    color: rgb(255, 255, 255);
+    height: 31px;
+    letter-spacing: 1.76px;
+    text-decoration: none solid rgb(255, 255, 255);
+    text-transform: uppercase;
+    touch-action: manipulation;
+    vertical-align: middle;
+    will-change: transform;
+    column-rule-color: rgb(255, 255, 255);
+    perspective-origin: 70.7812px 15.5px;
+    transform-origin: 70.7812px 15.5px;
+    user-select: none;
+    caret-color: rgb(255, 255, 255);
+    background: rgb(29, 185, 84) none repeat scroll 0% 0% / auto padding-box border-box;
+    border: 0px none rgb(255, 255, 255);
+    border-radius: 500px 500px 500px 500px;
+    font: normal normal 200 normal 11px / 17.6px spotify-circular, spotify-circular-arabic, spotify-circular-hebrew, "Helvetica Neue", Helvetica, Arial, "Hiragino Kaku Gothic Pro", Meiryo, "MS Gothic", sans-serif;
+    outline: rgb(255, 255, 255) none 0px;
+    padding: 7px 22px;
+    transition: all 0.033s cubic-bezier(0.3, 0, 0.7, 1) 0s;
+}
+
+.SpotifyLogInOutButton:hover {
+    background-color: #1ed760;
+    color: rgb(255, 255, 255);
+    transform: scale(1.06);
+    transition: none 33ms cubic-bezier(.3,0,0,1);
+}
+
+.SpotifyTitleDiv {
+    width:100%;
+    box-sizing: border-box;
+    background-color: rgb(255, 255, 255);
+    color: rgb(34, 35, 38);
+    height: 45px;
+    text-decoration: none solid rgb(34, 35, 38);
+    text-size-adjust: 100%;
+    column-rule-color: rgb(34, 35, 38);
+    perspective-origin: 378.75px 22.5px;
+    transform-origin: 378.75px 22.5px;
+    caret-color: rgb(34, 35, 38);
+    border-right: 0px none rgb(34, 35, 38);
+    border-left: 0px none rgb(34, 35, 38);
+    font: normal normal 400 normal 16px / 24px Circular, Helvetica, Arial, sans-serif;
+    margin: 0px 0px 24px;
+    outline: rgb(34, 35, 38) none 0px;
+    display: inline-block;
+}/*#DIV_1*/
+
+.SpotifyTitleText {
+    float:left;
+    box-sizing: border-box;
+    background-color: rgb(255, 255, 255);
+    color: rgb(29, 185, 84);
+    height: 31px;
+    letter-spacing: -0.52px;
+    text-decoration: none solid rgb(29, 185, 84);
+    text-size-adjust: 100%;
+    column-rule-color: rgb(29, 185, 84);
+    perspective-origin: 378.75px 15.5px;
+    transform-origin: 378.75px 15.5px;
+    caret-color: rgb(29, 185, 84);
+    border: 0px none rgb(29, 185, 84);
+    font: normal normal 400 normal 26px / 31.2px Circular, Helvetica, Arial, sans-serif;
+    margin: 13px 0px;
+    outline: rgb(29, 185, 84) none 0px;
+}/*#H1_1*/
+
+.SpotifyButton {
+    color: rgb(255, 255, 255);
+    height: 31px;
+    letter-spacing: 1.76px;
+    min-width: 130px;
+    text-decoration: none solid rgb(255, 255, 255);
+    text-transform: uppercase;
+    touch-action: manipulation;
+    vertical-align: middle;
+    will-change: transform;
+    column-rule-color: rgb(255, 255, 255);
+    perspective-origin: 70.7812px 15.5px;
+    transform-origin: 70.7812px 15.5px;
+    user-select: none;
+    caret-color: rgb(255, 255, 255);
+    background: rgb(29, 185, 84) none repeat scroll 0% 0% / auto padding-box border-box;
+    border: 0px none rgb(255, 255, 255);
+    border-radius: 500px 500px 500px 500px;
+    font: normal normal 200 normal 11px / 17.6px spotify-circular, spotify-circular-arabic, spotify-circular-hebrew, "Helvetica Neue", Helvetica, Arial, "Hiragino Kaku Gothic Pro", Meiryo, "MS Gothic", sans-serif;
+    outline: rgb(255, 255, 255) none 0px;
+    padding: 7px 22px;
+    transition: all 0.033s cubic-bezier(0.3, 0, 0.7, 1) 0s;
+}
+
+.SpotifyButton:hover {
+    background-color: #1ed760;
+    color: rgb(255, 255, 255);
+    transform: scale(1.06);
+    transition: none 33ms cubic-bezier(.3,0,0,1);
+}
+
+.SpotifyCancelButton {
+    margin-right:5px;
+    color: rgb(255, 255, 255);
+    height: 31px;
+    letter-spacing: 1.76px;
+    min-width: 130px;
+    text-decoration: none solid rgb(255, 255, 255);
+    text-transform: uppercase;
+    touch-action: manipulation;
+    vertical-align: middle;
+    will-change: transform;
+    column-rule-color: rgb(255, 255, 255);
+    perspective-origin: 70.7812px 15.5px;
+    transform-origin: 70.7812px 15.5px;
+    user-select: none;
+    caret-color: rgb(255, 255, 255);
+    background: grey none repeat scroll 0% 0% / auto padding-box border-box;
+    border: 0px none rgb(255, 255, 255);
+    border-radius: 500px 500px 500px 500px;
+    font: normal normal 200 normal 11px / 17.6px spotify-circular, spotify-circular-arabic, spotify-circular-hebrew, "Helvetica Neue", Helvetica, Arial, "Hiragino Kaku Gothic Pro", Meiryo, "MS Gothic", sans-serif;
+    outline: rgb(255, 255, 255) none 0px;
+    padding: 7px 22px;
+    transition: all 0.033s cubic-bezier(0.3, 0, 0.7, 1) 0s;
+}
+
+.SpotifyCancelButton:hover {
+    background-color: black;
+    color: rgb(255, 255, 255);
+    transform: scale(1.06);
+    transition: none 33ms cubic-bezier(.3,0,0,1);
+}
+
+.SpotifyAddPlayListDiv{
+    float:right;
+}
+
+
+.SpotifyBlackButton {
+    box-sizing: border-box;
+    color: rgb(255, 255, 255);
+    display: block;
+    height: 32px;
+    letter-spacing: 2px;
+    max-width: 290px;
+    min-width: 160px;
+    text-align: center;
+    text-decoration: none solid rgb(255, 255, 255);
+    text-size-adjust: 100%;
+    text-transform: uppercase;
+    touch-action: manipulation;
+    vertical-align: middle;
+    width: 290px;
+    column-rule-color: rgb(255, 255, 255);
+    perspective-origin: 145px 16px;
+    transform-origin: 145px 16px;
+    user-select: none;
+    caret-color: rgb(255, 255, 255);
+    background: rgb(0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box;
+    border: 0px solid rgba(0, 0, 0, 0);
+    border-radius: 500px 500px 500px 500px;
+    font: normal normal 700 normal 12px / 12px Circular, Helvetica, Arial, sans-serif;
+    margin: 0px 0.875px;
+    outline: rgb(255, 255, 255) none 0px;
+    padding: 10px 32px;
+    transition: background-color 0.3s ease 0s, border-color 0.3s ease 0s, color 0.3s ease 0s, box-shadow 0.3s ease 0s, filter 0.3s ease 0s, -webkit-box-shadow 0.3s ease 0s, -webkit-filter 0.3s ease 0s;
+}
+
+.SpotifyBlackButton:hover{
+    color: #FFF;
+    background-color: #333333;
+    transition-duration: .3s;
+}
+
+.SpotifyTitleText {
+    box-sizing: border-box;
+    color: rgb(29, 185, 84);
+    height: 31px;
+    letter-spacing: -0.52px;
+    text-decoration: none solid rgb(29, 185, 84);
+    text-size-adjust: 100%;
+    column-rule-color: rgb(29, 185, 84);
+    perspective-origin: 378.75px 15.5px;
+    transform-origin: 378.75px 15.5px;
+    caret-color: rgb(29, 185, 84);
+    border: 0px none rgb(29, 185, 84);
+    font: normal normal 400 normal 26px / 31.2px Circular, Helvetica, Arial, sans-serif;
+    margin: 13px 0px;
+    outline: rgb(29, 185, 84) none 0px;
+}
+
+.SpotifyTitleDiv {
+    box-sizing: border-box;
+    color: rgb(34, 35, 38);
+    height: 45px;
+    text-decoration: none solid rgb(34, 35, 38);
+    text-size-adjust: 100%;
+    column-rule-color: rgb(34, 35, 38);
+    perspective-origin: 378.75px 22.5px;
+    transform-origin: 378.75px 22.5px;
+    caret-color: rgb(34, 35, 38);
+    border-right: 0px none rgb(34, 35, 38);
+    border-left: 0px none rgb(34, 35, 38);
+    font: normal normal 400 normal 16px / 24px Circular, Helvetica, Arial, sans-serif;
+    margin: 0px 0px 24px;
+    outline: rgb(34, 35, 38) none 0px;
+    display: inline-block;
+}

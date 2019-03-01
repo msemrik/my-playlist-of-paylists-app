@@ -1,4 +1,5 @@
 var spotifyapi = require('../spotifyapi');
+var database = require('../database');
 
 var Users = require('./securityconfiguration').Users;
 
@@ -58,12 +59,20 @@ function initRestEndPoints(app) {
         spotifyapi.logout(res);
     });
 
-    app.post('/spotify/user/playlist', function (req, res) {
-        spotifyapi.getUserPlaylists(res);
+    // app.post('/spotify/user/configuredplaylists', function (req, res) {
+    //     spotifyapi.getConfiguredUserPlaylists(res);
+    // });
+
+    app.post('/spotify/user/playlists', function (req, res) {
+        spotifyapi.getSpotifyUserPlaylists(res);
     });
 
     app.post('/spotify/createplaylist', function (req, res) {
         spotifyapi.createPlaylist(req, res);
+    });
+
+    app.post('/updateplaylist', function (req, res) {
+        database.updatePlaylist(req, res);
     });
 
 }

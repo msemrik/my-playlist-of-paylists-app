@@ -1,6 +1,6 @@
 //TODO remove this vars
 var Users = [{user:"msemrik",pass:"yo"}];
-
+// var Users = [];
 
 function checkSignIn(req, res, next) {
     next()
