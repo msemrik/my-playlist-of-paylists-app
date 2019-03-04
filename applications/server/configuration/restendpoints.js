@@ -1,9 +1,14 @@
-var spotifyapi = require('../spotifyapi');
-var database = require('../database');
+var spotifyapi = require('../SpotifyApi');
+var restController = require('../RestController');
+var {Validator, ValidationError} = require('express-json-validator-middleware');
 
 var Users = require('./securityconfiguration').Users;
 
 function initRestEndPoints(app) {
+    // Initialize a Validator instance first
+    var validator = new Validator({allErrors: true}); // pass in options to the Ajv instance
+    // Define a shortcut function
+    var validate = validator.validate;
 
     app.post('/signup', function (req, res) {
         var redirected = false;
@@ -59,10 +64,6 @@ function initRestEndPoints(app) {
         spotifyapi.logout(res);
     });
 
-    // app.post('/spotify/user/configuredplaylists', function (req, res) {
-    //     spotifyapi.getConfiguredUserPlaylists(res);
-    // });
-
     app.post('/spotify/user/playlists', function (req, res) {
         spotifyapi.getSpotifyUserPlaylists(res);
     });
@@ -71,8 +72,23 @@ function initRestEndPoints(app) {
         spotifyapi.createPlaylist(req, res);
     });
 
-    app.post('/updateplaylist', function (req, res) {
-        database.updatePlaylist(req, res);
+
+    var UpdatePlaylistSchema = {
+        "type": 'object',
+        "properties":
+            {
+                "playlistToUpdate": {
+                    "type": "object",
+                    "properties": {
+                        "id": {"type":"string"},
+                        "includedPlaylists": {"type": "array"}
+                    }
+                }
+            },
+        "required": ["playlistToUpdate"]
+    };
+    app.post('/updateplaylist', validate({body: UpdatePlaylistSchema}), function (req, res) {
+        restController.updatePlaylist(req, res);
     });
 
 }

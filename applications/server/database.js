@@ -1,4 +1,6 @@
+var _ = require('lodash');
 var mongoose = require('mongoose');
+var async = require('async');
 
 var dataBasePromiseConnection = null;
 var isDataBaseConnected = false;
@@ -12,7 +14,7 @@ let playlistSchema = new Schema({
     playlists: [{
         playlistId: String,
         name: String,
-        playlistsConfigured: [{
+        includedPlaylists: [{
             playlistId: String
         }]
     }]
@@ -22,13 +24,14 @@ var PlaylistModel = mongoose.model('Playlist', playlistSchema)
 
 var getDataBasePromiseConection = function () {
     if (!dataBasePromiseConnection) {
-        dataBasePromiseConnection = mongoose.connect(mongoDB, {useNewUrlParser: true})
+        dataBasePromiseConnection = mongoose.connect(mongoDB , {useNewUrlParser: true})
             .then(() => {
                 isDataBaseConnected = true;
             })
             .catch(err => {
                 isDataBaseConnected = false;
                 console.error('Database connection error')
+                throw err;
             });
     }
 
@@ -110,15 +113,49 @@ var addNewPlaylistToDBPlaylistsObject = function (newPlaylistToBeSaved) {
     });
 }
 
-var updatePlaylist = function (req, res) {
-    const request = req;
-    console.log("update playlist: " + req.body);
-    getDataBasePromiseConection().then(function () {
-        PlaylistModel.find().lean().exec(function (err, DBPlaylistsObject) {
-            DBPlaylistsObject[0].req.body.playlistToUpdate.id
-            console.log(DBPlaylistsObject[0]);
-        });
-    });
+function createIncludedPlaylists(playlistToUpdate) {
+    var includedPlaylistsObject = [];
+    playlistToUpdate.includedPlaylists.map((includedPlaylistId) => includedPlaylistsObject.push({playlistId: includedPlaylistId}));
+    return includedPlaylistsObject;
+}
+
+function updatePlaylist(req, callback) {
+    request = req.body;
+
+    async.waterfall([
+
+        function (callback) {
+            getDataBasePromiseConection().then(function () {
+                PlaylistModel.find().lean().exec(function (err, DBPlaylistsObject) {
+                    callback(null, DBPlaylistsObject[0]);
+                });
+            }, (err) => {
+                if (err) {
+                    console.log('error: ' + err);
+                    callback(err)
+                }
+            });
+        },
+
+        function (result, callback) {
+            playlistToUpdate = req.body.playlistToUpdate;
+            var storedPlaylist = _.find(result.playlists, {'playlistId': playlistToUpdate.id});
+            storedPlaylist.includedPlaylists = createIncludedPlaylists(playlistToUpdate);
+            console.log("updated playlist " + playlistToUpdate)
+
+            updateDBPlaylistsObject(result).then(function (playlistObject) {
+                callback(null, playlistObject);
+            }, (err) => {
+                if (err) {
+                    console.log('error: ' + err);
+                    callback(err)
+                }
+            })
+        }
+    ], function(err,result){
+        if(err){console.log('error: ' + err); callback(err)};
+        if(result){console.log('result: ' + result); callback(null, result)};
+    })
 }
 
 module.exports =

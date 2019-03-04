@@ -1,4 +1,4 @@
-var spotifyapi = require('../spotifyapi');
+var spotifyapi = require('../SpotifyApi');
 var securityConfiguration = require('./securityconfiguration');
 
 function initGetEndPoints(app) {
@@ -46,6 +46,9 @@ function initGetEndPoints(app) {
     });
 
     app.use('/', function (err, req, res, next) {
+        if (err && err.name === 'JsonSchemaValidationError') {
+            return {}
+        }
         console.log(err);
         //User should be authenticated! Redirect him to log in.
         res.redirect('/');

@@ -1,7 +1,13 @@
-.UserLoggedInformationDiv {
+.configure-page-content{
+    margin-right: auto;
+    margin-left: auto;
+    display: table;
+    min-width: 30%;
+}
+
+.configure-page-user-logged-div {
     box-sizing: border-box;
     color: rgb(34, 35, 38);
-    /*height: 435px;*/
     min-height: 20px;
     text-decoration: none solid rgb(34, 35, 38);
     text-size-adjust: 100%;
@@ -17,7 +23,7 @@
     padding: 40px;
 }
 
-.UserLoggedInformationDivTitle {
+.configure-page-user-logged-div-title {
     background-color: inherit;
     box-sizing: border-box;
     color: rgb(29, 185, 84);
@@ -35,7 +41,7 @@
     outline: rgb(29, 185, 84) none 0px;
 }
 
-.UserLoggedInformationForm {
+.configure-page-user-logged-div-form {
     background-color: inherit;
     box-sizing: border-box;
     color: rgb(34, 35, 38);
@@ -52,7 +58,7 @@
     outline: rgb(34, 35, 38) none 0px;
 }
 
-.UserLoggedInformationDivItemGroup {
+.configure-page-user-logged-div-form-item-group {
     background-color: inherit;
     box-sizing: border-box;
     color: rgb(34, 35, 38);
@@ -68,7 +74,7 @@
     outline: rgb(34, 35, 38) none 0px;
 }
 
-.UserLoggedInformationItemTitle {
+.configure-page-user-logged-div-form-item-group-title {
     background-color: inherit;
     box-sizing: border-box;
     color: rgb(145, 148, 150);
@@ -86,7 +92,7 @@
     outline: rgb(145, 148, 150) none 0px;
 }
 
-.UserLoggedInformationItemValue {
+.configure-page-user-logged-div-form-item-group-value {
     background-color: inherit;
     box-sizing: border-box;
     color: rgb(34, 35, 38);
@@ -105,15 +111,84 @@
     padding: 2px 0px 17px;
 }
 
-.mainconfigurediv{
-    margin-right: auto;
+
+
+.configure-page-logout-button-div {
     margin-left: auto;
+    margin-right: auto;
     display: table;
-    min-width: 30%;
 }
 
-.button-div {
+.configure-page-login-logout-button {
     margin-left: auto;
     margin-right: auto;
-    display: table;
+    margin-top: 10%;
+    display: block;
+    color: rgb(255, 255, 255);
+    height: 31px;
+    letter-spacing: 1.76px;
+    text-decoration: none solid rgb(255, 255, 255);
+    text-transform: uppercase;
+    touch-action: manipulation;
+    vertical-align: middle;
+    will-change: transform;
+    column-rule-color: rgb(255, 255, 255);
+    perspective-origin: 70.7812px 15.5px;
+    transform-origin: 70.7812px 15.5px;
+    user-select: none;
+    caret-color: rgb(255, 255, 255);
+    background: rgb(29, 185, 84) none repeat scroll 0% 0% / auto padding-box border-box;
+    border: 0px none rgb(255, 255, 255);
+    border-radius: 500px 500px 500px 500px;
+    font: normal normal 200 normal 11px / 17.6px spotify-circular, spotify-circular-arabic, spotify-circular-hebrew, "Helvetica Neue", Helvetica, Arial, "Hiragino Kaku Gothic Pro", Meiryo, "MS Gothic", sans-serif;
+    outline: rgb(255, 255, 255) none 0px;
+    padding: 7px 22px;
+    transition: all 0.033s cubic-bezier(0.3, 0, 0.7, 1) 0s;
 }
+
+.configure-page-login-logout-button:hover {
+    background-color: #1ed760;
+    color: rgb(255, 255, 255);
+    transform: scale(1.06);
+    transition: none 33ms cubic-bezier(.3,0,0,1);
+}
+
+
+
+
+
+/*.SpotifyBlackButton {*/
+    /*box-sizing: border-box;*/
+    /*color: rgb(255, 255, 255);*/
+    /*display: block;*/
+    /*height: 32px;*/
+    /*letter-spacing: 2px;*/
+    /*max-width: 290px;*/
+    /*min-width: 160px;*/
+    /*text-align: center;*/
+    /*text-decoration: none solid rgb(255, 255, 255);*/
+    /*text-size-adjust: 100%;*/
+    /*text-transform: uppercase;*/
+    /*touch-action: manipulation;*/
+    /*vertical-align: middle;*/
+    /*width: 290px;*/
+    /*column-rule-color: rgb(255, 255, 255);*/
+    /*perspective-origin: 145px 16px;*/
+    /*transform-origin: 145px 16px;*/
+    /*user-select: none;*/
+    /*caret-color: rgb(255, 255, 255);*/
+    /*background: rgb(0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box;*/
+    /*border: 0px solid rgba(0, 0, 0, 0);*/
+    /*border-radius: 500px 500px 500px 500px;*/
+    /*font: normal normal 700 normal 12px / 12px Circular, Helvetica, Arial, sans-serif;*/
+    /*margin: 0px 0.875px;*/
+    /*outline: rgb(255, 255, 255) none 0px;*/
+    /*padding: 10px 32px;*/
+    /*transition: background-color 0.3s ease 0s, border-color 0.3s ease 0s, color 0.3s ease 0s, box-shadow 0.3s ease 0s, filter 0.3s ease 0s, -webkit-box-shadow 0.3s ease 0s, -webkit-filter 0.3s ease 0s;*/
+/*}*/
+
+/*.SpotifyBlackButton:hover{*/
+    /*color: #FFF;*/
+    /*background-color: #333333;*/
+    /*transition-duration: .3s;*/
+/*}*/

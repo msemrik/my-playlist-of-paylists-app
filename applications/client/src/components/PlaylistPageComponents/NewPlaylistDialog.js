@@ -1,4 +1,3 @@
-import './NewPlaylistDialog.css';
 var React = require('react');
 var ButtonToolbar = require('react-bootstrap').ButtonToolbar;
 var Button = require('react-bootstrap').Button;
@@ -30,7 +29,7 @@ class NewPlaylistDialog extends React.Component {
 
         return (
             <ButtonToolbar>
-                <Button className={"SpotifyButton"} onClick={() => this.setState({lgShow: true})}>
+                <Button className={"playlist-list-button-div-button"} onClick={() => this.setState({lgShow: true})}>
                     Create New Playlist
                 </Button>
 
@@ -38,24 +37,23 @@ class NewPlaylistDialog extends React.Component {
                     size="lg"
                     show={this.state.lgShow}
                     onHide={lgClose}
-                    aria-labelledby="example-modal-sizes-title-lg">
+                >
 
                     <Modal.Header closeButton>
-                        <Modal.Title id="example-modal-sizes-title-lg" className={"SpotifyTitleText"}>
+                        <Modal.Title className={"playlist-add-playlist-title-text"}>
                             {this.props.title}
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <input id="name" type="text" className={"playlist-text"} value={this.state.name} onChange={this.handleNameChange}/>
+                        <input id="name" type="text" className={"playlist-add-playlist-input-text"}
+                               value={this.state.name} onChange={this.handleNameChange}/>
                         <br/>
                         <br/>
-                        {/*<button type="button" className="btn btn-secondary" onClick={lgClose}>Close</button>*/}
-                        {/*<button type="button" className="btn btn-primary" onClick={this.handleClick}>Save</button>*/}
                         <div className={"button-div"}>
-                            <button className={"SpotifyCancelButton"} onClick={lgClose}>
+                            <button className={"playlist-add-playlist-cancel-button"} onClick={lgClose}>
                                 Close
                             </button>
-                            <button className={"SpotifyButton"} onClick={this.handleClick}>
+                            <button className={"playlist-list-button-div-button"} onClick={this.handleClick}>
                                 Create
                             </button>
                         </div>

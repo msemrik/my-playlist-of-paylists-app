@@ -1,0 +1,323 @@
+.playlist-page-content {
+    width: 100%;
+    float: left;
+    padding-bottom: 4%;
+}
+
+.playlist-page-title-text {
+    box-sizing: border-box;
+    color: rgb(29, 185, 84);
+    letter-spacing: -0.52px;
+    text-decoration: none solid rgb(29, 185, 84);
+    font: normal normal 400 normal 26px / 31.2px Circular, Helvetica, Arial, sans-serif;
+    outline: rgb(29, 185, 84) none 0px;
+}
+
+
+.playlist-page-title-div {
+    box-sizing: border-box;
+    color: rgb(34, 35, 38);
+    /*height: 45px;*/
+    text-decoration: none solid rgb(34, 35, 38);
+    text-size-adjust: 100%;
+    column-rule-color: rgb(34, 35, 38);
+    perspective-origin: 378.75px 22.5px;
+    transform-origin: 378.75px 22.5px;
+    caret-color: rgb(34, 35, 38);
+    border-right: 0px none rgb(34, 35, 38);
+    border-left: 0px none rgb(34, 35, 38);
+    font: normal normal 400 normal 16px / 24px Circular, Helvetica, Arial, sans-serif;
+    margin: 0px 0px 24px;
+    outline: rgb(34, 35, 38) none 0px;
+    display: inline-block;
+}
+
+.playlist-page-configured-playlist {
+    width: 48%;
+    float: left;
+}
+
+.playlist-page-spotify-playlist {
+    width: 48%;
+    float: right;
+}
+
+.playlist-list-section {
+    box-sizing: border-box;
+    color: rgb(34, 35, 38);
+    height: 100%;
+    caret-color: rgb(34, 35, 38);
+    background: rgb(255, 255, 255) none repeat scroll 0% 0% / auto padding-box border-box;
+    border: 1px solid rgba(0, 0, 0, 0);
+    font: normal normal 400 normal 16px / 24px Circular, Helvetica, Arial, sans-serif;
+    margin: 0px 0px 10px;
+    padding: 0 2% 0 2%;
+}
+
+.playlist-list-title-div {
+    width: 100%;
+    box-sizing: border-box;
+    background-color: rgb(255, 255, 255);
+    border-right: 0px none rgb(34, 35, 38);
+    border-left: 0px none rgb(34, 35, 38);
+    display: inline-block;
+    margin-bottom: 2%;
+}
+
+.playlist-list-title-text {
+    box-sizing: border-box;
+    background-color: rgb(255, 255, 255);
+    color: rgb(29, 185, 84);
+    letter-spacing: -0.52px;
+    text-decoration: none solid rgb(29, 185, 84);
+    font: normal normal 400 normal 26px / 31.2px Circular, Helvetica, Arial, sans-serif;
+    outline: rgb(29, 185, 84) none 0px;
+}
+
+.playlist-list-button-div {
+    float: left;
+}
+
+.playlist-list-button-div-button {
+    color: rgb(255, 255, 255);
+    letter-spacing: 1.76px;
+    text-decoration: none solid rgb(255, 255, 255);
+    text-transform: uppercase;
+    vertical-align: middle;
+    user-select: none;
+    caret-color: rgb(255, 255, 255);
+    background: rgb(29, 185, 84) none repeat scroll 0% 0% / auto padding-box border-box;
+    border: 0px none rgb(255, 255, 255);
+    border-radius: 500px 500px 500px 500px;
+    font: normal normal 200 normal 11px / 17.6px spotify-circular, spotify-circular-arabic, spotify-circular-hebrew, "Helvetica Neue", Helvetica, Arial, "Hiragino Kaku Gothic Pro", Meiryo, "MS Gothic", sans-serif;
+    outline: rgb(255, 255, 255) none 0px;
+    padding: 7px 22px;
+    transition: all 0.033s cubic-bezier(0.3, 0, 0.7, 1) 0s;
+}
+
+.playlist-list-button-div-button-text {
+    box-sizing: border-box;
+    color: rgb(29, 185, 84);
+    /*height: 31px;*/
+    letter-spacing: -0.52px;
+    text-decoration: none solid rgb(29, 185, 84);
+    text-size-adjust: 100%;
+    column-rule-color: rgb(29, 185, 84);
+    perspective-origin: 378.75px 15.5px;
+    transform-origin: 378.75px 15.5px;
+    caret-color: rgb(29, 185, 84);
+    border: 0px none rgb(29, 185, 84);
+    font: normal normal 400 normal 26px / 31.2px Circular, Helvetica, Arial, sans-serif;
+    margin: 13px 0px;
+    outline: rgb(29, 185, 84) none 0px;
+}
+
+.playlist-list-button-div-button:hover {
+    background-color: #1ed760;
+    color: rgb(255, 255, 255);
+    transform: scale(1.06);
+    transition: none 33ms cubic-bezier(.3, 0, 0, 1);
+}
+
+.playlist-list-div {
+    box-sizing: border-box;
+    color: rgb(34, 35, 38);
+    max-height: 92%;
+    border: 0px none rgb(34, 35, 38);
+    overflow: auto;
+}
+
+.playlist-list-div-table {
+    width: 100%;
+    border-collapse: collapse;
+    box-sizing: border-box;
+    color: rgb(34, 35, 38);
+    max-width: 100%;
+    border-spacing: 0px 5px;
+    font: normal normal 400 normal 16px / 24px Circular, Helvetica, Arial, sans-serif;
+    outline: rgb(34, 35, 38) none 0px;
+    border-collapse: separate;
+}
+
+
+.playlist-list-div-table-tbody {
+    border-collapse: collapse;
+    box-sizing: border-box;
+    color: rgb(34, 35, 38);
+    text-decoration: none solid rgb(34, 35, 38);
+    text-size-adjust: 100%;
+    width: 675px;
+    column-rule-color: rgb(34, 35, 38);
+    perspective-origin: 337.5px 304px;
+    transform-origin: 337.5px 304px;
+    caret-color: rgb(34, 35, 38);
+    border: 0px none rgb(128, 128, 128);
+    font: normal normal 400 normal 16px / 24px Circular, Helvetica, Arial, sans-serif;
+    outline: rgb(34, 35, 38) none 0px;
+}
+
+.playlist-add-playlist-title-text {
+    box-sizing: border-box;
+    background-color: rgb(255, 255, 255);
+    color: rgb(29, 185, 84);
+    letter-spacing: -0.52px;
+    text-decoration: none solid rgb(29, 185, 84);
+    font: normal normal 400 normal 26px / 31.2px Circular, Helvetica, Arial, sans-serif;
+    outline: rgb(29, 185, 84) none 0px;
+}
+
+.playlist-add-playlist-input-text {
+    width: 40%;
+}
+
+.playlist-add-playlist-cancel-button {
+    margin-right: 5px;
+    color: rgb(255, 255, 255);
+    background: grey none repeat scroll 0% 0% / auto padding-box border-box;
+    height: 31px;
+    letter-spacing: 1.76px;
+    min-width: 130px;
+    text-decoration: none solid rgb(255, 255, 255);
+    text-transform: uppercase;
+    touch-action: manipulation;
+    vertical-align: middle;
+    will-change: transform;
+    column-rule-color: rgb(255, 255, 255);
+    perspective-origin: 70.7812px 15.5px;
+    transform-origin: 70.7812px 15.5px;
+    user-select: none;
+    caret-color: rgb(255, 255, 255);
+
+    border: 0px none rgb(255, 255, 255);
+    border-radius: 500px 500px 500px 500px;
+    font: normal normal 200 normal 11px / 17.6px spotify-circular, spotify-circular-arabic, spotify-circular-hebrew, "Helvetica Neue", Helvetica, Arial, "Hiragino Kaku Gothic Pro", Meiryo, "MS Gothic", sans-serif;
+    outline: rgb(255, 255, 255) none 0px;
+    padding: 7px 22px;
+    transition: all 0.033s cubic-bezier(0.3, 0, 0.7, 1) 0s;
+}
+
+.playlist-add-playlist-cancel-button:hover {
+    background-color: black;
+    color: rgb(255, 255, 255);
+    transform: scale(1.06);
+    transition: none 33ms cubic-bezier(.3, 0, 0, 1);
+}
+
+.playlist-list-item-row {
+    border-collapse: collapse;
+    box-sizing: border-box;
+    color: rgb(34, 35, 38);
+    text-decoration: none solid rgb(34, 35, 38);
+    text-size-adjust: 100%;
+    vertical-align: middle;
+    width: 675px;
+    column-rule-color: rgb(34, 35, 38);
+    perspective-origin: 337.5px 52px;
+    transform-origin: 337.5px 52px;
+    caret-color: rgb(34, 35, 38);
+    background: rgba(0, 0, 0, 0.02) none repeat scroll 0% 0% / auto padding-box border-box;
+    border: 0px none rgb(128, 128, 128);
+    font: normal normal 400 normal 16px / 24px Circular, Helvetica, Arial, sans-serif;
+    outline: rgb(34, 35, 38) none 0px;
+}
+
+.playlist-list-item-row.selected {
+    background: rgb(29, 185, 84) none repeat scroll 0% 0% / auto padding-box border-box;
+}
+
+.playlist-list-item-row.selected:hover {
+    cursor: pointer;
+    background-color: rgb(29, 218, 85);
+}
+
+.playlist-list-item-row:hover {
+    cursor: pointer;
+    background-color: rgb(29, 185, 84);
+}
+
+
+.playlist-list-item-image-column {
+    border-collapse: collapse;
+    box-sizing: border-box;
+    color: rgb(34, 35, 38);
+    text-size-adjust: 100%;
+    vertical-align: middle;
+    width: 1%;
+    border: 0px none rgb(34, 35, 38);
+    font: normal normal 400 normal 16px / 24px Circular, Helvetica, Arial, sans-serif;
+    outline: rgb(34, 35, 38) none 0px;
+    padding: 1% 1% 1% 2%;
+}
+
+.playlist-list-item-image-image {
+    height: 60px;
+    width: 60px;
+}
+
+
+.playlist-list-item-name-column {
+    border-collapse: collapse;
+    box-sizing: border-box;
+    color: rgb(34, 35, 38);
+    overflow-wrap: break-word;
+    text-decoration: none solid rgb(34, 35, 38);
+    text-size-adjust: 100%;
+    text-overflow: ellipsis;
+    vertical-align: middle;
+    width: 80%;
+    column-rule-color: rgb(34, 35, 38);
+    perspective-origin: 227px 52px;
+    transform-origin: 227px 52px;
+    caret-color: rgb(34, 35, 38);
+    border: 0px none rgb(34, 35, 38);
+    font: normal normal 400 normal 16px / 24px Circular, Helvetica, Arial, sans-serif;
+    outline: rgb(34, 35, 38) none 0px;
+    padding: 16px 16px 16px 16px;
+}
+
+.playlist-list-item-name-column.selected {
+    color: #F8F8F8;
+}
+
+.spotifyplaylistlists .playlist-list-item-name-column {
+    width: 60%;
+}
+
+.playlist-list-item-checkbox-column {
+    width: 20%;
+}
+
+.playlist-list-item-checkbox-div {
+    position: relative;
+}
+
+.playlist-list-item-checkbox-input-checkbox {
+    position: absolute;
+    z-index: -1;
+}
+
+.playlist-list-item-checkbox-span {
+    height: 20px;
+    left: 0px;
+    position: absolute;
+    top: 1px;
+    width: 20px;
+    border: 1px solid #C1C3C6;
+    border-radius: 4px 4px 4px 4px;
+}
+
+.playlist-list-item-checkbox-span.checked {
+    background: rgb(29, 185, 84) url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2232%22%20height%3D%2232%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cpath%20d%3D%22M13.613%2027.068l-7.94-7.28q-.285-.267-.442-.613t-.172-.7.11-.71.394-.638q.52-.583%201.3-.614T8.225%2017l6.13%205.626%208.79-17q.363-.693%201.104-.93t1.433.118.93%201.103-.126%201.442L16.56%2026.55q-.204.394-.558.654t-.78.34q-.063.015-.118.023t-.11.008-.102%200q-.74%200-1.276-.504z%22%20fill%3D%22%23FFF%22/%3E%3C/svg%3E") no-repeat scroll 50% 50% / 16px padding-box border-box;
+    border: 1px solid rgb(29, 185, 84);
+}
+
+
+@media screen and (max-width: 768px) {
+    .playlist-page-configured-playlist {
+        width: 100%;
+    }
+
+    .playlist-page-spotify-playlist {
+        width: 100%;
+    }
+}

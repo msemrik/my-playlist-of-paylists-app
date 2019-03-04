@@ -141,8 +141,12 @@ module.exports = function(webpackEnv) {
         // require.resolve('react-dev-utils/webpackHotDevClient'),
     // Finally, this is your app's code:
     index: paths.appIndexJs,
-    login: paths.loginJs,
-    signup: paths.signupJs
+    // login: paths.loginJs,
+    // signup: paths.signupJs
+
+
+
+
     // We include the app code last so that if there is a runtime error during
     // initialization, it doesn't blow up the WebpackDevServer client, and
     // changing JS code would still trigger a refresh.
@@ -510,16 +514,24 @@ module.exports = function(webpackEnv) {
             : undefined
         )
       ),
-      new HtmlWebpackPlugin({
-        filename: 'login.html',
-        template: 'public/login.html',
-        chunks: ['login']
-      }),
-      new HtmlWebpackPlugin({
-        filename: 'signup.html',
-        template: 'public/signup.html',
-        chunks: ['signup']
-      }),
+      // new HtmlWebpackPlugin({
+      //   filename: 'login.html',
+      //   template: 'public/login.html',
+      //   chunks: ['login']
+      // }),
+      // new HtmlWebpackPlugin({
+      //   filename: 'signup.html',
+      //   template: 'public/signup.html',
+      //   chunks: ['signup']
+      // }),
+
+
+
+
+
+
+
+
       // Inlines the webpack runtime script. This script is too small to warrant
       // a network request.
       isEnvProduction &&

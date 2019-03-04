@@ -1,5 +1,8 @@
 var SpotifyWebApi = require('spotify-web-api-node');
 var DataBaseAccess = require('./database')
+var _ = require('lodash');
+var async = require('async');
+var flatMap = require('array.prototype.flatmap');
 
 var isClientConected = false;
 var userConnectedPromise;
@@ -13,6 +16,7 @@ spotifyApi = new SpotifyWebApi({
     redirectUri: process.env.SPOTIFY_REDIRECT_URI
 });
 
+console.log(process.env.SPOTIFY_REDIRECT_URI);
 var clientConnectedPromise = spotifyApi.clientCredentialsGrant()
     .then(function (data) {
         isClientConected = true;
@@ -124,10 +128,64 @@ function createPlaylist(req, res) {
 
 
 function getConfiguredSpotifyPlaylists(DBPlaylistsObject, SPOTIFYPlaylistsObject) {
-    var DBPlaylistsObjectIDs = DBPlaylistsObject.playlists.map(itemY => {
-        return itemY.playlistId;
+    var DBPlaylistsObjectIDs = DBPlaylistsObject.playlists.map(dbObject => {
+        return dbObject.playlistId;
     });
-    return SPOTIFYPlaylistsObject.body.items.filter(itemX => DBPlaylistsObjectIDs.includes(itemX.id));
+    return SPOTIFYPlaylistsObject.body.items.filter(spotifyObject => DBPlaylistsObjectIDs.includes(spotifyObject.id))
+        .map((spotifyObject) => {
+            spotifyObject.includedPlaylists = (_.find(DBPlaylistsObject.playlists, {"playlistId": spotifyObject.id}).includedPlaylists);
+            return spotifyObject;
+        })
+}
+
+
+function updatePlaylist(playListToUpdate, callback) {
+    var promises = [];
+
+    //create promises for getting tracks
+    playListToUpdate.includedPlaylists.map((playlistIncluded) => {
+            promises.push(
+                (callback) => {
+                    spotifyApi.getPlaylistTracks(playlistIncluded).then(
+                        (res) => {
+                            var items = res.body.items.map((item) => item.track.uri);
+                            callback(null, items);
+                        },
+                        (err) => {
+                            callback(createSpotifyErrorObject(err.statusCode === 403, err.message));
+                        })
+                }
+            );
+        }
+    );
+
+    var playlistId = playListToUpdate.id;
+    //execute promises for getting tracks in parallel
+    async.parallel(promises, (err, results) => {
+        if (err) {
+            console.log('error updating playlist' + err);
+            callback(err);
+        } else {
+            spotifyApi.replaceTracksInPlaylist(playlistId, flatMap(results, x => x)).then(
+                (result) => {
+                    console.log(result);
+                    callback(null, result);
+                },
+                (err) => {
+                    callback(createSpotifyErrorObject(err.statusCode === 403, err.message));
+                }
+            );
+        }
+    })
+
+}
+
+function createSpotifyErrorObject(shouldReLogInToSpotify, message) {
+    return {
+        errorType: "spotifyError",
+        shouldReLogInToSpotify: shouldReLogInToSpotify,
+        errorMessage: message
+    };
 }
 
 module.exports = {
@@ -136,5 +194,6 @@ module.exports = {
     logout: logout,
     logoutWhenClosingAppSession: logoutWhenClosingAppSession,
     getSpotifyUserPlaylists: getUnionOfDBAndSpotifyUserPlaylists,
-    createPlaylist: createPlaylist
+    createPlaylist: createPlaylist,
+    updatePlaylist: updatePlaylist
 }

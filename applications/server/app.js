@@ -1,2 +1,2 @@
 require('./configuration/applicationconfiguration');
-require('./spotifyapi');
+require('./SpotifyApi');
