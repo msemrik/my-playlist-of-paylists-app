@@ -3,8 +3,8 @@ var bodyParser = require('body-parser');
 var multer = require('multer');
 var session = require('express-session');
 var cookieParser = require('cookie-parser');
-var getendpoints = require('./getpageendpoints');
-var restendpoints = require('./restendpoints');
+var getEndpoints = require('./GetEndpoints');
+var restEndpoints = require('./RestEndpoints');
 
 //App Configuration
 var app = express();
@@ -20,8 +20,8 @@ app.use(cookieParser());
 app.use(session({secret: "Your secret key"}));
 
 //Init EndPoints
-restendpoints(app);
-getendpoints(app);
+restEndpoints(app);
+getEndpoints(app);
 
 //Set directories
 app.set('views', __dirname + '/../../../build');
@@ -33,5 +33,3 @@ if (port == null || port == "") {
     port = 5000;
 }
 app.listen(port);
-
-

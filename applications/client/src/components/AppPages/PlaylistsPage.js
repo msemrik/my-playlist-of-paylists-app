@@ -13,7 +13,7 @@ class PlaylistsPage extends React.Component {
         this.getUserPlaylists = this.getUserPlaylists.bind(this);
         this.createPlaylist = this.createPlaylist.bind(this);
         this.savePlaylistsConfiguration = this.savePlaylistsConfiguration.bind(this);
-}
+    }
 
     componentDidMount() {
         if (this.props.isSpotifyUserLogged)
@@ -37,7 +37,9 @@ class PlaylistsPage extends React.Component {
                             state.setState({userPlaylists: playlists});
                         });
                     } else {
-                        alert('error getting user playlists');
+                        result.json().then(function (error) {
+                            state.props.showError(error.customErrorMessage);
+                        });
                     }
                 }
             )
@@ -50,11 +52,16 @@ class PlaylistsPage extends React.Component {
 
                     this.showAppPlaylistsApp() :
 
-                    <div className={"playlist-page-title-div"}>
-                        <h1 className={"playlist-page-title-text"}>You're not logged to your Spotify account. Please go to
-                            Configure Spotify Account.
-                        </h1>
+                    <div>
+                        <div className={"playlist-page-title-div"}>
+
+                            <h1 className={"playlist-page-title-text"}>You're not logged to your Spotify account. Please
+                                go to
+                                Configure Spotify Account.
+                            </h1>
+                        </div>
                     </div>
+
                 }
             </div>
         );
@@ -122,11 +129,12 @@ class PlaylistsPage extends React.Component {
             body: JSON.stringify({name: name})
         })
             .then((result) => {
+                    var state = this;
                     if (result.ok) {
-                        alert('success createplaylist');
+                        state.props.showMessage("Playlist Successfully created =D");
                         this.getUserPlaylists();
                     } else {
-                        this.props.handleError(result, () => alert("Not General Error Only related To Action"));
+                        state.props.handleError(result, () => alert("Not General Error Only related To Action"));
                     }
                 }
             )

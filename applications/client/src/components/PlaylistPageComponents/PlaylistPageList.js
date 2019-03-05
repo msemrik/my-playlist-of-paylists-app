@@ -2,7 +2,7 @@ import React from "react";
 import PlaylistItem from "../PlaylistPageComponents/PlaylistItem";
 
 class PlaylistPageList extends React.Component {
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {selectedConfiguredPlaylist: ''};
     }
@@ -28,12 +28,21 @@ class PlaylistPageList extends React.Component {
                         <tbody className={"playlist-list-div-table-tbody"}>
                         {this.props.playlistsToShow ?
 
-                            this.props.playlistsToShow.map(playlist =>
 
-                                <PlaylistItem {...this.getPlaylistItemConfiguration(playlist)}/>
-                            ).reduce((prev, curr) => [prev, ' ', curr], '')
+                            (this.props.isConfiguredPlaylist && this.props.playlistsToShow.length == 0) ?
+                                <h1 className={"playlist-list-title-text"}>
+                                    <br/>
+                                    You do not have configured playlists. Start by Clicking on Create New Playlist ;)
+                                </h1> :
 
-                            : undefined
+                                this.props.playlistsToShow.map(playlist =>
+
+                                    <PlaylistItem {...this.getPlaylistItemConfiguration(playlist)}/>
+                                ).reduce((prev, curr) => [prev, ' ', curr], '')
+
+                            :
+
+                            undefined
                         }
                         </tbody>
                     </table>
@@ -45,7 +54,7 @@ class PlaylistPageList extends React.Component {
     getPlaylistItemConfiguration(playlist) {
         return {
             isConfiguredPlaylist: this.props.isConfiguredPlaylist,
-            isSelected: playlist.id === this.state.selectedConfiguredPlaylist.id? true : false,
+            isSelected: playlist.id === this.state.selectedConfiguredPlaylist.id ? true : false,
             playlist: playlist,
             clickAction: (playlist) => this.props.itemActionOnClick(playlist)
         }

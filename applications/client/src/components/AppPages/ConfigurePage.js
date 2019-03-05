@@ -10,7 +10,8 @@ class ConfigurePage extends React.Component {
                     this.showUserLoggedInformation() :
 
                     <div className={"button-div"}>
-                        <Button className={"configure-page-login-logout-button"} onClick={this.props.logInToSpotifyMethod}>
+                        <Button className={"configure-page-login-logout-button"}
+                                onClick={this.logInToSpotify}>
                             Log In To SPOTIFY
                         </Button>
                     </div>
@@ -41,11 +42,19 @@ class ConfigurePage extends React.Component {
                     </form>
                 </div>
                 <div className={"configure-page-logout-button-div"}>
-                    <Button className={"configure-page-login-logout-button"} onClick={this.props.logOutToSpotifyMethod}>Log Out To
-                        SPOTIFY</Button>
+                    <Button className={"configure-page-login-logout-button"} onClick={this.logOutSpotify}>Log
+                        Out SPOTIFY</Button>
                 </div>
             </div>
         );
+    }
+
+    logInToSpotify() {
+        window.location.replace("/spotify/login");
+    }
+
+    logOutSpotify() {
+        window.location.replace("/logout");
     }
 }
 

@@ -17,6 +17,7 @@ class NewPlaylistDialog extends React.Component {
     }
 
     handleClick() {
+        this.lgClose();
         this.props.action(this.state.name);
     }
 
@@ -24,9 +25,9 @@ class NewPlaylistDialog extends React.Component {
         this.setState({name: event.target.value});
     }
 
-    render() {
-        let lgClose = () => this.setState({lgShow: false});
+    lgClose = () => this.setState({lgShow: false, name: ''});
 
+    render() {
         return (
             <ButtonToolbar>
                 <Button className={"playlist-list-button-div-button"} onClick={() => this.setState({lgShow: true})}>
@@ -36,7 +37,7 @@ class NewPlaylistDialog extends React.Component {
                 <Modal
                     size="lg"
                     show={this.state.lgShow}
-                    onHide={lgClose}
+                    onHide={this.lgClose}
                 >
 
                     <Modal.Header closeButton>
@@ -50,7 +51,7 @@ class NewPlaylistDialog extends React.Component {
                         <br/>
                         <br/>
                         <div className={"button-div"}>
-                            <button className={"playlist-add-playlist-cancel-button"} onClick={lgClose}>
+                            <button className={"playlist-add-playlist-cancel-button"} onClick={this.lgClose}>
                                 Close
                             </button>
                             <button className={"playlist-list-button-div-button"} onClick={this.handleClick}>

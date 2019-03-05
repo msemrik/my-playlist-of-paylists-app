@@ -1,39 +1,18 @@
-var spotifyapi = require('../SpotifyApi');
-var securityConfiguration = require('./securityconfiguration');
+var restController = require('../RestController');
 
 function initGetEndPoints(app) {
 
-    app.get('/', securityConfiguration.checkSignIn, function (req, res) {
+    app.get('/', function (req, res) {
         var code = req.query.code;
         if (code) {
-            spotifyapi.login(code, res);
+            restController.login(req, res, code);
         } else {
             res.render('index');
         }
     });
 
-    app.get('/signup', function (req, res) {
-        if (!req.session.user) {
-            res.render('signup');
-        } else {
-            res.redirect('/');
-        }
-    });
-
-    app.get('/login', function (req, res) {
-        if (!req.session.user) {
-            res.render('login');
-        } else {
-            res.redirect('/');
-        }
-    });
-
     app.get('/logout', function (req, res) {
-        req.session.destroy(function () {
-            console.log("user logged out.")
-        });
-        spotifyapi.logoutWhenClosingAppSession();
-        res.redirect('/login');
+        restController.logout(req, res);
     });
 
     app.get('/spotify/login', function (req, res) {
@@ -47,10 +26,9 @@ function initGetEndPoints(app) {
 
     app.use('/', function (err, req, res, next) {
         if (err && err.name === 'JsonSchemaValidationError') {
-            return {}
+            console.log("JsonSchemaValidationError");
         }
         console.log(err);
-        //User should be authenticated! Redirect him to log in.
         res.redirect('/');
     });
 

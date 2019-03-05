@@ -26,7 +26,11 @@ class DefaultLayout extends React.Component {
                             <div>
                                 <a href="#" className={this.setClassName(Pages.PLAYLISTS)}
                                    onClick={() => this.props.onChange(Pages.PLAYLISTS)}>Go To My Playlists</a>
-                                <a href="#" onClick={this.logOutApplication}>Logout</a>
+                                {this.props.isSpotifyUserLogged?
+                                    <a href="#" onClick={this.logOutApplication}>Logout</a>:
+                                    undefined
+                                }
+
                                 <a href="#" className={this.setClassName(Pages.SPOTIFYCONFIGURATION)}
                                    onClick={() => this.props.onChange(Pages.SPOTIFYCONFIGURATION)}>Configure Spotify
                                     Account</a>
@@ -41,7 +45,7 @@ class DefaultLayout extends React.Component {
                 </div>
 
                 <div className="footer">
-                    <h4>Recommend to your friends ;)</h4>
+                    <p>Recommend to your friends ;)</p>
                 </div>
             </div>
 
