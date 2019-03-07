@@ -37,6 +37,14 @@
     float: left;
 }
 
+.playlist-page-configured-playlist.playlist-page-configured-playlist-full-width{
+    width: 100%;
+}
+
+.playlist-page-spotify-playlist.playlist-page-spotify-playlist-not-showed{
+    display:none;
+}
+
 .playlist-page-spotify-playlist {
     width: 48%;
     float: right;
@@ -51,7 +59,7 @@
     border: 1px solid rgba(0, 0, 0, 0);
     font: normal normal 400 normal 16px / 24px Circular, Helvetica, Arial, sans-serif;
     margin: 0px 0px 10px;
-    padding: 0 2% 0 2%;
+    padding: 2% 2% 0 2%;
 }
 
 .playlist-list-title-div {
@@ -129,7 +137,6 @@
 
 .playlist-list-div-table {
     width: 100%;
-    border-collapse: collapse;
     box-sizing: border-box;
     color: rgb(34, 35, 38);
     max-width: 100%;
@@ -168,39 +175,6 @@
 
 .playlist-add-playlist-input-text {
     width: 40%;
-}
-
-.playlist-add-playlist-cancel-button {
-    margin-right: 5px;
-    color: rgb(255, 255, 255);
-    background: grey none repeat scroll 0% 0% / auto padding-box border-box;
-    height: 31px;
-    letter-spacing: 1.76px;
-    min-width: 130px;
-    text-decoration: none solid rgb(255, 255, 255);
-    text-transform: uppercase;
-    touch-action: manipulation;
-    vertical-align: middle;
-    will-change: transform;
-    column-rule-color: rgb(255, 255, 255);
-    perspective-origin: 70.7812px 15.5px;
-    transform-origin: 70.7812px 15.5px;
-    user-select: none;
-    caret-color: rgb(255, 255, 255);
-
-    border: 0px none rgb(255, 255, 255);
-    border-radius: 500px 500px 500px 500px;
-    font: normal normal 200 normal 11px / 17.6px spotify-circular, spotify-circular-arabic, spotify-circular-hebrew, "Helvetica Neue", Helvetica, Arial, "Hiragino Kaku Gothic Pro", Meiryo, "MS Gothic", sans-serif;
-    outline: rgb(255, 255, 255) none 0px;
-    padding: 7px 22px;
-    transition: all 0.033s cubic-bezier(0.3, 0, 0.7, 1) 0s;
-}
-
-.playlist-add-playlist-cancel-button:hover {
-    background-color: black;
-    color: rgb(255, 255, 255);
-    transform: scale(1.06);
-    transition: none 33ms cubic-bezier(.3, 0, 0, 1);
 }
 
 .playlist-list-item-row {
@@ -247,6 +221,9 @@
     font: normal normal 400 normal 16px / 24px Circular, Helvetica, Arial, sans-serif;
     outline: rgb(34, 35, 38) none 0px;
     padding: 1% 1% 1% 2%;
+    border-left-style: solid;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
 }
 
 .playlist-list-item-image-image {
@@ -273,6 +250,15 @@
     font: normal normal 400 normal 16px / 24px Circular, Helvetica, Arial, sans-serif;
     outline: rgb(34, 35, 38) none 0px;
     padding: 16px 16px 16px 16px;
+    border-right-style: solid;
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.playlist-page-spotify-playlist .playlist-list-item-name-column{
+    border-right-style: solid;
+    border-bottom-right-radius: 0px;
+    border-top-right-radius: 0px;
 }
 
 .playlist-list-item-name-column.selected {
@@ -285,6 +271,8 @@
 
 .playlist-list-item-checkbox-column {
     width: 20%;
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
 }
 
 .playlist-list-item-checkbox-div {

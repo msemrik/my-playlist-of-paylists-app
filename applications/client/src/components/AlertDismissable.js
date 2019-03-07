@@ -16,12 +16,8 @@ class AlertDismissable extends React.Component {
     }
 
     handleHide = () => {
-        // this.setState({show: false});
         this.props.resetAlert();
     };
-    // handleShow = () => {
-        // this.setState({show: true});
-    // };
 
     render() {
 

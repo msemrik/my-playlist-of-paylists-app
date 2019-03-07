@@ -1,3 +1,5 @@
+import './NewPlaylistDialog.css';
+
 var React = require('react');
 var ButtonToolbar = require('react-bootstrap').ButtonToolbar;
 var Button = require('react-bootstrap').Button;
@@ -40,25 +42,29 @@ class NewPlaylistDialog extends React.Component {
                     onHide={this.lgClose}
                 >
 
-                    <Modal.Header closeButton>
-                        <Modal.Title className={"playlist-add-playlist-title-text"}>
-                            {this.props.title}
-                        </Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                        <input id="name" type="text" className={"playlist-add-playlist-input-text"}
-                               value={this.state.name} onChange={this.handleNameChange}/>
-                        <br/>
-                        <br/>
-                        <div className={"button-div"}>
-                            <button className={"playlist-add-playlist-cancel-button"} onClick={this.lgClose}>
-                                Close
-                            </button>
-                            <button className={"playlist-list-button-div-button"} onClick={this.handleClick}>
-                                Create
-                            </button>
-                        </div>
-                    </Modal.Body>
+                    <div className={"modal-div"}>
+                        <h3 className={"modal-div-title"}>Create New Playlist</h3>
+                        <form className={"modal-div-form"}>
+                            <div className={"modal-div-form-item-group"}>
+                                <div className="input-group mb-3">
+                                    <div className="input-group-prepend">
+                                        <span className="input-group-text modal-div-form-item-group-input"
+                                              id="basic-addon1">Playlist Name</span>
+                                    </div>
+                                    <input type="text" className="form-control" aria-describedby="basic-addon1"
+                                           value={this.state.name} onChange={this.handleNameChange}/>
+                                </div>
+                            </div>
+                            <div className={"modal-div-form-item-group button-item-group"}>
+                                <button className={"playlist-add-playlist-cancel-button"} onClick={this.lgClose}>
+                                    Close
+                                </button>
+                                <button className={"playlist-add-playlist-create-button"} onClick={this.handleClick}>
+                                    Create New Playlist
+                                </button>
+                            </div>
+                        </form>
+                    </div>
                 </Modal>
             </ButtonToolbar>
         );

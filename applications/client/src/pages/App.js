@@ -109,24 +109,21 @@ class App extends React.Component {
 
 
     modifyAlert(alert) {
+        var newAlertObject = this.state.alert;
         if (alert.error) {
             if (this.state.alert.error.toShow) {
-                var newAlertObject = this.state.alert;
                 newAlertObject.error.text = this.state.alert.error.text + ' ' + alert.error.text;
                 this.setState({alert: newAlertObject});
             } else {
-                var newAlertObject = this.state.alert;
                 newAlertObject.error.text = alert.error.text;
                 newAlertObject.error.toShow = true;
                 this.setState({alert: newAlertObject});
             }
         } else {
             if (this.state.alert.message.toShow) {
-                var newAlertObject = this.state.alert;
                 newAlertObject.message.text = this.state.alert.message.text + ' ' + alert.message.text;
                 this.setState({alert: newAlertObject});
             } else {
-                var newAlertObject = this.state.alert;
                 newAlertObject.message.text = alert.message.text;
                 newAlertObject.message.toShow = true;
                 this.setState({alert: newAlertObject});

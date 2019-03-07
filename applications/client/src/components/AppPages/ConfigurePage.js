@@ -1,6 +1,6 @@
 import React from 'react';
 import './ConfigurePage.css';
-import Button from 'react-bootstrap/lib/Button';
+import Button from 'react-bootstrap/Button';
 
 class ConfigurePage extends React.Component {
 

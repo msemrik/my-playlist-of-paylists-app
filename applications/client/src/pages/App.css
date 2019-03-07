@@ -75,6 +75,7 @@ body {
 
 .content{
     width: 100%;
+    position:absolute;
     padding-top: 2%;
 }
 
@@ -94,7 +95,7 @@ body {
     text-align: center;
 }
 
-.footer h4 {
+.footer p {
     margin-top: 0.5%;
     margin-bottom: 0.5%;
     background: inherit;
@@ -122,13 +123,15 @@ body {
 .alert-dismisable-container button{
     font-size: 0.8rem;
 }
-/*!* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other *!*/
-/*@media screen and (max-width: 800px) {*/
-/*.leftcolumn, .rightcolumn {*/
-/*width: 100%;*/
-/*padding: 0;*/
-/*}*/
-/*}*/
+
+.clearfix:after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0;
+}
 
 /* Responsive layout - when the screen is less than 400px wide, make the navigation links stack on top of each other instead of next to each other */
 @media screen and (max-width: 768px) {
@@ -139,6 +142,28 @@ body {
 
     html {
         font-size: 15px;
+    }
+
+    .header {
+        position: absolute;
+    }
+
+    .header-topnav{
+        position: fixed;
+        top: 0;
+        width: 100%;
+    }
+
+    .header-topnav-buttons{
+        max-width: 100%;
+    }
+
+    .content-view-port{
+        width: 90%;
+    }
+
+    .footer {
+        display: none;
     }
 
     .playlist-page-configured-playlist{

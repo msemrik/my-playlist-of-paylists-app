@@ -29,7 +29,7 @@ class PlaylistPageList extends React.Component {
                         {this.props.playlistsToShow ?
 
 
-                            (this.props.isConfiguredPlaylist && this.props.playlistsToShow.length == 0) ?
+                            (this.props.isConfiguredPlaylist && this.props.playlistsToShow.length === 0) ?
                                 <h1 className={"playlist-list-title-text"}>
                                     <br/>
                                     You do not have configured playlists. Start by Clicking on Create New Playlist ;)

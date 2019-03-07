@@ -70,11 +70,11 @@ class PlaylistsPage extends React.Component {
     showAppPlaylistsApp() {
         return (
             <div className={"playlist-page-content"}>
-                <div className={"playlist-page-configured-playlist"}>
+                <div className={this.state.selectedConfiguredPlaylist? "playlist-page-configured-playlist" : "playlist-page-configured-playlist playlist-page-configured-playlist-full-width"}>
                     <PlaylistPageList {...this.prepareConfiguredPlaylistsList()} />
                 </div>
 
-                <div className={"playlist-page-spotify-playlist"}>
+                <div className={this.state.selectedConfiguredPlaylist? "playlist-page-spotify-playlist" : "playlist-page-spotify-playlist playlist-page-spotify-playlist-not-showed"}>
                     <PlaylistPageList {...this.prepareSpotifyPlaylistsList()} />
                 </div>
             </div>

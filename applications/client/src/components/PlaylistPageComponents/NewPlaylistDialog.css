@@ -1,0 +1,175 @@
+.modal-div {
+    box-sizing: border-box;
+    color: rgb(34, 35, 38);
+    min-height: 20px;
+    text-decoration: none solid rgb(34, 35, 38);
+    text-size-adjust: 100%;
+    column-rule-color: rgb(34, 35, 38);
+    perspective-origin: 186.875px 217.5px;
+    transform-origin: 186.875px 217.5px;
+    caret-color: rgb(34, 35, 38);
+    background: rgb(255, 255, 255) none repeat scroll 0% 0% / auto padding-box border-box;
+    border: 1px solid rgba(0, 0, 0, 0);
+    font: normal normal 400 normal 16px / 24px Circular, Helvetica, Arial, sans-serif;
+    outline: rgb(34, 35, 38) none 0px;
+    padding: 40px;
+}
+
+.modal-div-title {
+    background-color: inherit;
+    box-sizing: border-box;
+    color: rgb(29, 185, 84);
+    height: 25px;
+    letter-spacing: -0.18px;
+    text-decoration: none solid rgb(29, 185, 84);
+    text-size-adjust: 100%;
+    column-rule-color: rgb(29, 185, 84);
+    perspective-origin: 145.875px 12.5px;
+    transform-origin: 145.875px 12.5px;
+    caret-color: rgb(29, 185, 84);
+    border: 0px none rgb(29, 185, 84);
+    font: normal normal 400 normal 18px / 25.2px Circular, Helvetica, Arial, sans-serif;
+    margin: 0px 0px 12px;
+    outline: rgb(29, 185, 84) none 0px;
+}
+
+.modal-div-form {
+    background-color: inherit;
+    box-sizing: border-box;
+    color: rgb(34, 35, 38);
+    /*height: 284px;*/
+    text-decoration: none solid rgb(34, 35, 38);
+    text-size-adjust: 100%;
+    column-rule-color: rgb(34, 35, 38);
+    perspective-origin: 145.875px 142px;
+    transform-origin: 145.875px 142px;
+    caret-color: rgb(34, 35, 38);
+    border: 0px none rgb(34, 35, 38);
+    font: normal normal 400 normal 16px / 24px Circular, Helvetica, Arial, sans-serif;
+    margin: 4% 0px 0px 0px;
+    outline: rgb(34, 35, 38) none 0px;
+}
+
+.modal-div-form-item-group {
+    background-color: inherit;
+    box-sizing: border-box;
+    color: rgb(34, 35, 38);
+    text-decoration: none solid rgb(34, 35, 38);
+    text-size-adjust: 100%;
+    column-rule-color: rgb(34, 35, 38);
+    perspective-origin: 145.875px 35.5px;
+    transform-origin: 145.875px 35.5px;
+    caret-color: rgb(34, 35, 38);
+    border: 0px none rgb(34, 35, 38);
+    font: normal normal 400 normal 16px / 24px Circular, Helvetica, Arial, sans-serif;
+    outline: rgb(34, 35, 38) none 0px;
+}
+
+.modal-div-form-item-group.button-item-group{
+    float: right;
+}
+
+.modal-div-form-item-group-input{
+    font-size: 0.7rem;
+}
+
+.modal-button-div {
+    margin-left: auto;
+    margin-right: auto;
+    display: table;
+}
+
+.playlist-add-playlist-cancel-button {
+    margin-right: 5px;
+    color: rgb(255, 255, 255);
+    background: grey none repeat scroll 0% 0% / auto padding-box border-box;
+    height: 31px;
+    letter-spacing: 1.76px;
+    min-width: 130px;
+    text-decoration: none solid rgb(255, 255, 255);
+    text-transform: uppercase;
+    touch-action: manipulation;
+    vertical-align: middle;
+    will-change: transform;
+    column-rule-color: rgb(255, 255, 255);
+    perspective-origin: 70.7812px 15.5px;
+    transform-origin: 70.7812px 15.5px;
+    user-select: none;
+    caret-color: rgb(255, 255, 255);
+
+    border: 0px none rgb(255, 255, 255);
+    border-radius: 500px 500px 500px 500px;
+    font: normal normal 200 normal 11px / 17.6px spotify-circular, spotify-circular-arabic, spotify-circular-hebrew, "Helvetica Neue", Helvetica, Arial, "Hiragino Kaku Gothic Pro", Meiryo, "MS Gothic", sans-serif;
+    outline: rgb(255, 255, 255) none 0px;
+    padding: 7px 22px;
+    transition: all 0.033s cubic-bezier(0.3, 0, 0.7, 1) 0s;
+}
+
+.playlist-add-playlist-cancel-button:hover {
+    background-color: black;
+    color: rgb(255, 255, 255);
+    transform: scale(1.06);
+    transition: none 33ms cubic-bezier(.3, 0, 0, 1);
+}
+
+
+.playlist-add-playlist-create-button {
+    color: rgb(255, 255, 255);
+    letter-spacing: 1.76px;
+    text-decoration: none solid rgb(255, 255, 255);
+    text-transform: uppercase;
+    vertical-align: middle;
+    user-select: none;
+    caret-color: rgb(255, 255, 255);
+    background: rgb(29, 185, 84) none repeat scroll 0% 0% / auto padding-box border-box;
+    border: 0px none rgb(255, 255, 255);
+    border-radius: 500px 500px 500px 500px;
+    font: normal normal 200 normal 11px / 17.6px spotify-circular, spotify-circular-arabic, spotify-circular-hebrew, "Helvetica Neue", Helvetica, Arial, "Hiragino Kaku Gothic Pro", Meiryo, "MS Gothic", sans-serif;
+    outline: rgb(255, 255, 255) none 0px;
+    padding: 7px 22px;
+    transition: all 0.033s cubic-bezier(0.3, 0, 0.7, 1) 0s;
+}
+
+.playlist-add-playlist-create-button:hover {
+    background-color: #1ed760;
+    color: rgb(255, 255, 255);
+    transform: scale(1.06);
+    transition: none 33ms cubic-bezier(.3, 0, 0, 1);
+}
+
+
+/*.SpotifyBlackButton {*/
+    /*box-sizing: border-box;*/
+    /*color: rgb(255, 255, 255);*/
+    /*display: block;*/
+    /*height: 32px;*/
+    /*letter-spacing: 2px;*/
+    /*max-width: 290px;*/
+    /*min-width: 160px;*/
+    /*text-align: center;*/
+    /*text-decoration: none solid rgb(255, 255, 255);*/
+    /*text-size-adjust: 100%;*/
+    /*text-transform: uppercase;*/
+    /*touch-action: manipulation;*/
+    /*vertical-align: middle;*/
+    /*width: 290px;*/
+    /*column-rule-color: rgb(255, 255, 255);*/
+    /*perspective-origin: 145px 16px;*/
+    /*transform-origin: 145px 16px;*/
+    /*user-select: none;*/
+    /*caret-color: rgb(255, 255, 255);*/
+    /*background: rgb(0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box;*/
+    /*border: 0px solid rgba(0, 0, 0, 0);*/
+    /*border-radius: 500px 500px 500px 500px;*/
+    /*font: normal normal 700 normal 12px / 12px Circular, Helvetica, Arial, sans-serif;*/
+    /*margin: 0px 0.875px;*/
+    /*outline: rgb(255, 255, 255) none 0px;*/
+    /*padding: 10px 32px;*/
+    /*transition: background-color 0.3s ease 0s, border-color 0.3s ease 0s, color 0.3s ease 0s, box-shadow 0.3s ease 0s, filter 0.3s ease 0s, -webkit-box-shadow 0.3s ease 0s, -webkit-filter 0.3s ease 0s;*/
+/*}*/
+
+/*.SpotifyBlackButton:hover{*/
+    /*color: #FFF;*/
+    /*background-color: #333333;*/
+    /*transition-duration: .3s;*/
+/*}*/
