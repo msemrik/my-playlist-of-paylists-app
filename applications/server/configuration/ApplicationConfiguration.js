@@ -17,7 +17,10 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(upload.array());
 app.use(cookieParser());
-app.use(session({secret: "Your secret key"}));
+app.use(session({
+    secret: "Your secret key", resave: true,
+    saveUninitialized: true
+}));
 
 //Init EndPoints
 restEndpoints(app);
@@ -25,7 +28,7 @@ getEndpoints(app);
 
 //Set directories
 app.set('views', __dirname + '/../../../build');
-app.use(express.static(__dirname +'/../../../build'));
+app.use(express.static(__dirname + '/../../../build'));
 
 //Configure port
 let port = process.env.PORT;

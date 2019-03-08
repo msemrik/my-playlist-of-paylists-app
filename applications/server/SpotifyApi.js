@@ -1,10 +1,7 @@
 var SpotifyWebApi = require('spotify-web-api-node');
 var _ = require('lodash');
-var async = require('async');
 var flatMap = require('array.prototype.flatmap');
-
-var isClientConected = false;
-var userConnectedPromise;
+var logger = require('./configuration/Logger').logger;
 
 spotifyApi = new SpotifyWebApi({
     clientId: process.env.SPOTIFY_CLIENT_ID,
@@ -14,17 +11,15 @@ spotifyApi = new SpotifyWebApi({
 
 var clientConnectedPromise = spotifyApi.clientCredentialsGrant()
     .then(function (data) {
-        isClientConected = true;
         spotifyApi.setAccessToken(data.body['access_token']);
-        console.log('Client connected');
     }, function (err) {
-        console.log('Something went wrong on connecting client to Spotify!', err);
+        logger.error("Error connecting to App to Spotify: " + err);
     });
 
 function login(code) {
     return (callback) => {
         clientConnectedPromise.then(function () {
-            userConnectedPromise = spotifyApi.authorizationCodeGrant(code).then(
+            spotifyApi.authorizationCodeGrant(code).then(
                 function (data) {
                     spotifyClientObject = {
                         acesstoken: data.body['access_token'],
@@ -36,8 +31,13 @@ function login(code) {
                     callback(null, spotifyClientObject);
                 },
                 function (err) {
-                    callback(createSpotifyErrorObject(true, err.errorMessage, "Error while logging in to Spotify"));
-                })
+                    logger.error("Error getting authorization code grant: ", err);
+                    callback(createSpotifyErrorObject(true, err.errorMessage, "We got an error reaching Spotify, please retry."));
+                }).catch((e) => {
+                    logger.error("Internal error while logging in to Spotify: ", e);
+                    callback(createSpotifyErrorObject(true, "510-01", "Internal error while logging in to Spotify."));
+                }
+            )
         });
     }
 }
@@ -51,9 +51,12 @@ function getUserInfo(spotifyUserObject) {
                 userData = data.body;
                 callback(null, userData);
             }, function (err) {
-                console.log('Something went wrong!', err);
+                logger.error('Error while getting User Information', err);
                 callback(createSpotifyErrorObject(true, err.errorMessage, "Error while getting User Information"));
-            })
+            }).catch((e) => {
+            logger.error("Internal error while retrieving data from Spotify: " + e);
+            callback(createSpotifyErrorObject(true, "510-02", "Internal error while retrieving your data from Spotify, please retry."))
+        });
     }
 }
 
@@ -65,7 +68,11 @@ function getSpotifyUserPlaylists(loggedUser) {
         loggedInSpotifyApi.getUserPlaylists(loggedUser.id, {limit: 50}).then(function (spotifyPlaylistsObject) {
             callback(null, spotifyPlaylistsObject);
         }, function (err) {
-            callback(createSpotifyErrorObject(false, err.message, 'Error while getting spotify playlists'));
+            logger.error("Spotify error while retrieving playlists.", err);
+            callback(createSpotifyErrorObject(false, err.message, 'Spotify error while retrieving playlists.'));
+        }).catch((e) => {
+            logger.error("Internal error while retrieving Spotify playlists: ", e);
+            callback(createSpotifyErrorObject(true, "510-03", "Internal error while retrieving Spotify playlists."))
         });
     }
 }
@@ -78,8 +85,12 @@ function createPlaylist(loggedUser, playlistName) {
             .then(function (data) {
                 callback(null, data)
             }, function (err) {
-                callback(createSpotifyErrorObject(false, err.message));
-            });
+                logger.error("Internal error while creating a new Spotify playlists: ", e);
+                callback(createSpotifyErrorObject(false, err.message, "Internal error while creating a new Spotify playlists"));
+            }).catch((e) => {
+            logger.error("Internal error while creating a new Spotify playlists: ", e);
+            callback(createSpotifyErrorObject(true, "510-04", "Internal error while creating a new Spotify playlists: "))
+        });
     }
 }
 
@@ -166,44 +177,6 @@ function updatePlaylist(loggedUser, playListToUpdate) {
                     console.log("error: " + err);
                     callback(createSpotifyErrorObject(false, err, "Error while getting spotify's track, please retry"))
                 })
-
-
-        // //create promises for getting tracks
-        // playListToUpdate.includedPlaylists.map((playlistIncluded) => {
-        //         promises.push(
-        //             (callback) => {
-        //                 loggedInSpotifyApi.getPlaylistTracks(playlistIncluded).then(
-        //                     (res) => {
-        //                         var items = res.body.items.map((item) => item.track.uri);
-        //                         callback(null, items);
-        //                     },
-        //                     (err) => {
-        //                         callback(createSpotifyErrorObject(err.statusCode === 403, err.message));
-        //                     })
-        //             }
-        //         );
-        //     }
-        // );
-
-        // var playlistId = playListToUpdate.id;
-        // //execute promises for getting tracks in parallel
-        // async.parallel(promises, (err, results) => {
-        //     if (err) {
-        //         console.log('error updating playlist' + err);
-        //         callback(err);
-        //     } else {
-        //         loggedInSpotifyApi.replaceTracksInPlaylist(playlistId, flatMap(results, x => x)).then(
-        //             (result) => {
-        //                 callback(null, result);
-        //             },
-        //             (err) => {
-        //                 callback(createSpotifyErrorObject(err.statusCode === 403, err.message));
-        //             }
-        //         );
-        //     }
-        // })
-
-
     }
 }
 
@@ -230,7 +203,7 @@ function createSpotifyErrorObject(shouldReLogInToSpotify, spotifyErrorCode, cust
     return {
         errorType: "spotifyError",
         shouldReLogInToSpotify: shouldReLogInToSpotify,
-        spotifyErrorCode: spotifyErrorCode,
+        errorCode: spotifyErrorCode,
         customErrorMessage: customErrorMessage
     };
 }

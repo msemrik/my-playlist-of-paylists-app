@@ -2,8 +2,8 @@ var _ = require('lodash');
 var mongoose = require('mongoose');
 var async = require('async');
 var dataBasePromiseConnection = null;
-var isDataBaseConnected = false;
 var mongoDB = process.env.DATABASE_URL;
+var logger = require('./configuration/Logger').logger;
 
 var Schema = mongoose.Schema;
 let playlistSchema = new Schema({
@@ -22,10 +22,8 @@ var getDataBasePromiseConection = function () {
     if (!dataBasePromiseConnection) {
         dataBasePromiseConnection = mongoose.connect(mongoDB, {useNewUrlParser: true})
             .then(() => {
-                isDataBaseConnected = true;
             })
             .catch(err => {
-                isDataBaseConnected = false;
                 console.error('Database connection error')
                 throw err;
             });
@@ -37,11 +35,18 @@ var getConfiguredPlaylists = function (loggedId) {
     return (callback) => {
         getDataBasePromiseConection().then(function () {
             PlaylistModel.findOne({'_id': loggedId}, function (err, person) {
-                if (err) return callback(createDatabaseErrorObject("Internal Error. Error while getting configured playlist"));
-                if (person) return callback(null, person._doc);
-                else callback(null, undefined);
+                if (err) {
+                    logger.error("Internal Error. while getting configured playlist", e);
+                    callback(createDatabaseErrorObject("Internal Error while getting configured playlist"));
+                } else {
+                    callback(null, person? person._doc : undefined);
+                }
+
 
             });
+        }).catch((e) => {
+            logger.error("Internal Error while getting configured playlist", e);
+            callback(createDatabaseErrorObject("510-01", "Internal Error while getting configured playlist"));
         });
     }
 }
@@ -125,7 +130,7 @@ function updatePlaylist(loggedUser, req) {
             getConfiguredPlaylists(loggedUser.id),
 
 
-            (userConfiguredPlaylists, callback)=>{
+            (userConfiguredPlaylists, callback) => {
 
                 playlistToUpdate = req.body.playlistToUpdate;
                 var storedPlaylist = _.find(userConfiguredPlaylists.playlists, {'playlistId': playlistToUpdate.id});
@@ -133,7 +138,7 @@ function updatePlaylist(loggedUser, req) {
                 console.log("updated playlist " + playlistToUpdate)
 
                 updateDBPlaylistsObject(userConfiguredPlaylists)(callback);
-        }
+            }
 
         ], function (err, result) {
             if (err) {
@@ -152,9 +157,10 @@ function updatePlaylist(loggedUser, req) {
 }
 
 
-function createDatabaseErrorObject(customErrorMessage) {
+function createDatabaseErrorObject(errorCode, customErrorMessage) {
     return {
         errorType: "dbError",
+        errorCode: errorCode,
         customErrorMessage: customErrorMessage
     };
 }
