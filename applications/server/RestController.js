@@ -4,6 +4,10 @@ var async = require('async');
 var validate = require('jsonschema').validate;
 var jsonSchemas = require('./configuration/JSONSchemas');
 var logger = require('./configuration/Logger').logger;
+var loggerMessages = require('./configuration/Logger').loggerMessages;
+var createErrorObject = require('./configuration/Logger').createErrorObject;
+var generateErrorMessageToLog = require('./configuration/Logger').generateErrorMessageToLog;
+var generateErrorObjectToReturn = require('./configuration/Logger').generateErrorObjectToReturn;
 var _ = require('lodash');
 
 var sessionHandler = require('./configuration/SessionHandler');
@@ -21,8 +25,8 @@ module.exports = {
                 res.json(loggedUser)
                 res.end();
             }
-        } catch (e) {
-            logger.error("Error when checking if user is logged: " + e);
+        } catch (err) {
+            logger.error(generateErrorMessageToLog(createErrorObject(loggerMessages.isLoggedError, err)));
             res.status(500);
             res.end();
         }
@@ -31,19 +35,16 @@ module.exports = {
     login: function (req, res, code) {
         async.waterfall(
             [
-
-
                 spotifyApi.login(code),
 
 
                 (spotifyUserObject, callback) => {
                     try {
-                        callback(null, sessionHandler.updateSession(req.sessionID, spotifyUserObject));
+                        spotifyUserObject = sessionHandler.updateSession(req.sessionID, spotifyUserObject)
+                        callback(null, spotifyUserObject);
                     } catch (e) {
-                        logger.error("Error while logging in: ", e);
-                        callback(createGenericErrorObject("500-01", "Error while logging in. Please retry."))
+                        callback(createErrorObject(loggerMessages.updatingSessionDataError, e))
                     }
-
                 },
 
 
@@ -54,10 +55,10 @@ module.exports = {
 
                 (spotifyUserDataObject, callback) => {
                     try {
-                        callback(null, sessionHandler.updateSession(req.sessionID, spotifyUserDataObject));
+                        spotifyUserDataObject = sessionHandler.updateSession(req.sessionID, spotifyUserDataObject)
+                        callback(null, spotifyUserDataObject);
                     } catch (e) {
-                        logger.error("Error while logging in: ", e);
-                        callback(createGenericErrorObject("500-01", "Error while logging in. Please retry."))
+                        callback(createErrorObject(loggerMessages.updatingSessionDataError, e))
                     }
                 },
 
@@ -65,24 +66,21 @@ module.exports = {
 
             function (err) {
                 if (err) {
-                    logger.error("Error while logging in to Spotify: ", err);
+                    logger.error(generateErrorMessageToLog(err));
                     sessionHandler.removeSession(req.sessionID);
                     res.redirect('/?loginerror');
                 } else {
                     res.redirect('/');
                 }
-
-
-                return;
-
             });
     },
 
-    logout: function (req, res, code) {
+    logout: function (req, res) {
         try {
             sessionHandler.removeSession(req.sessionID);
             req.session.destroy();
-        } catch (e) {
+        } catch (err) {
+            logger.error(generateErrorMessageToLog(createErrorObject(loggerMessages.loggingOutInternalError, err)));
             logger.error("Error while loging out Spotify: " + e);
         }
         res.redirect('/');
@@ -90,8 +88,8 @@ module.exports = {
     },
 
     getUserPlaylists: function (req, res) {
-        var loggedUser = sessionHandler.isLogged(req.sessionID);
-        if (loggedUser) {
+
+        var getUserPlaylistFunction = function (loggedUser) {
             async.parallel([
 
                 spotifyApi.getSpotifyUserPlaylists(loggedUser),
@@ -100,14 +98,12 @@ module.exports = {
 
             ], function (err, returnedObject) {
                 if (err) {
-                    logger.error("Error while getting User Playlists: ", err);
-                    // validate(err, jsonSchemas);
+                    logger.error(generateErrorMessageToLog(err));
                     res.status(500);
-                    res.json(err);
+                    res.json(generateErrorObjectToReturn(err));
                     res.end();
                 } else {
-
-                    try{
+                    try {
                         res.status(200);
                         res.json({
                             configuredPlaylists: getConfiguredSpotifyPlaylists(returnedObject[1], returnedObject[0]),
@@ -115,20 +111,16 @@ module.exports = {
                         })
                         res.end();
                     } catch (e) {
-                        logger.error("Internal error while converting User Playlist to be returned: ", err);
+                        logger.error(generateErrorMessageToLog(createErrorObject(loggerMessages.convertingPlaylistsToReturnError,err)));
                         res.status(500);
-                        res.json(createGenericErrorObject("500-02", "Internal error while retrieving Spotify playlists: "));
+                        res.json(generateErrorObjectToReturn(loggerMessages.convertingPlaylistsToReturnError));
                         res.end();
                     }
-
-
                 }
-            });
-        } else {
-            res.status(500);
-            res.json(spotifyApi.createSpotifyErrorObject(true, '', "Your session expired. Please re login."));
-            res.end();
-        }
+            })
+        };
+
+        checkIfIsLoggedAndExecute(req, res, getUserPlaylistFunction)
     },
 
     createPlaylist: function (req, res) {
@@ -161,7 +153,6 @@ module.exports = {
             res.json(spotifyApi.createSpotifyErrorObject(true, '', "Your session expired. Please re login."));
             res.end();
         }
-
     },
 
     updatePlaylist: function (req, res) {
@@ -192,6 +183,18 @@ module.exports = {
             res.end();
         }
     }
+};
+
+function checkIfIsLoggedAndExecute(req, res, functionToExecute) {
+    var loggedUser = sessionHandler.isLogged(req.sessionID);
+    if (loggedUser) {
+        functionToExecute(loggedUser);
+    } else {
+        logger.error(generateErrorMessageToLog(createErrorObject(loggerMessages.userNotLoggedError)));
+        res.status(500);
+        res.json(generateErrorObjectToReturn(loggerMessages.userNotLoggedError));
+        res.end();
+    }
 }
 
 function getConfiguredSpotifyPlaylists(DBPlaylistsObject, SPOTIFYPlaylistsObject) {
@@ -207,12 +210,4 @@ function getConfiguredSpotifyPlaylists(DBPlaylistsObject, SPOTIFYPlaylistsObject
             spotifyObject.includedPlaylists = (_.find(DBPlaylistsObject.playlists, {"playlistId": spotifyObject.id}).includedPlaylists);
             return spotifyObject;
         })
-}
-
-function createGenericErrorObject(errorCode, customErrorMessage) {
-    return {
-        errorType: "internalServerError",
-        errorCode: errorCode,
-        customErrorMessage: customErrorMessage
-    };
 }

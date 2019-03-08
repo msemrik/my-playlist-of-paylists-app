@@ -4,6 +4,8 @@ var async = require('async');
 var dataBasePromiseConnection = null;
 var mongoDB = process.env.DATABASE_URL;
 var logger = require('./configuration/Logger').logger;
+var loggerMessages = require('./configuration/Logger').loggerMessages;
+var createErrorObject = require('./configuration/Logger').createErrorObject;
 
 var Schema = mongoose.Schema;
 let playlistSchema = new Schema({
@@ -29,40 +31,43 @@ var getDataBasePromiseConection = function () {
             });
     }
     return dataBasePromiseConnection;
-}
+};
 
 var getConfiguredPlaylists = function (loggedId) {
     return (callback) => {
         getDataBasePromiseConection().then(function () {
             PlaylistModel.findOne({'_id': loggedId}, function (err, person) {
                 if (err) {
-                    logger.error("Internal Error. while getting configured playlist", e);
-                    callback(createDatabaseErrorObject("Internal Error while getting configured playlist"));
+                    callback(createErrorObject(loggerMessages.gettingDatabasePlaylistsInternalError, err));
                 } else {
-                    callback(null, person? person._doc : undefined);
+                    callback(null, person ? person._doc : undefined);
                 }
-
-
             });
-        }).catch((e) => {
-            logger.error("Internal Error while getting configured playlist", e);
-            callback(createDatabaseErrorObject("510-01", "Internal Error while getting configured playlist"));
+        }).catch((err) => {
+            callback(createErrorObject(loggerMessages.gettingDatabasePlaylistsInternalError, err));
         });
     }
-}
+};
 
 var updateDBPlaylistsObject = function (DBPlaylistsObject) {
     return (callback) => {
         getDataBasePromiseConection().then(function () {
             PlaylistModel.findOneAndReplace({_id: DBPlaylistsObject._id}, DBPlaylistsObject
                 , function (err, res) {
-                    if (err) callback(err);
-                    else callback(null, res);
+                    if (err || !res._doc) {
+                        logger.error("Internal Error while updating configured playlist", e);
+                        callback(createDatabaseErrorObject("510-02", "Internal Error while getting configured playlist"));
+                    } else {
+                        callback(null, res);
+                    }
                 }
             )
-        })
+        }).catch((e) => {
+            logger.error("Internal Error while updating configured playlist", e);
+            callback(createDatabaseErrorObject("510-02", "Internal Error while getting configured playlist"));
+        });
     }
-}
+};
 
 var createEmptyDBPlaylistsObject = function (loggedUserId) {
     return (callback) => {
@@ -74,9 +79,13 @@ var createEmptyDBPlaylistsObject = function (loggedUserId) {
                     callback(null, doc._doc);
                 })
                 .catch(err => {
-                    callback(err);
+                    logger.error("Internal Error while creating new playlist", e);
+                    callback(createDatabaseErrorObject("510-03", "Internal Error while creating new playlist"));
                 });
-        })
+        }).catch((e) => {
+            logger.error("Internal Error while creating new playlist", e);
+            callback(createDatabaseErrorObject("510-03", "Internal Error while creating new playlist"));
+        });
     }
 }
 
@@ -102,25 +111,16 @@ var addPlaylist = function (loggedUser, spotifyPlaylistObject) {
 
                 updateDBPlaylistsObject(databasePlaylistObject)(callback);
             }
-
-
         ], function (err, returnedObject) {
             if (err) {
                 callback(err);
             } else {
                 callback(null, returnedObject)
             }
-            ;
         });
     }
 
-}
-
-function createIncludedPlaylists(playlistToUpdate) {
-    var includedPlaylistsObject = [];
-    playlistToUpdate.includedPlaylists.map((includedPlaylistId) => includedPlaylistsObject.push({playlistId: includedPlaylistId}));
-    return includedPlaylistsObject;
-}
+};
 
 function updatePlaylist(loggedUser, req) {
     return (callback) => {
@@ -131,31 +131,33 @@ function updatePlaylist(loggedUser, req) {
 
 
             (userConfiguredPlaylists, callback) => {
+                try{
+                    playlistToUpdate = req.body.playlistToUpdate;
+                    var storedPlaylist = _.find(userConfiguredPlaylists.playlists, {'playlistId': playlistToUpdate.id});
+                    storedPlaylist.includedPlaylists = createIncludedPlaylists(playlistToUpdate);
 
-                playlistToUpdate = req.body.playlistToUpdate;
-                var storedPlaylist = _.find(userConfiguredPlaylists.playlists, {'playlistId': playlistToUpdate.id});
-                storedPlaylist.includedPlaylists = createIncludedPlaylists(playlistToUpdate);
-                console.log("updated playlist " + playlistToUpdate)
-
-                updateDBPlaylistsObject(userConfiguredPlaylists)(callback);
+                    updateDBPlaylistsObject(userConfiguredPlaylists)(callback);
+                } catch (e) {
+                    logger.error("Internal Error while updating configured playlist", e);
+                    callback(createDatabaseErrorObject("510-03", "Internal Error while getting configured playlist"));
+                }
             }
 
-        ], function (err, result) {
+        ], function (err, returnedObject) {
             if (err) {
                 callback(err);
+            } else {
+                callback(null, returnedObject)
             }
-            ;
-            if (result) {
-                console.log('result: ' + result);
-                callback(null, true);
-            }
-            ;
         })
     }
-
-
 }
 
+function createIncludedPlaylists(playlistToUpdate) {
+    var includedPlaylistsObject = [];
+    playlistToUpdate.includedPlaylists.map((includedPlaylistId) => includedPlaylistsObject.push({playlistId: includedPlaylistId}));
+    return includedPlaylistsObject;
+}
 
 function createDatabaseErrorObject(errorCode, customErrorMessage) {
     return {
