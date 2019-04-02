@@ -37,6 +37,10 @@ body {
     font-size: 2rem;
 }
 
+.headerSplitter{
+    display: none;
+}
+
 .header-topnav {
     overflow: hidden;
     background-color: #333;
@@ -146,6 +150,10 @@ body {
 
     .header {
         position: absolute;
+    }
+
+    .headerSplitter{
+        display: block;
     }
 
     .header-topnav{
@@ -1047,4 +1055,4 @@ body {
 
 
 
-/*# sourceMappingURL=index.7abed8d3.css.map*/
+/*# sourceMappingURL=index.090db0f5.css.map*/

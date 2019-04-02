@@ -33,6 +33,7 @@ class DefaultLayout extends React.Component {
                         <h1>My Playlist of Playlists App</h1>
                         <p>Create playlist that automatically updates with other playlists' songs.</p>
                     </div>
+                    <hr className={"headerSplitter"}/>
                     <div className="header-topnav" ref={(headerTopNav) => this.headerTopNav = headerTopNav}>
                         <div className="header-topnav-buttons">
                             <div>
