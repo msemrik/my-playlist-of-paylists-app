@@ -60,7 +60,7 @@ class PlaylistsPage extends React.Component {
 
                             <h1 className={"playlist-page-title-text"}>You're not logged to your Spotify account. Please
                                 go to
-                                Configure Spotify Account.
+                                'Log in to Spotify' option.
                             </h1>
                         </div>
                     </div>

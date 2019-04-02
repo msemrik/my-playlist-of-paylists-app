@@ -108,8 +108,9 @@ body {
 .alert-dismisable-container{
     margin-top:-10%;
     position: fixed;
-    width: 75%;
+    width: 100%;
     z-index: 2;
+    left: 0;
 }
 
 .alert-dismisable-container p{
@@ -126,6 +127,13 @@ body {
 
 .alert-dismisable-container button{
     font-size: 0.8rem;
+}
+
+.alert-dismisable-container .alert{
+    width: 75%;
+    position: relative;
+    margin-right: auto;
+    margin-left: auto;
 }
 
 .clearfix:after {

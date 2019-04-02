@@ -108,8 +108,9 @@ body {
 .alert-dismisable-container{
     margin-top:-10%;
     position: fixed;
-    width: 75%;
+    width: 100%;
     z-index: 2;
+    left: 0;
 }
 
 .alert-dismisable-container p{
@@ -126,6 +127,13 @@ body {
 
 .alert-dismisable-container button{
     font-size: 0.8rem;
+}
+
+.alert-dismisable-container .alert{
+    width: 75%;
+    position: relative;
+    margin-right: auto;
+    margin-left: auto;
 }
 
 .clearfix:after {
@@ -293,7 +301,6 @@ body {
     background: grey none repeat scroll 0% 0% / auto padding-box border-box;
     height: 31px;
     letter-spacing: 1.76px;
-    min-width: 130px;
     -webkit-text-decoration: none solid rgb(255, 255, 255);
             text-decoration: none solid rgb(255, 255, 255);
     text-transform: uppercase;
@@ -1055,4 +1062,4 @@ body {
 
 
 
-/*# sourceMappingURL=index.090db0f5.css.map*/
+/*# sourceMappingURL=index.aeb1bb2a.css.map*/
