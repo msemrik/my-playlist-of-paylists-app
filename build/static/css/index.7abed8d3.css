@@ -1,0 +1,1050 @@
+*:not(.fade .in .modal) {
+    box-sizing: border-box;
+    background-color: #F8F8F8;
+}
+
+html {
+    height: 100%;
+    font-size: 20px;
+}
+
+body {
+    min-height: 100%;
+    font-family: Arial;
+    padding: 0px;
+    background-color: #F8F8F8;
+}
+
+.landing-wrapper {
+    height: 100%;
+}
+
+.header {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    background-color: #F8F8F8;
+    z-index: 1;
+}
+
+.header-title {
+    padding: 0%;
+    text-align: center;
+}
+
+.header-title h1 {
+    margin-top: 1%;
+    font-size: 2rem;
+}
+
+.header-topnav {
+    overflow: hidden;
+    background-color: #333;
+}
+
+.header-topnav-buttons{
+    max-width: 75%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.header-topnav a {
+    float: right;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 0.70rem;
+}
+
+.header-topnav a:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+.header-topnav a:first-child {
+    float: left;
+    margin-right: -20%;
+}
+
+.header-topnav a.selected {
+    background-color: grey;
+    color: black;
+}
+
+.content{
+    width: 100%;
+    position:absolute;
+    padding-top: 2%;
+}
+
+.content-view-port{
+    width: 75%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #333;
+    color: white;
+    text-align: center;
+}
+
+.footer p {
+    margin-top: 0.5%;
+    margin-bottom: 0.5%;
+    background: inherit;
+}
+
+.alert-dismisable-container{
+    margin-top:-10%;
+    position: fixed;
+    width: 75%;
+    z-index: 2;
+}
+
+.alert-dismisable-container p{
+    font-size: 0.8rem;
+}
+
+.alert-dismisable-container .h4{
+    font-size: 1.2rem;
+}
+
+.alert-dismisable-container hr{
+    margin-bottom: 0%;
+}
+
+.alert-dismisable-container button{
+    font-size: 0.8rem;
+}
+
+.clearfix:after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0;
+}
+
+/* Responsive layout - when the screen is less than 400px wide, make the navigation links stack on top of each other instead of next to each other */
+@media screen and (max-width: 768px) {
+    .topnav a {
+        float: none;
+        width: 100%;
+    }
+
+    html {
+        font-size: 15px;
+    }
+
+    .header {
+        position: absolute;
+    }
+
+    .header-topnav{
+        position: fixed;
+        top: 0;
+        width: 100%;
+    }
+
+    .header-topnav-buttons{
+        max-width: 100%;
+    }
+
+    .content-view-port{
+        width: 90%;
+    }
+
+    .footer {
+        display: none;
+    }
+
+    .playlist-page-configured-playlist{
+        width:100%;
+    }
+
+    .playlist-page-spotify-playlist{
+        width:100%;
+    }
+}
+.modal-div {
+    box-sizing: border-box;
+    color: rgb(34, 35, 38);
+    min-height: 20px;
+    -webkit-text-decoration: none solid rgb(34, 35, 38);
+            text-decoration: none solid rgb(34, 35, 38);
+    -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+            text-size-adjust: 100%;
+    -webkit-column-rule-color: rgb(34, 35, 38);
+            column-rule-color: rgb(34, 35, 38);
+    -webkit-perspective-origin: 186.875px 217.5px;
+            perspective-origin: 186.875px 217.5px;
+    -webkit-transform-origin: 186.875px 217.5px;
+            transform-origin: 186.875px 217.5px;
+    caret-color: rgb(34, 35, 38);
+    background: rgb(255, 255, 255) none repeat scroll 0% 0% / auto padding-box border-box;
+    border: 1px solid rgba(0, 0, 0, 0);
+    font: normal normal 400 normal 16px / 24px Circular, Helvetica, Arial, sans-serif;
+    outline: rgb(34, 35, 38) none 0px;
+    padding: 40px;
+}
+
+.modal-div-title {
+    background-color: inherit;
+    box-sizing: border-box;
+    color: rgb(29, 185, 84);
+    height: 25px;
+    letter-spacing: -0.18px;
+    -webkit-text-decoration: none solid rgb(29, 185, 84);
+            text-decoration: none solid rgb(29, 185, 84);
+    -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+            text-size-adjust: 100%;
+    -webkit-column-rule-color: rgb(29, 185, 84);
+            column-rule-color: rgb(29, 185, 84);
+    -webkit-perspective-origin: 145.875px 12.5px;
+            perspective-origin: 145.875px 12.5px;
+    -webkit-transform-origin: 145.875px 12.5px;
+            transform-origin: 145.875px 12.5px;
+    caret-color: rgb(29, 185, 84);
+    border: 0px none rgb(29, 185, 84);
+    font: normal normal 400 normal 18px / 25.2px Circular, Helvetica, Arial, sans-serif;
+    margin: 0px 0px 12px;
+    outline: rgb(29, 185, 84) none 0px;
+}
+
+.modal-div-form {
+    background-color: inherit;
+    box-sizing: border-box;
+    color: rgb(34, 35, 38);
+    /*height: 284px;*/
+    -webkit-text-decoration: none solid rgb(34, 35, 38);
+            text-decoration: none solid rgb(34, 35, 38);
+    -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+            text-size-adjust: 100%;
+    -webkit-column-rule-color: rgb(34, 35, 38);
+            column-rule-color: rgb(34, 35, 38);
+    -webkit-perspective-origin: 145.875px 142px;
+            perspective-origin: 145.875px 142px;
+    -webkit-transform-origin: 145.875px 142px;
+            transform-origin: 145.875px 142px;
+    caret-color: rgb(34, 35, 38);
+    border: 0px none rgb(34, 35, 38);
+    font: normal normal 400 normal 16px / 24px Circular, Helvetica, Arial, sans-serif;
+    margin: 4% 0px 0px 0px;
+    outline: rgb(34, 35, 38) none 0px;
+}
+
+.modal-div-form-item-group {
+    background-color: inherit;
+    box-sizing: border-box;
+    color: rgb(34, 35, 38);
+    -webkit-text-decoration: none solid rgb(34, 35, 38);
+            text-decoration: none solid rgb(34, 35, 38);
+    -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+            text-size-adjust: 100%;
+    -webkit-column-rule-color: rgb(34, 35, 38);
+            column-rule-color: rgb(34, 35, 38);
+    -webkit-perspective-origin: 145.875px 35.5px;
+            perspective-origin: 145.875px 35.5px;
+    -webkit-transform-origin: 145.875px 35.5px;
+            transform-origin: 145.875px 35.5px;
+    caret-color: rgb(34, 35, 38);
+    border: 0px none rgb(34, 35, 38);
+    font: normal normal 400 normal 16px / 24px Circular, Helvetica, Arial, sans-serif;
+    outline: rgb(34, 35, 38) none 0px;
+}
+
+.modal-div-form-item-group.button-item-group{
+    float: right;
+}
+
+.modal-div-form-item-group-input{
+    font-size: 0.7rem;
+}
+
+.modal-button-div {
+    margin-left: auto;
+    margin-right: auto;
+    display: table;
+}
+
+.playlist-add-playlist-cancel-button {
+    margin-right: 5px;
+    color: rgb(255, 255, 255);
+    background: grey none repeat scroll 0% 0% / auto padding-box border-box;
+    height: 31px;
+    letter-spacing: 1.76px;
+    min-width: 130px;
+    -webkit-text-decoration: none solid rgb(255, 255, 255);
+            text-decoration: none solid rgb(255, 255, 255);
+    text-transform: uppercase;
+    touch-action: manipulation;
+    vertical-align: middle;
+    will-change: transform;
+    -webkit-column-rule-color: rgb(255, 255, 255);
+            column-rule-color: rgb(255, 255, 255);
+    -webkit-perspective-origin: 70.7812px 15.5px;
+            perspective-origin: 70.7812px 15.5px;
+    -webkit-transform-origin: 70.7812px 15.5px;
+            transform-origin: 70.7812px 15.5px;
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+    caret-color: rgb(255, 255, 255);
+
+    border: 0px none rgb(255, 255, 255);
+    border-radius: 500px 500px 500px 500px;
+    font: normal normal 200 normal 11px / 17.6px spotify-circular, spotify-circular-arabic, spotify-circular-hebrew, "Helvetica Neue", Helvetica, Arial, "Hiragino Kaku Gothic Pro", Meiryo, "MS Gothic", sans-serif;
+    outline: rgb(255, 255, 255) none 0px;
+    padding: 7px 22px;
+    -webkit-transition: all 0.033s cubic-bezier(0.3, 0, 0.7, 1) 0s;
+    transition: all 0.033s cubic-bezier(0.3, 0, 0.7, 1) 0s;
+}
+
+.playlist-add-playlist-cancel-button:hover {
+    background-color: black;
+    color: rgb(255, 255, 255);
+    -webkit-transform: scale(1.06);
+            transform: scale(1.06);
+    -webkit-transition: none 33ms cubic-bezier(.3, 0, 0, 1);
+    transition: none 33ms cubic-bezier(.3, 0, 0, 1);
+}
+
+
+.playlist-add-playlist-create-button {
+    color: rgb(255, 255, 255);
+    letter-spacing: 1.76px;
+    -webkit-text-decoration: none solid rgb(255, 255, 255);
+            text-decoration: none solid rgb(255, 255, 255);
+    text-transform: uppercase;
+    vertical-align: middle;
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+    caret-color: rgb(255, 255, 255);
+    background: rgb(29, 185, 84) none repeat scroll 0% 0% / auto padding-box border-box;
+    border: 0px none rgb(255, 255, 255);
+    border-radius: 500px 500px 500px 500px;
+    font: normal normal 200 normal 11px / 17.6px spotify-circular, spotify-circular-arabic, spotify-circular-hebrew, "Helvetica Neue", Helvetica, Arial, "Hiragino Kaku Gothic Pro", Meiryo, "MS Gothic", sans-serif;
+    outline: rgb(255, 255, 255) none 0px;
+    padding: 7px 22px;
+    -webkit-transition: all 0.033s cubic-bezier(0.3, 0, 0.7, 1) 0s;
+    transition: all 0.033s cubic-bezier(0.3, 0, 0.7, 1) 0s;
+}
+
+.playlist-add-playlist-create-button:hover {
+    background-color: #1ed760;
+    color: rgb(255, 255, 255);
+    -webkit-transform: scale(1.06);
+            transform: scale(1.06);
+    -webkit-transition: none 33ms cubic-bezier(.3, 0, 0, 1);
+    transition: none 33ms cubic-bezier(.3, 0, 0, 1);
+}
+
+
+/*.SpotifyBlackButton {*/
+    /*box-sizing: border-box;*/
+    /*color: rgb(255, 255, 255);*/
+    /*display: block;*/
+    /*height: 32px;*/
+    /*letter-spacing: 2px;*/
+    /*max-width: 290px;*/
+    /*min-width: 160px;*/
+    /*text-align: center;*/
+    /*text-decoration: none solid rgb(255, 255, 255);*/
+    /*text-size-adjust: 100%;*/
+    /*text-transform: uppercase;*/
+    /*touch-action: manipulation;*/
+    /*vertical-align: middle;*/
+    /*width: 290px;*/
+    /*column-rule-color: rgb(255, 255, 255);*/
+    /*perspective-origin: 145px 16px;*/
+    /*transform-origin: 145px 16px;*/
+    /*user-select: none;*/
+    /*caret-color: rgb(255, 255, 255);*/
+    /*background: rgb(0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box;*/
+    /*border: 0px solid rgba(0, 0, 0, 0);*/
+    /*border-radius: 500px 500px 500px 500px;*/
+    /*font: normal normal 700 normal 12px / 12px Circular, Helvetica, Arial, sans-serif;*/
+    /*margin: 0px 0.875px;*/
+    /*outline: rgb(255, 255, 255) none 0px;*/
+    /*padding: 10px 32px;*/
+    /*transition: background-color 0.3s ease 0s, border-color 0.3s ease 0s, color 0.3s ease 0s, box-shadow 0.3s ease 0s, filter 0.3s ease 0s, -webkit-box-shadow 0.3s ease 0s, -webkit-filter 0.3s ease 0s;*/
+/*}*/
+
+/*.SpotifyBlackButton:hover{*/
+    /*color: #FFF;*/
+    /*background-color: #333333;*/
+    /*transition-duration: .3s;*/
+/*}*/
+
+.playlist-page-content {
+    width: 100%;
+    float: left;
+    padding-bottom: 4%;
+}
+
+.playlist-page-title-text {
+    box-sizing: border-box;
+    color: rgb(29, 185, 84);
+    letter-spacing: -0.52px;
+    -webkit-text-decoration: none solid rgb(29, 185, 84);
+            text-decoration: none solid rgb(29, 185, 84);
+    font: normal normal 400 normal 26px / 31.2px Circular, Helvetica, Arial, sans-serif;
+    outline: rgb(29, 185, 84) none 0px;
+}
+
+
+.playlist-page-title-div {
+    box-sizing: border-box;
+    color: rgb(34, 35, 38);
+    /*height: 45px;*/
+    -webkit-text-decoration: none solid rgb(34, 35, 38);
+            text-decoration: none solid rgb(34, 35, 38);
+    -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+            text-size-adjust: 100%;
+    -webkit-column-rule-color: rgb(34, 35, 38);
+            column-rule-color: rgb(34, 35, 38);
+    -webkit-perspective-origin: 378.75px 22.5px;
+            perspective-origin: 378.75px 22.5px;
+    -webkit-transform-origin: 378.75px 22.5px;
+            transform-origin: 378.75px 22.5px;
+    caret-color: rgb(34, 35, 38);
+    border-right: 0px none rgb(34, 35, 38);
+    border-left: 0px none rgb(34, 35, 38);
+    font: normal normal 400 normal 16px / 24px Circular, Helvetica, Arial, sans-serif;
+    margin: 0px 0px 24px;
+    outline: rgb(34, 35, 38) none 0px;
+    display: inline-block;
+}
+
+.playlist-page-configured-playlist {
+    width: 48%;
+    float: left;
+}
+
+.playlist-page-configured-playlist.playlist-page-configured-playlist-full-width{
+    width: 100%;
+}
+
+.playlist-page-spotify-playlist.playlist-page-spotify-playlist-not-showed{
+    display:none;
+}
+
+.playlist-page-spotify-playlist {
+    width: 48%;
+    float: right;
+}
+
+.playlist-list-section {
+    box-sizing: border-box;
+    color: rgb(34, 35, 38);
+    height: 100%;
+    caret-color: rgb(34, 35, 38);
+    background: rgb(255, 255, 255) none repeat scroll 0% 0% / auto padding-box border-box;
+    border: 1px solid rgba(0, 0, 0, 0);
+    font: normal normal 400 normal 16px / 24px Circular, Helvetica, Arial, sans-serif;
+    margin: 0px 0px 10px;
+    padding: 2% 2% 0 2%;
+}
+
+.playlist-list-title-div {
+    width: 100%;
+    box-sizing: border-box;
+    background-color: rgb(255, 255, 255);
+    border-right: 0px none rgb(34, 35, 38);
+    border-left: 0px none rgb(34, 35, 38);
+    display: inline-block;
+    margin-bottom: 2%;
+}
+
+.playlist-list-title-text {
+    box-sizing: border-box;
+    background-color: rgb(255, 255, 255);
+    color: rgb(29, 185, 84);
+    letter-spacing: -0.52px;
+    -webkit-text-decoration: none solid rgb(29, 185, 84);
+            text-decoration: none solid rgb(29, 185, 84);
+    font: normal normal 400 normal 26px / 31.2px Circular, Helvetica, Arial, sans-serif;
+    outline: rgb(29, 185, 84) none 0px;
+}
+
+.playlist-list-button-div {
+    float: left;
+}
+
+.playlist-list-button-div-button {
+    color: rgb(255, 255, 255);
+    letter-spacing: 1.76px;
+    -webkit-text-decoration: none solid rgb(255, 255, 255);
+            text-decoration: none solid rgb(255, 255, 255);
+    text-transform: uppercase;
+    vertical-align: middle;
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+    caret-color: rgb(255, 255, 255);
+    background: rgb(29, 185, 84) none repeat scroll 0% 0% / auto padding-box border-box;
+    border: 0px none rgb(255, 255, 255);
+    border-radius: 500px 500px 500px 500px;
+    font: normal normal 200 normal 11px / 17.6px spotify-circular, spotify-circular-arabic, spotify-circular-hebrew, "Helvetica Neue", Helvetica, Arial, "Hiragino Kaku Gothic Pro", Meiryo, "MS Gothic", sans-serif;
+    outline: rgb(255, 255, 255) none 0px;
+    padding: 7px 22px;
+    -webkit-transition: all 0.033s cubic-bezier(0.3, 0, 0.7, 1) 0s;
+    transition: all 0.033s cubic-bezier(0.3, 0, 0.7, 1) 0s;
+}
+
+.playlist-list-button-div-button-text {
+    box-sizing: border-box;
+    color: rgb(29, 185, 84);
+    /*height: 31px;*/
+    letter-spacing: -0.52px;
+    -webkit-text-decoration: none solid rgb(29, 185, 84);
+            text-decoration: none solid rgb(29, 185, 84);
+    -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+            text-size-adjust: 100%;
+    -webkit-column-rule-color: rgb(29, 185, 84);
+            column-rule-color: rgb(29, 185, 84);
+    -webkit-perspective-origin: 378.75px 15.5px;
+            perspective-origin: 378.75px 15.5px;
+    -webkit-transform-origin: 378.75px 15.5px;
+            transform-origin: 378.75px 15.5px;
+    caret-color: rgb(29, 185, 84);
+    border: 0px none rgb(29, 185, 84);
+    font: normal normal 400 normal 26px / 31.2px Circular, Helvetica, Arial, sans-serif;
+    margin: 13px 0px;
+    outline: rgb(29, 185, 84) none 0px;
+}
+
+.playlist-list-button-div-button:hover {
+    background-color: #1ed760;
+    color: rgb(255, 255, 255);
+    -webkit-transform: scale(1.06);
+            transform: scale(1.06);
+    -webkit-transition: none 33ms cubic-bezier(.3, 0, 0, 1);
+    transition: none 33ms cubic-bezier(.3, 0, 0, 1);
+}
+
+.playlist-list-div {
+    box-sizing: border-box;
+    color: rgb(34, 35, 38);
+    max-height: 92%;
+    border: 0px none rgb(34, 35, 38);
+    overflow: auto;
+}
+
+.playlist-list-div-table {
+    width: 100%;
+    box-sizing: border-box;
+    color: rgb(34, 35, 38);
+    max-width: 100%;
+    border-spacing: 0px 5px;
+    font: normal normal 400 normal 16px / 24px Circular, Helvetica, Arial, sans-serif;
+    outline: rgb(34, 35, 38) none 0px;
+    border-collapse: separate;
+}
+
+
+.playlist-list-div-table-tbody {
+    border-collapse: collapse;
+    box-sizing: border-box;
+    color: rgb(34, 35, 38);
+    -webkit-text-decoration: none solid rgb(34, 35, 38);
+            text-decoration: none solid rgb(34, 35, 38);
+    -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+            text-size-adjust: 100%;
+    width: 675px;
+    -webkit-column-rule-color: rgb(34, 35, 38);
+            column-rule-color: rgb(34, 35, 38);
+    -webkit-perspective-origin: 337.5px 304px;
+            perspective-origin: 337.5px 304px;
+    -webkit-transform-origin: 337.5px 304px;
+            transform-origin: 337.5px 304px;
+    caret-color: rgb(34, 35, 38);
+    border: 0px none rgb(128, 128, 128);
+    font: normal normal 400 normal 16px / 24px Circular, Helvetica, Arial, sans-serif;
+    outline: rgb(34, 35, 38) none 0px;
+}
+
+.playlist-add-playlist-title-text {
+    box-sizing: border-box;
+    background-color: rgb(255, 255, 255);
+    color: rgb(29, 185, 84);
+    letter-spacing: -0.52px;
+    -webkit-text-decoration: none solid rgb(29, 185, 84);
+            text-decoration: none solid rgb(29, 185, 84);
+    font: normal normal 400 normal 26px / 31.2px Circular, Helvetica, Arial, sans-serif;
+    outline: rgb(29, 185, 84) none 0px;
+}
+
+.playlist-add-playlist-input-text {
+    width: 40%;
+}
+
+.playlist-list-item-row {
+    border-collapse: collapse;
+    box-sizing: border-box;
+    color: rgb(34, 35, 38);
+    -webkit-text-decoration: none solid rgb(34, 35, 38);
+            text-decoration: none solid rgb(34, 35, 38);
+    -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+            text-size-adjust: 100%;
+    vertical-align: middle;
+    width: 675px;
+    -webkit-column-rule-color: rgb(34, 35, 38);
+            column-rule-color: rgb(34, 35, 38);
+    -webkit-perspective-origin: 337.5px 52px;
+            perspective-origin: 337.5px 52px;
+    -webkit-transform-origin: 337.5px 52px;
+            transform-origin: 337.5px 52px;
+    caret-color: rgb(34, 35, 38);
+    background: rgba(0, 0, 0, 0.02) none repeat scroll 0% 0% / auto padding-box border-box;
+    border: 0px none rgb(128, 128, 128);
+    font: normal normal 400 normal 16px / 24px Circular, Helvetica, Arial, sans-serif;
+    outline: rgb(34, 35, 38) none 0px;
+}
+
+.playlist-list-item-row.selected {
+    background: rgb(29, 185, 84) none repeat scroll 0% 0% / auto padding-box border-box;
+}
+
+.playlist-list-item-row.selected:hover {
+    cursor: pointer;
+    background-color: rgb(29, 218, 85);
+}
+
+.playlist-list-item-row:hover {
+    cursor: pointer;
+    background-color: rgb(29, 185, 84);
+}
+
+
+.playlist-list-item-image-column {
+    border-collapse: collapse;
+    box-sizing: border-box;
+    color: rgb(34, 35, 38);
+    -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+            text-size-adjust: 100%;
+    vertical-align: middle;
+    width: 1%;
+    border: 0px none rgb(34, 35, 38);
+    font: normal normal 400 normal 16px / 24px Circular, Helvetica, Arial, sans-serif;
+    outline: rgb(34, 35, 38) none 0px;
+    padding: 1% 1% 1% 2%;
+    border-left-style: solid;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+.playlist-list-item-image-image {
+    height: 60px;
+    width: 60px;
+}
+
+
+.playlist-list-item-name-column {
+    border-collapse: collapse;
+    box-sizing: border-box;
+    color: rgb(34, 35, 38);
+    overflow-wrap: break-word;
+    -webkit-text-decoration: none solid rgb(34, 35, 38);
+            text-decoration: none solid rgb(34, 35, 38);
+    -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+            text-size-adjust: 100%;
+    text-overflow: ellipsis;
+    vertical-align: middle;
+    width: 80%;
+    -webkit-column-rule-color: rgb(34, 35, 38);
+            column-rule-color: rgb(34, 35, 38);
+    -webkit-perspective-origin: 227px 52px;
+            perspective-origin: 227px 52px;
+    -webkit-transform-origin: 227px 52px;
+            transform-origin: 227px 52px;
+    caret-color: rgb(34, 35, 38);
+    border: 0px none rgb(34, 35, 38);
+    font: normal normal 400 normal 16px / 24px Circular, Helvetica, Arial, sans-serif;
+    outline: rgb(34, 35, 38) none 0px;
+    padding: 16px 16px 16px 16px;
+    border-right-style: solid;
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.playlist-page-spotify-playlist .playlist-list-item-name-column{
+    border-right-style: solid;
+    border-bottom-right-radius: 0px;
+    border-top-right-radius: 0px;
+}
+
+.playlist-list-item-name-column.selected {
+    color: #F8F8F8;
+}
+
+.spotifyplaylistlists .playlist-list-item-name-column {
+    width: 60%;
+}
+
+.playlist-list-item-checkbox-column {
+    width: 20%;
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.playlist-list-item-checkbox-div {
+    position: relative;
+}
+
+.playlist-list-item-checkbox-input-checkbox {
+    position: absolute;
+    z-index: -1;
+}
+
+.playlist-list-item-checkbox-span {
+    height: 20px;
+    left: 0px;
+    position: absolute;
+    top: 1px;
+    width: 20px;
+    border: 1px solid #C1C3C6;
+    border-radius: 4px 4px 4px 4px;
+}
+
+.playlist-list-item-checkbox-span.checked {
+    background: rgb(29, 185, 84) url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2232%22%20height%3D%2232%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cpath%20d%3D%22M13.613%2027.068l-7.94-7.28q-.285-.267-.442-.613t-.172-.7.11-.71.394-.638q.52-.583%201.3-.614T8.225%2017l6.13%205.626%208.79-17q.363-.693%201.104-.93t1.433.118.93%201.103-.126%201.442L16.56%2026.55q-.204.394-.558.654t-.78.34q-.063.015-.118.023t-.11.008-.102%200q-.74%200-1.276-.504z%22%20fill%3D%22%23FFF%22/%3E%3C/svg%3E") no-repeat scroll 50% 50% / 16px padding-box border-box;
+    border: 1px solid rgb(29, 185, 84);
+}
+
+
+@media screen and (max-width: 768px) {
+    .playlist-page-configured-playlist {
+        width: 100%;
+    }
+
+    .playlist-page-spotify-playlist {
+        width: 100%;
+    }
+}
+.configure-page-content{
+    margin-right: auto;
+    margin-left: auto;
+    display: table;
+    min-width: 30%;
+}
+
+.configure-page-user-logged-div {
+    box-sizing: border-box;
+    color: rgb(34, 35, 38);
+    min-height: 20px;
+    -webkit-text-decoration: none solid rgb(34, 35, 38);
+            text-decoration: none solid rgb(34, 35, 38);
+    -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+            text-size-adjust: 100%;
+    -webkit-column-rule-color: rgb(34, 35, 38);
+            column-rule-color: rgb(34, 35, 38);
+    -webkit-perspective-origin: 186.875px 217.5px;
+            perspective-origin: 186.875px 217.5px;
+    -webkit-transform-origin: 186.875px 217.5px;
+            transform-origin: 186.875px 217.5px;
+    caret-color: rgb(34, 35, 38);
+    background: rgb(255, 255, 255) none repeat scroll 0% 0% / auto padding-box border-box;
+    border: 1px solid rgba(0, 0, 0, 0);
+    font: normal normal 400 normal 16px / 24px Circular, Helvetica, Arial, sans-serif;
+    margin: 0px -10px 10px 0px;
+    outline: rgb(34, 35, 38) none 0px;
+    padding: 40px;
+}
+
+.configure-page-user-logged-div-title {
+    background-color: inherit;
+    box-sizing: border-box;
+    color: rgb(29, 185, 84);
+    height: 25px;
+    letter-spacing: -0.18px;
+    -webkit-text-decoration: none solid rgb(29, 185, 84);
+            text-decoration: none solid rgb(29, 185, 84);
+    -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+            text-size-adjust: 100%;
+    -webkit-column-rule-color: rgb(29, 185, 84);
+            column-rule-color: rgb(29, 185, 84);
+    -webkit-perspective-origin: 145.875px 12.5px;
+            perspective-origin: 145.875px 12.5px;
+    -webkit-transform-origin: 145.875px 12.5px;
+            transform-origin: 145.875px 12.5px;
+    caret-color: rgb(29, 185, 84);
+    border: 0px none rgb(29, 185, 84);
+    font: normal normal 400 normal 18px / 25.2px Circular, Helvetica, Arial, sans-serif;
+    margin: 0px 0px 12px;
+    outline: rgb(29, 185, 84) none 0px;
+}
+
+.configure-page-user-logged-div-form {
+    background-color: inherit;
+    box-sizing: border-box;
+    color: rgb(34, 35, 38);
+    /*height: 284px;*/
+    -webkit-text-decoration: none solid rgb(34, 35, 38);
+            text-decoration: none solid rgb(34, 35, 38);
+    -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+            text-size-adjust: 100%;
+    -webkit-column-rule-color: rgb(34, 35, 38);
+            column-rule-color: rgb(34, 35, 38);
+    -webkit-perspective-origin: 145.875px 142px;
+            perspective-origin: 145.875px 142px;
+    -webkit-transform-origin: 145.875px 142px;
+            transform-origin: 145.875px 142px;
+    caret-color: rgb(34, 35, 38);
+    border: 0px none rgb(34, 35, 38);
+    font: normal normal 400 normal 16px / 24px Circular, Helvetica, Arial, sans-serif;
+    margin: 0px;
+    outline: rgb(34, 35, 38) none 0px;
+}
+
+.configure-page-user-logged-div-form-item-group {
+    background-color: inherit;
+    box-sizing: border-box;
+    color: rgb(34, 35, 38);
+    height: 71px;
+    -webkit-text-decoration: none solid rgb(34, 35, 38);
+            text-decoration: none solid rgb(34, 35, 38);
+    -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+            text-size-adjust: 100%;
+    -webkit-column-rule-color: rgb(34, 35, 38);
+            column-rule-color: rgb(34, 35, 38);
+    -webkit-perspective-origin: 145.875px 35.5px;
+            perspective-origin: 145.875px 35.5px;
+    -webkit-transform-origin: 145.875px 35.5px;
+            transform-origin: 145.875px 35.5px;
+    caret-color: rgb(34, 35, 38);
+    border: 0px none rgb(34, 35, 38);
+    font: normal normal 400 normal 16px / 24px Circular, Helvetica, Arial, sans-serif;
+    outline: rgb(34, 35, 38) none 0px;
+}
+
+.configure-page-user-logged-div-form-item-group-title {
+    background-color: inherit;
+    box-sizing: border-box;
+    color: rgb(145, 148, 150);
+    display: inline-block;
+    height: 24px;
+    max-width: 100%;
+    -webkit-text-decoration: none solid rgb(145, 148, 150);
+            text-decoration: none solid rgb(145, 148, 150);
+    -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+            text-size-adjust: 100%;
+    -webkit-column-rule-color: rgb(145, 148, 150);
+            column-rule-color: rgb(145, 148, 150);
+    -webkit-perspective-origin: 68.9219px 12px;
+            perspective-origin: 68.9219px 12px;
+    -webkit-transform-origin: 68.9219px 12px;
+            transform-origin: 68.9219px 12px;
+    caret-color: rgb(145, 148, 150);
+    border: 0px none rgb(145, 148, 150);
+    font: normal normal 400 normal 16px / 24px Circular, Helvetica, Arial, sans-serif;
+    outline: rgb(145, 148, 150) none 0px;
+}
+
+.configure-page-user-logged-div-form-item-group-value {
+    background-color: inherit;
+    box-sizing: border-box;
+    color: rgb(34, 35, 38);
+    height: 40px;
+    min-height: 40px;
+    -webkit-text-decoration: none solid rgb(34, 35, 38);
+            text-decoration: none solid rgb(34, 35, 38);
+    -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+            text-size-adjust: 100%;
+    -webkit-column-rule-color: rgb(34, 35, 38);
+            column-rule-color: rgb(34, 35, 38);
+    -webkit-perspective-origin: 145.875px 20px;
+            perspective-origin: 145.875px 20px;
+    -webkit-transform-origin: 145.875px 20px;
+            transform-origin: 145.875px 20px;
+    caret-color: rgb(34, 35, 38);
+    border: 0px none rgb(34, 35, 38);
+    font: normal normal 400 normal 14px / 21px Circular, Helvetica, Arial, sans-serif;
+    margin: 7px 0px 0px;
+    outline: rgb(34, 35, 38) none 0px;
+    padding: 2px 0px 17px;
+}
+
+
+
+.configure-page-logout-button-div {
+    margin-left: auto;
+    margin-right: auto;
+    display: table;
+}
+
+.configure-page-login-logout-button {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10%;
+    display: block;
+    color: rgb(255, 255, 255);
+    height: 31px;
+    letter-spacing: 1.76px;
+    -webkit-text-decoration: none solid rgb(255, 255, 255);
+            text-decoration: none solid rgb(255, 255, 255);
+    text-transform: uppercase;
+    touch-action: manipulation;
+    vertical-align: middle;
+    will-change: transform;
+    -webkit-column-rule-color: rgb(255, 255, 255);
+            column-rule-color: rgb(255, 255, 255);
+    -webkit-perspective-origin: 70.7812px 15.5px;
+            perspective-origin: 70.7812px 15.5px;
+    -webkit-transform-origin: 70.7812px 15.5px;
+            transform-origin: 70.7812px 15.5px;
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+    caret-color: rgb(255, 255, 255);
+    background: rgb(29, 185, 84) none repeat scroll 0% 0% / auto padding-box border-box;
+    border: 0px none rgb(255, 255, 255);
+    border-radius: 500px 500px 500px 500px;
+    font: normal normal 200 normal 11px / 17.6px spotify-circular, spotify-circular-arabic, spotify-circular-hebrew, "Helvetica Neue", Helvetica, Arial, "Hiragino Kaku Gothic Pro", Meiryo, "MS Gothic", sans-serif;
+    outline: rgb(255, 255, 255) none 0px;
+    padding: 7px 22px;
+    -webkit-transition: all 0.033s cubic-bezier(0.3, 0, 0.7, 1) 0s;
+    transition: all 0.033s cubic-bezier(0.3, 0, 0.7, 1) 0s;
+}
+
+.configure-page-login-logout-button:hover {
+    background-color: #1ed760;
+    color: rgb(255, 255, 255);
+    -webkit-transform: scale(1.06);
+            transform: scale(1.06);
+    -webkit-transition: none 33ms cubic-bezier(.3,0,0,1);
+    transition: none 33ms cubic-bezier(.3,0,0,1);
+}
+
+
+
+
+
+/*.SpotifyBlackButton {*/
+    /*box-sizing: border-box;*/
+    /*color: rgb(255, 255, 255);*/
+    /*display: block;*/
+    /*height: 32px;*/
+    /*letter-spacing: 2px;*/
+    /*max-width: 290px;*/
+    /*min-width: 160px;*/
+    /*text-align: center;*/
+    /*text-decoration: none solid rgb(255, 255, 255);*/
+    /*text-size-adjust: 100%;*/
+    /*text-transform: uppercase;*/
+    /*touch-action: manipulation;*/
+    /*vertical-align: middle;*/
+    /*width: 290px;*/
+    /*column-rule-color: rgb(255, 255, 255);*/
+    /*perspective-origin: 145px 16px;*/
+    /*transform-origin: 145px 16px;*/
+    /*user-select: none;*/
+    /*caret-color: rgb(255, 255, 255);*/
+    /*background: rgb(0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box;*/
+    /*border: 0px solid rgba(0, 0, 0, 0);*/
+    /*border-radius: 500px 500px 500px 500px;*/
+    /*font: normal normal 700 normal 12px / 12px Circular, Helvetica, Arial, sans-serif;*/
+    /*margin: 0px 0.875px;*/
+    /*outline: rgb(255, 255, 255) none 0px;*/
+    /*padding: 10px 32px;*/
+    /*transition: background-color 0.3s ease 0s, border-color 0.3s ease 0s, color 0.3s ease 0s, box-shadow 0.3s ease 0s, filter 0.3s ease 0s, -webkit-box-shadow 0.3s ease 0s, -webkit-filter 0.3s ease 0s;*/
+/*}*/
+
+/*.SpotifyBlackButton:hover{*/
+    /*color: #FFF;*/
+    /*background-color: #333333;*/
+    /*transition-duration: .3s;*/
+/*}*/
+
+.modal-loading-div {
+    box-sizing: border-box;
+    color: rgb(34, 35, 38);
+    min-height: 20px;
+    -webkit-text-decoration: none solid rgb(34, 35, 38);
+            text-decoration: none solid rgb(34, 35, 38);
+    -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+            text-size-adjust: 100%;
+    -webkit-column-rule-color: rgb(34, 35, 38);
+            column-rule-color: rgb(34, 35, 38);
+    -webkit-perspective-origin: 186.875px 217.5px;
+            perspective-origin: 186.875px 217.5px;
+    -webkit-transform-origin: 186.875px 217.5px;
+            transform-origin: 186.875px 217.5px;
+    caret-color: rgb(34, 35, 38);
+    background: rgb(255, 255, 255) none repeat scroll 0% 0% / auto padding-box border-box;
+    border: 1px solid rgba(0, 0, 0, 0);
+    font: normal normal 400 normal 16px / 24px Circular, Helvetica, Arial, sans-serif;
+    outline: rgb(34, 35, 38) none 0px;
+    padding: 0px;
+}
+
+.modal-loading-div-gif{
+    height:100%;
+    width:100%;
+    margin-left: auto;
+    display: block;
+    margin-right: auto;
+}
+
+.modal {
+    text-align: center;
+    max-height: 95%;
+}
+
+.modal-dialog {
+    display: inline-block;
+    text-align: left;
+    vertical-align: middle;
+}
+
+.modal:before {
+    display: inline-block;
+    vertical-align: middle;
+    content: " ";
+    height: 95%;
+}
+
+@media screen and (mIN-width: 768px) {
+    .modal-dialog {
+        display: inline-block;
+        text-align: left;
+        vertical-align: middle;
+        max-width: 50%;
+    }
+
+}
+
+
+
+
+/*# sourceMappingURL=index.7abed8d3.css.map*/
