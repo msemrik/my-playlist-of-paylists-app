@@ -2,9 +2,10 @@ import './App.css';
 import React from 'react';
 import PagesEnum from '../enum/pages';
 import DefaultLayout from '../components/DefaultLayout';
-import AlertDismissable from "../components/AlertDismissable";
+import AlertDismissable from "../components/common/AlertDismissable";
 import PlaylistsPage from "../components/AppPages/PlaylistsPage";
 import ConfigurePage from "../components/AppPages/ConfigurePage";
+import LoadingModal from "../components/common/LoadingModal";
 
 class App extends React.Component {
 
@@ -13,20 +14,22 @@ class App extends React.Component {
         this.state = {
             isSpotifyUserLogged: false,
             actualPage: PagesEnum.PLAYLISTS,
-            alert: {message: {toShow: false, text: ''}, error: {toShow: false, text: ''}}
+            alert: {message: {toShow: false, text: ''}, error: {toShow: false, text: ''}},
+            showLoadingModal: false
         };
 
         this.modifyAlert = this.modifyAlert.bind(this);
-        this.showError = this.showError.bind(this);
-        this.showMessage = this.showMessage.bind(this);
         this.resetAlert = this.resetAlert.bind(this);
+        this.showLoadingModal = this.showLoadingModal.bind(this);
+        this.hideLoadingModal = this.hideLoadingModal.bind(this);
 
-        this.handleError = this.handleError.bind(this);
+        this.handleResponse = this.handleResponse.bind(this);
     }
 
     componentDidMount() {
-        if (new URLSearchParams(window.location.search).has('loginerror'))
-            this.modifyAlert({error: {text: 'There was some error when login to Spotify. Please retry'}});
+        if (new URLSearchParams(window.location.search).has('loginerror')){
+            window.history.pushState("object or string", "Title", "/");
+            this.modifyAlert({error: {text: 'There was some error when login to Spotify. Please retry'}});}
 
         fetch('/spotify/islogged', {
             method: 'POST',
@@ -53,16 +56,16 @@ class App extends React.Component {
         this.setState({actualPage: page});
     };
 
-    handleError = function (errorObject, errorFunction) {
-        if (errorObject.shouldReLogInToSpotify) {
-            this.setState({
-                isSpotifyUserLogged: false
-            });
-            alert("SPOTIFY SESSION ENDED.");
-        } else if (errorObject.unrecoverableError) {
-            alert("APPLICATION IS NOT WORKING RIGHT NOW COME BACK LATER PLEASE.");
+    handleResponse = function (responseObject) {
+        if (responseObject.errorToShow) {
+            this.modifyAlert({error: {text: responseObject.errorToShow}});
+            if (responseObject.shouldReLogInToSpotify) {
+                this.setState({
+                    isSpotifyUserLogged: false
+                });
+            }
         } else {
-            errorFunction(errorObject);
+            this.modifyAlert({message: {text: responseObject.messageToShow}});
         }
     };
 
@@ -70,8 +73,8 @@ class App extends React.Component {
         return (
             <DefaultLayout isSpotifyUserLogged={this.state.isSpotifyUserLogged} actualPage={this.state.actualPage}
                            onChange={this.transitionateToPage.bind(this)}>
-
-                <AlertDismissable alert={this.state.alert} resetAlert={this.resetAlert}/>
+                <LoadingModal showLoadingModal={this.state.showLoadingModal} />
+                <AlertDismissable alert={this.state.alert} showLoadingModal={this.state.showLoadingModal} resetAlert={this.resetAlert}/>
 
                 {
                     this.state.actualPage === PagesEnum.PLAYLISTS ?
@@ -86,27 +89,22 @@ class App extends React.Component {
     getPlaylistPageProps() {
         return {
             isSpotifyUserLogged: this.state.isSpotifyUserLogged,
-            handleError: this.handleError,
+            handleResponse: this.handleResponse,
             showError: this.showError,
-            showMessage: this.showMessage
+            showMessage: this.showMessage,
+            showLoadingModal: this.showLoadingModal,
+            hideLoadingModal: this.hideLoadingModal,
         }
     }
 
     getConfigurePageProps() {
         return {
             isSpotifyUserLogged: this.state.isSpotifyUserLogged,
-            spotifyUserLoggedInfo: this.state.userInfo
+            spotifyUserLoggedInfo: this.state.userInfo,
+            showLoadingModal: this.showLoadingModal,
+            hideLoadingModal: this.hideLoadingModal,
         }
     }
-
-    showError(message){
-        this.modifyAlert({error: {text: message}});
-    }
-
-    showMessage(message){
-        this.modifyAlert({message: {text: message}});
-    }
-
 
     modifyAlert(alert) {
         var newAlertObject = this.state.alert;
@@ -131,8 +129,16 @@ class App extends React.Component {
         }
     }
 
-    resetAlert(){
+    resetAlert() {
         this.setState({alert: {message: {toShow: false, text: ''}, error: {toShow: false, text: ''}}});
+    }
+
+    showLoadingModal() {
+        this.setState({showLoadingModal: true})
+    }
+
+    hideLoadingModal() {
+        this.setState({showLoadingModal: false})
     }
 }
 

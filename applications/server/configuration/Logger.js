@@ -33,8 +33,8 @@ module.exports = {
         userNotLoggedError: {errorCode: "500-04-00", errorMessage: "Internal error when trying to perform some action, user seems not to be logged to Spotify"
             , errorToShow: "Your session seems to have expired, please relog in ;)", shouldReLogInToSpotify: true},
 
-        gettingSpotifyPlaylistsSpotifyError: {errorCode: "600-05-00", errorMessage: "Error getting Spotify Playlists. "
-            , errorToShow: "Your session seems to have expired, please relog in ;)", shouldReLogInToSpotify: true},
+        gettingSpotifyPlaylistsSpotifyError: {errorCode: "600-05-00", errorMessage: "Spotify Error when getting Spotify Playlists. "
+            , errorToShow: "Error getting your playlists, please retry."},
         gettingSpotifyPlaylistsInternalError: {errorCode: "500-05-00", errorMessage: "Internal Error when getting Spotify Playlists. "
             , errorToShow: "Error getting your playlists, please retry."},
         gettingDatabasePlaylistsInternalError: {errorCode: "500-05-01", errorMessage: "Internal Error when getting Database Playlists. "
@@ -42,6 +42,31 @@ module.exports = {
         convertingPlaylistsToReturnError: {errorCode: "500-05-01", errorMessage: "Internal error while converting User Playlist to be returned. "
             , errorToShow: "Error getting your playlists, please retry."},
 
+
+        creatingSpotifyPlaylistsSpotifyError: {errorCode: "600-06-00", errorMessage: "Spotify Error when creating Spotify Playlists. "
+            , errorToShow: "Error creating your playlists, please retry."},
+        creatingSpotifyPlaylistsInternalError: {errorCode: "500-06-00", errorMessage: "Internal Error when creating Spotify Playlists. "
+            , errorToShow: "Error creating your playlists, please retry."},
+        creatingDBPlaylistInternalError: {errorCode: "600-06-01", errorMessage: "Spotify Error when creating Spotify Playlists. "
+            , errorToShow: "Error creating your playlists, please retry."},
+        updatingDBPlaylistInternalError: {errorCode: "600-06-02", errorMessage: "Spotify Error when updating Spotify Playlists. "
+            , errorToShow: "Error updating your playlists, please retry."},
+
+        gettingSpotifyPlaylistTracksInternalError: {errorCode: "600-07-00", errorMessage: "Internal Error when getting Spotify Playlists tracks. "
+            , errorToShow: "Error updating your playlist, please retry."},
+        gettingSpotifyPlaylistTracksSpotifyError: {errorCode: "600-07-00", errorMessage: "Spotify Error when updating Spotify Playlists tracks. "
+            , errorToShow: "Error updating your playlist, please retry."},
+        updatingSpotifyPlaylistInternalError: {errorCode: "600-07-01", errorMessage: "Internal Error when updating Spotify Playlists. "
+            , errorToShow: "Error updating your playlist, please retry."},
+
+        removingTracksToSpotifyPlaylistSpotifyError: {errorCode: "600-07-02", errorMessage: "Spotify Error when removing tracks to Spotify Playlists. "
+            , errorToShow: "Error updating your playlist, please retry."},
+        removingTracksToSpotifyPlaylistInternalError: {errorCode: "500-07-02", errorMessage: "Internal Error when removing tracks to Spotify Playlists. "
+            , errorToShow: "Error updating your playlist, please retry."},
+        insertingTracksToSpotifyPlaylistSpotifyError: {errorCode: "600-07-03", errorMessage: "Spotify Error when inserting tracks to Spotify Playlists. "
+            , errorToShow: "Error updating your playlist, please retry."},
+        insertingTracksToSpotifyPlaylistInternalError: {errorCode: "500-07-03", errorMessage: "Internal Error when inserting tracks to Spotify Playlists. "
+            , errorToShow: "Error updating your playlist, please retry."},
 
     },
 

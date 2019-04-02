@@ -1,0 +1,54 @@
+.modal-loading-div {
+    box-sizing: border-box;
+    color: rgb(34, 35, 38);
+    min-height: 20px;
+    text-decoration: none solid rgb(34, 35, 38);
+    text-size-adjust: 100%;
+    column-rule-color: rgb(34, 35, 38);
+    perspective-origin: 186.875px 217.5px;
+    transform-origin: 186.875px 217.5px;
+    caret-color: rgb(34, 35, 38);
+    background: rgb(255, 255, 255) none repeat scroll 0% 0% / auto padding-box border-box;
+    border: 1px solid rgba(0, 0, 0, 0);
+    font: normal normal 400 normal 16px / 24px Circular, Helvetica, Arial, sans-serif;
+    outline: rgb(34, 35, 38) none 0px;
+    padding: 0px;
+}
+
+.modal-loading-div-gif{
+    height:100%;
+    width:100%;
+    margin-left: auto;
+    display: block;
+    margin-right: auto;
+}
+
+.modal {
+    text-align: center;
+    max-height: 95%;
+}
+
+.modal-dialog {
+    display: inline-block;
+    text-align: left;
+    vertical-align: middle;
+}
+
+.modal:before {
+    display: inline-block;
+    vertical-align: middle;
+    content: " ";
+    height: 95%;
+}
+
+@media screen and (mIN-width: 768px) {
+    .modal-dialog {
+        display: inline-block;
+        text-align: left;
+        vertical-align: middle;
+        max-width: 50%;
+    }
+
+}
+
+

@@ -56,12 +56,12 @@ class NewPlaylistDialog extends React.Component {
                                 </div>
                             </div>
                             <div className={"modal-div-form-item-group button-item-group"}>
-                                <button className={"playlist-add-playlist-cancel-button"} onClick={this.lgClose}>
+                                <Button className={"playlist-add-playlist-cancel-button"} onClick={this.lgClose}>
                                     Close
-                                </button>
-                                <button className={"playlist-add-playlist-create-button"} onClick={this.handleClick}>
+                                </Button>
+                                <Button className={"playlist-add-playlist-create-button"} onClick={this.handleClick}>
                                     Create New Playlist
-                                </button>
+                                </Button>
                             </div>
                         </form>
                     </div>

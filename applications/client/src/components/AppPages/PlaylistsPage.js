@@ -26,6 +26,7 @@ class PlaylistsPage extends React.Component {
     }
 
     getUserPlaylists() {
+        this.props.showLoadingModal();
         fetch('/spotify/user/playlists', {
             method: 'POST',
             headers: {"Content-Type": "application/json"},
@@ -35,10 +36,12 @@ class PlaylistsPage extends React.Component {
                     if (result.ok) {
                         result.json().then(function (playlists) {
                             state.setState({userPlaylists: playlists});
+                            state.props.hideLoadingModal();
                         });
                     } else {
                         result.json().then(function (error) {
-                            state.props.showError(error.customErrorMessage);
+                            state.props.handleResponse(error);
+                            state.props.hideLoadingModal();
                         });
                     }
                 }
@@ -70,11 +73,13 @@ class PlaylistsPage extends React.Component {
     showAppPlaylistsApp() {
         return (
             <div className={"playlist-page-content"}>
-                <div className={this.state.selectedConfiguredPlaylist? "playlist-page-configured-playlist" : "playlist-page-configured-playlist playlist-page-configured-playlist-full-width"}>
+                <div
+                    className={this.state.selectedConfiguredPlaylist ? "playlist-page-configured-playlist" : "playlist-page-configured-playlist playlist-page-configured-playlist-full-width"}>
                     <PlaylistPageList {...this.prepareConfiguredPlaylistsList()} />
                 </div>
 
-                <div className={this.state.selectedConfiguredPlaylist? "playlist-page-spotify-playlist" : "playlist-page-spotify-playlist playlist-page-spotify-playlist-not-showed"}>
+                <div
+                    className={this.state.selectedConfiguredPlaylist ? "playlist-page-spotify-playlist" : "playlist-page-spotify-playlist playlist-page-spotify-playlist-not-showed"}>
                     <PlaylistPageList {...this.prepareSpotifyPlaylistsList()} />
                 </div>
             </div>
@@ -123,24 +128,29 @@ class PlaylistsPage extends React.Component {
     }
 
     createPlaylist(name) {
+        this.props.showLoadingModal();
         fetch('/spotify/createplaylist', {
             method: 'POST',
             headers: {'Content-Type': "application/json"},
-            body: JSON.stringify({name: name})
-        })
-            .then((result) => {
-                    var state = this;
-                    if (result.ok) {
-                        state.props.showMessage("Playlist Successfully created =D");
-                        this.getUserPlaylists();
-                    } else {
-                        state.props.handleError(result, () => alert("Not General Error Only related To Action"));
-                    }
+            body: JSON.stringify({name: name}),
+            redirect: 'manual'
+        }).then((result) => {
+                var state = this;
+                if (result.ok) {
+                    this.getUserPlaylists();
+                    state.props.handleResponse({messageToShow: "Playlist Successfully created =D"});
+                } else {
+                    result.json().then(function (error) {
+                        state.props.handleResponse(error);
+                        state.props.hideLoadingModal();
+                    });
                 }
-            )
+            }
+        )
     }
 
     savePlaylistsConfiguration() {
+        this.props.showLoadingModal();
         var playlistToUpdate = this.state.selectedConfiguredPlaylist;
         playlistToUpdate.includedPlaylists = [];
         this.state.spotifyPlaylistsToBeShown.filter((playlist) => playlist.selected).forEach(playlist => {
@@ -151,24 +161,35 @@ class PlaylistsPage extends React.Component {
             method: 'POST',
             headers: {'Content-Type': "application/json"},
             body: JSON.stringify({playlistToUpdate: playlistToUpdate})
-        })
-            .then((result) => {
-                    if (result.ok) {
-                        console.log('success updatedplaylist');
-                        alert('success updatedplaylist');
-                        this.getUserPlaylists();
-                    } else {
-                        // isSpotifyLogged: false
-                        result.json().then((error) => {
-                            this.props.handleError(error, (error) => {
-                                if (error.errorType === "dbError") {
-                                    alert("Internal errors occurred, Please try later. Error desc: " + error.errorMessage);
-                                } else if (error.errorType === "spotifyError") {
-                                    alert("Changes were saved, but was not able to update Spotify playlsit, try saving later. Error desc: " + error.errorMessage);
-                                }
-                            });
-                        });
-                    }
+        }).then((result) => {
+                var state = this;
+                if (result.ok) {
+                    this.getUserPlaylists();
+                    state.props.handleResponse({messageToShow: "Playlist Successfully updated =D"});
+                    state.props.hideLoadingModal();
+                } else {
+                    result.json().then(function (error) {
+                        state.props.handleResponse(error);
+                        state.props.hideLoadingModal();
+                    });
+                }
+
+                // if (result.ok) {
+                //         console.log('success updatedplaylist');
+                //         alert('success updatedplaylist');
+                //         this.getUserPlaylists();
+                //     } else {
+                //         // isSpotifyLogged: false
+                //         result.json().then((error) => {
+                //             this.props.handleError(error, (error) => {
+                //                 if (error.errorType === "dbError") {
+                //                     alert("Internal errors occurred, Please try later. Error desc: " + error.errorMessage);
+                //                 } else if (error.errorType === "spotifyError") {
+                //                     alert("Changes were saved, but was not able to update Spotify playlsit, try saving later. Error desc: " + error.errorMessage);
+                //                 }
+                //             });
+                //         });
+                //     }
                 }
             );
         console.log(playlistToUpdate);

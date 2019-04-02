@@ -11,7 +11,7 @@ class ConfigurePage extends React.Component {
 
                     <div className={"button-div"}>
                         <Button className={"configure-page-login-logout-button"}
-                                onClick={this.logInToSpotify}>
+                                onClick={this.logInToSpotify.bind(this)}>
                             Log In To SPOTIFY
                         </Button>
                     </div>
@@ -42,7 +42,7 @@ class ConfigurePage extends React.Component {
                     </form>
                 </div>
                 <div className={"configure-page-logout-button-div"}>
-                    <Button className={"configure-page-login-logout-button"} onClick={this.logOutSpotify}>Log
+                    <Button className={"configure-page-login-logout-button"} onClick={this.logOutSpotify.bind(this)}>Log
                         Out SPOTIFY</Button>
                 </div>
             </div>
@@ -50,10 +50,12 @@ class ConfigurePage extends React.Component {
     }
 
     logInToSpotify() {
+        this.props.showLoadingModal();
         window.location.replace("/spotify/login");
     }
 
     logOutSpotify() {
+        this.props.showLoadingModal();
         window.location.replace("/logout");
     }
 }

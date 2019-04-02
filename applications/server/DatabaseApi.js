@@ -55,16 +55,14 @@ var updateDBPlaylistsObject = function (DBPlaylistsObject) {
             PlaylistModel.findOneAndReplace({_id: DBPlaylistsObject._id}, DBPlaylistsObject
                 , function (err, res) {
                     if (err || !res._doc) {
-                        logger.error("Internal Error while updating configured playlist", e);
-                        callback(createDatabaseErrorObject("510-02", "Internal Error while getting configured playlist"));
+                        callback(createErrorObject(loggerMessages.updatingDBPlaylistInternalError, err));
                     } else {
                         callback(null, res);
                     }
                 }
             )
-        }).catch((e) => {
-            logger.error("Internal Error while updating configured playlist", e);
-            callback(createDatabaseErrorObject("510-02", "Internal Error while getting configured playlist"));
+        }).catch((err) => {
+            callback(createErrorObject(loggerMessages.updatingDBPlaylistInternalError, err));
         });
     }
 };
@@ -79,12 +77,10 @@ var createEmptyDBPlaylistsObject = function (loggedUserId) {
                     callback(null, doc._doc);
                 })
                 .catch(err => {
-                    logger.error("Internal Error while creating new playlist", e);
-                    callback(createDatabaseErrorObject("510-03", "Internal Error while creating new playlist"));
+                    callback(createErrorObject(loggerMessages.creatingDBPlaylistInternalError, err));
                 });
-        }).catch((e) => {
-            logger.error("Internal Error while creating new playlist", e);
-            callback(createDatabaseErrorObject("510-03", "Internal Error while creating new playlist"));
+        }).catch((err) => {
+            callback(createErrorObject(loggerMessages.creatingDBPlaylistInternalError, err));
         });
     }
 }
@@ -131,15 +127,14 @@ function updatePlaylist(loggedUser, req) {
 
 
             (userConfiguredPlaylists, callback) => {
-                try{
+                try {
                     playlistToUpdate = req.body.playlistToUpdate;
                     var storedPlaylist = _.find(userConfiguredPlaylists.playlists, {'playlistId': playlistToUpdate.id});
                     storedPlaylist.includedPlaylists = createIncludedPlaylists(playlistToUpdate);
 
                     updateDBPlaylistsObject(userConfiguredPlaylists)(callback);
-                } catch (e) {
-                    logger.error("Internal Error while updating configured playlist", e);
-                    callback(createDatabaseErrorObject("510-03", "Internal Error while getting configured playlist"));
+                } catch (err) {
+                    callback(createErrorObject(loggerMessages.updatingDBPlaylistInternalError, err));
                 }
             }
 
@@ -157,14 +152,6 @@ function createIncludedPlaylists(playlistToUpdate) {
     var includedPlaylistsObject = [];
     playlistToUpdate.includedPlaylists.map((includedPlaylistId) => includedPlaylistsObject.push({playlistId: includedPlaylistId}));
     return includedPlaylistsObject;
-}
-
-function createDatabaseErrorObject(errorCode, customErrorMessage) {
-    return {
-        errorType: "dbError",
-        errorCode: errorCode,
-        customErrorMessage: customErrorMessage
-    };
 }
 
 module.exports =

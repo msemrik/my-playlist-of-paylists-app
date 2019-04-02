@@ -12,7 +12,19 @@ class AlertDismissable extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        this.setState({alert: nextProps.alert});
+        if (this.props.showLoadingModal === true && nextProps.showLoadingModal === true) {
+            this.state = {alert: {error: {}, message: {}}};
+        } else {
+            this.state = {alert: this.props.alert}
+        }
+
+        // if(nextProps.alert.error.toShow === false && nextProps.alert.message.toShow === false){
+        //     this.setState({alert: nextProps.alert});
+        // } else if(){
+        //     this.setState({alert: nextProps.alert});
+        // }
+
+
     }
 
     handleHide = () => {

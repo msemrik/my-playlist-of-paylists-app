@@ -100,7 +100,7 @@ module.exports = {
                 if (err) {
                     logger.error(generateErrorMessageToLog(err));
                     res.status(500);
-                    res.json(generateErrorObjectToReturn(err));
+                    res.json(generateErrorObjectToReturn(err.errorObject));
                     res.end();
                 } else {
                     try {
@@ -124,40 +124,37 @@ module.exports = {
     },
 
     createPlaylist: function (req, res) {
-        var loggedUser = sessionHandler.isLogged(req.sessionID);
-        if (loggedUser) {
+
+        var createPlaylistFunction = function (loggedUser, req) {
+            var playlistName = req.body.name;
             async.waterfall([
 
-                spotifyApi.createPlaylist(loggedUser, req.body.name),
+                spotifyApi.createPlaylist(loggedUser, playlistName),
 
                 (spotifyPlaylistObject, callback) => {
                     database.addPlaylist(loggedUser, spotifyPlaylistObject)(callback)
                 }
 
-
-            ], function (err, returnedObject) {
+            ], function (err) {
                 if (err) {
-                    validate(err, jsonSchemas);
-                    console.log('error ' + err);
+                    logger.error(generateErrorMessageToLog(err));
                     res.status(500);
-                    res.json(err);
+                    res.json(generateErrorObjectToReturn(err.errorObject));
                     res.end();
                     return;
+                } else {
+                    res.status(200);
+                    res.end();
                 }
-                res.status(200);
-                res.end();
-                return;
             });
-        } else {
-            res.status(500);
-            res.json(spotifyApi.createSpotifyErrorObject(true, '', "Your session expired. Please re login."));
-            res.end();
-        }
+        };
+
+        checkIfIsLoggedAndExecute(req, res, createPlaylistFunction);
     },
 
     updatePlaylist: function (req, res) {
-        var loggedUser = sessionHandler.isLogged(req.sessionID);
-        if (loggedUser) {
+
+        var updatePlaylistFunction = function (loggedUser, req){
             async.series([
 
                 database.updatePlaylist(loggedUser, req),
@@ -165,30 +162,30 @@ module.exports = {
 
             ], function (err) {
                 if (err) {
-                    validate(err, jsonSchemas);
-                    console.log('error ' + err);
+                    logger.error(generateErrorMessageToLog(err));
                     res.status(500);
-                    res.json(err);
+                    res.json(generateErrorObjectToReturn(err.errorObject));
                     res.end();
                     return;
+                } else {
+                    res.status(200);
+                    res.end();
                 }
-                res.status(200);
-                res.end();
-                return;
 
             });
-        } else {
-            res.status(500);
-            res.json(spotifyApi.createSpotifyErrorObject(true, '', "Your session expired. Please re login."));
-            res.end();
-        }
+
+        };
+
+
+
+        checkIfIsLoggedAndExecute(req, res, updatePlaylistFunction);
     }
 };
 
 function checkIfIsLoggedAndExecute(req, res, functionToExecute) {
     var loggedUser = sessionHandler.isLogged(req.sessionID);
     if (loggedUser) {
-        functionToExecute(loggedUser);
+        functionToExecute(loggedUser, req);
     } else {
         logger.error(generateErrorMessageToLog(createErrorObject(loggerMessages.userNotLoggedError)));
         res.status(500);
